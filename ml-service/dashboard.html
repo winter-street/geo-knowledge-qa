@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geo-KG 开发面板</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: Inter, PingFang SC, Microsoft YaHei, sans-serif; background: #F5F3EE; color: #1A1A2E; padding: 28px; }
+  h1 { font-family: 'Source Serif 4', serif; font-size: 22px; margin-bottom: 2px; }
+  .sub { font-size: 11px; color: #6B6B78; margin-bottom: 20px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .card { background: #fff; border: 1px solid #E2DFD6; border-radius: 6px; padding: 16px; }
+  .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .card-title { font-weight: 600; font-size: 14px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .dot.green { background: #2E7D5B; }
+  .dot.red { background: #B83A1F; }
+  .detail { margin-top: 5px; font-size: 10px; line-height: 1.45; color: #6B6B78; }
+  .info { font-size: 11px; color: #6B6B78; }
+  .stat-row { display: flex; justify-content: space-between; padding: 3px 0; font-size: 12px; }
+  .stat-val { font-weight: 600; color: #2E7D5B; }
+  .section-title { font-size: 12px; font-weight: 600; color: #6B6B78; text-transform: uppercase; letter-spacing: 0.08em; margin: 20px 0 10px; }
+  .tools { display: flex; gap: 10px; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
+  .btn { background: #1A1A2E; color: #fff; border: none; padding: 6px 14px; border-radius: 4px; font-size: 12px; cursor: pointer; font-family: Inter, sans-serif; }
+  .btn:hover { background: #2D2D3A; }
+  .srv-btn { border: 1px solid #E2DFD6; border-radius: 3px; padding: 3px 10px; font-size: 11px; cursor: pointer; background: #fff; font-family: Inter, sans-serif; }
+  .srv-btn.start:hover { border-color: #2E7D5B; color: #2E7D5B; }
+  .srv-btn.stop:hover { border-color: #B83A1F; color: #B83A1F; }
+  .srv-btn:disabled { opacity: 0.3; cursor: default; }
+  select { font-size: 12px; padding: 4px; border: 1px solid #E2DFD6; border-radius: 3px; background: #fff; }
+</style>
+</head>
+<body>
+
+<h1>Geo-Knowledge 开发面板</h1>
+<p class="sub" id="time">检查中...</p>
+
+<div class="tools">
+  <button class="btn" onclick="checkAll()">刷新状态</button>
+  <span style="font-size:11px;color:#6B6B78">自动:
+    <select id="autoRefresh" onchange="setAutoRefresh()">
+      <option value="0">关</option>
+      <option value="10">10s</option>
+      <option value="30" selected>30s</option>
+      <option value="60">60s</option>
+    </select>
+  </span>
+</div>
+
+<div class="section-title">服务状态</div>
+<div class="grid" id="cards"></div>
+
+<div class="section-title">Neo4j / SQLite 统计</div>
+<div class="grid" style="grid-template-columns: 1fr 1fr 1fr 1fr">
+  <div class="card">
+    <div class="stat-row"><span>总节点</span><span class="stat-val" id="totalNodes">-</span></div>
+    <div class="stat-row"><span>总关系</span><span class="stat-val" id="totalRels">-</span></div>
+    <div class="stat-row"><span>Document</span><span class="stat-val" id="docCount">-</span></div>
+    <div class="stat-row"><span>LandUse</span><span class="stat-val" id="luCount">-</span></div>
+    <div class="stat-row"><span>Concept</span><span class="stat-val" id="cnCount">-</span></div>
+    <div class="stat-row"><span>SQLite chunks</span><span class="stat-val" id="dbChunks">-</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title" style="font-size:12px;margin-bottom:6px">关系分布</div>
+    <div id="relStats" style="font-size:11px;color:#6B6B78">-</div>
+  </div>
+  <div class="card" style="grid-column:span 2">
+    <div class="card-title" style="font-size:12px;margin-bottom:6px">快速访问</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px">
+      <a href="http://localhost:7474" target="_blank" class="btn" style="text-align:center;text-decoration:none;background:#1E3A5F">Neo4j Browser</a>
+      <a href="http://localhost:5173" target="_blank" class="btn" style="text-align:center;text-decoration:none;background:#2E7D5B">前端 Q&A</a>
+      <a href="http://localhost:5173/#/admin" target="_blank" class="btn" style="text-align:center;text-decoration:none;background:#6B6B78">后台管理</a>
+      <a href="http://localhost:5173/#/graph" target="_blank" class="btn" style="text-align:center;text-decoration:none;background:#B8860B">知识图谱</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const SERVICES = [
+  { key: 'neo4j', name: 'Neo4j 图数据库', port: 7474,
+    check: async () => { const r = await fetch('http://localhost:7474'); return r.ok; } },
+  { key: 'flask', name: 'Flask 检索服务', port: 5000,
+    check: async () => {
+      const r = await fetch('/health');
+      const health = await r.json();
+      if (health.status !== 'ok') throw new Error('Flask 健康检查失败');
+      const retrieval = health.retrieval;
+      if (!retrieval || !retrieval.bge || !retrieval.tfidf) {
+        throw new Error('健康接口版本过旧，请用项目根目录 start_all.py 重启 Flask');
+      }
+      const statusText = (name, item) => item.available ? `${name} 可用` : `${name} 不可用：${item.reason || '索引未加载'}`;
+      return { ok: true, detail: `${statusText('BGE', retrieval.bge)}<br>${statusText('TF-IDF', retrieval.tfidf)}` };
+    } },
+  { key: 'backend', name: '后端 API', port: 3000,
+    check: async () => { const r = await fetch('http://127.0.0.1:3000/api/health'); return (await r.json()).status === 'ok'; } },
+  { key: 'frontend', name: '前端 Vue', port: 5173,
+    check: async () => { const r = await fetch('http://localhost:5173'); return r.ok; } },
+];
+let timer = null;
+
+async function checkService(svc) {
+  const t0 = Date.now();
+  try { const result = await svc.check(); const ok = typeof result === 'boolean' ? result : result.ok; return { ...svc, status: ok ? 'green' : 'red', ms: Date.now()-t0, detail: typeof result === 'object' ? result.detail : '' }; }
+  catch(e) { return { ...svc, status: 'red', ms: Date.now()-t0, error: e.message }; }
+}
+
+async function startSrv(key) {
+  await fetch('/start/' + key, { method: 'POST' });
+  setTimeout(checkAll, 3000);
+}
+async function stopSrv(key) {
+  await fetch('/stop/' + key, { method: 'POST' });
+  setTimeout(checkAll, 1000);
+}
+
+async function loadStats() {
+  try { const s = await (await fetch('/stats')).json(); const n = s.neo4j; const d = s.sqlite;
+    document.getElementById('totalNodes').textContent = n.totalNodes ?? '-';
+    document.getElementById('totalRels').textContent = n.totalRels ?? '-';
+    document.getElementById('docCount').textContent = n.Document ?? '-';
+    document.getElementById('luCount').textContent = n.LandUse ?? '-';
+    document.getElementById('cnCount').textContent = n.Concept ?? '-';
+    document.getElementById('dbChunks').textContent = d.chunks ?? '-';
+    const rels = [];
+    for (const k of ['BELONGS_TO','REFERENCES','GOVERNS','CONSTRAINS','SUPPORTS','PROTECTS','CLASSIFIES','RELATED_TO'])
+      if (n[k]) rels.push(`${k}: ${n[k]}`);
+    document.getElementById('relStats').innerHTML = rels.map(r => `<div style="padding:1px 0">${r}</div>`).join('');
+  } catch(e) {}
+}
+
+function renderCards(results) {
+  document.getElementById('cards').innerHTML = results.map(r => `
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">${r.name}</span>
+        <span class="dot ${r.status}"></span>
+      </div>
+      <div class="info">:${r.port} · ${r.ms}ms · ${r.status === 'green' ? '运行中' : r.error || '断开'}</div>
+      ${r.detail ? `<div class="detail">${r.detail}</div>` : ''}
+      <div style="margin-top:8px;display:flex;gap:6px">
+        <button class="srv-btn start" onclick="startSrv('${r.key}')" ${r.key === 'flask' ? 'disabled' : ''}>启动</button>
+        <button class="srv-btn stop" onclick="stopSrv('${r.key}')" ${r.key === 'flask' ? 'disabled' : ''}>停止</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function checkAll() {
+  document.getElementById('time').textContent = '检查中...';
+  const results = await Promise.all(SERVICES.map(checkService));
+  renderCards(results);
+  document.getElementById('time').textContent = `最后检查: ${new Date().toLocaleTimeString()}`;
+  loadStats();
+}
+function setAutoRefresh() {
+  clearInterval(timer);
+  const sec = parseInt(document.getElementById('autoRefresh').value);
+  if (sec > 0) timer = setInterval(checkAll, sec * 1000);
+}
+checkAll(); setAutoRefresh();
+</script>
+</body>
+</html>

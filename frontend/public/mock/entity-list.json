@@ -1,0 +1,18 @@
+[
+  {
+    "entityId": 1,
+    "name": "演示矿物 A",
+    "type": "Mineral",
+    "relationCount": 1,
+    "sourceDoc": "公开演示地质文档",
+    "status": "verified"
+  },
+  {
+    "entityId": 2,
+    "name": "演示岩石 A",
+    "type": "Rock",
+    "relationCount": 1,
+    "sourceDoc": "公开演示地质文档",
+    "status": "verified"
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "paths": [
+    { "key": "bm25", "label": "BM25 关键词检索", "enabled": true, "weight": 0.35 },
+    { "key": "bert", "label": "BERT 语义检索", "enabled": false, "weight": 0.00 },
+    { "key": "kg", "label": "知识图谱检索", "enabled": true, "weight": 0.40 },
+    { "key": "ontology", "label": "本体推理", "enabled": false, "weight": 0.00 },
+    { "key": "spatial", "label": "空间查询", "enabled": false, "weight": 0.00 }
+  ],
+  "topK": 5,
+  "rerankerThreshold": 0.65,
+  "chunkSize": 512,
+  "chunkOverlap": 128,
+  "llmModel": "deepseek-v4-flash",
+  "maxTokens": 2048,
+  "temperature": 0.3
+}

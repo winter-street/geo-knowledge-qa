@@ -1,0 +1,52 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+ml-service/config.py
+
+# Private or derived data
+data/
+ml-service/output/
+ml-service/models/
+ml-service/eval/
+backend/evaluation/
+backend/uploads/
+*.db
+*.db-shm
+*.db-wal
+*.pkl
+*.dump
+*.conll
+*.pdf
+*.tif
+*.tiff
+
+# Course-delivery and binary report artifacts
+*.zip
+*.7z
+*.rar
+*.docx
+*.pptx
+*.mp4
+*.log
+
+# Dependencies and build output
+node_modules/
+dist/
+.npm-cache/
+frontend/auto-imports.d.ts
+frontend/components.d.ts
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Local tools and editors
+.claude/
+.codex/
+.agents/
+.superpowers/
+.worktrees/
+.idea/
+.vscode/
+*.swp

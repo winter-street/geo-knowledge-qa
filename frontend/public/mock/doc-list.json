@@ -1,0 +1,10 @@
+[
+  {
+    "docId": "demo-doc-001",
+    "title": "公开演示地质文档",
+    "docType": "演示文档",
+    "status": "completed",
+    "chunkCount": 3,
+    "uploadedAt": "2026-01-01"
+  }
+]

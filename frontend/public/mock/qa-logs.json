@@ -1,0 +1,11 @@
+[
+  {
+    "id": "demo-log-001",
+    "question": "演示矿物与演示岩石有什么关系？",
+    "pathUsed": ["rag", "kg"],
+    "hitDocs": 1,
+    "latency": 500,
+    "satisfaction": "good",
+    "createdAt": "2026-01-01 12:00"
+  }
+]
