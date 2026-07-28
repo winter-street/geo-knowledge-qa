@@ -10,6 +10,8 @@ export interface GraphNode {
   label: string
   type: string
   owlTypes?: string[]
+  isMock?: boolean
+  synthetic?: boolean
 }
 
 export interface GraphEdge {
@@ -17,6 +19,8 @@ export interface GraphEdge {
   target: string
   label: string
   inferred?: boolean
+  isMock?: boolean
+  synthetic?: boolean
 }
 
 export interface Subgraph {

@@ -1,15 +1,14 @@
 {
   "name": "6-gisdevelop",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
+  "private": true,
+  "description": "Reproducible verification entry point for the geological AI application.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "verify": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1",
+    "demo": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/start-synthetic-demo.ps1",
+    "demo:stop": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/stop-synthetic-demo.ps1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "engines": {
+    "node": ">=22.18.0 <23"
+  }
 }

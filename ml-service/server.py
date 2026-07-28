@@ -12,9 +12,11 @@ import jieba
 import joblib
 from flask import Flask, request, jsonify, send_file
 from neo4j import GraphDatabase
+from reranker import BGEReranker, MAX_CANDIDATES, MAX_TOP_K
 
 # ---- 初始化 ----
 app = Flask(__name__)
+reranker = BGEReranker()
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE_DIR)
@@ -157,6 +159,60 @@ def _cosine_similarity(a: np.ndarray, b: np.ndarray) -> float:
 
 
 # ---- 接口 ----
+
+@app.route("/rerank", methods=["POST"])
+def rerank_candidates():
+    """Rerank up to 20 retrieval candidates and report any fallback explicitly."""
+    data = request.get_json(silent=True)
+    if not isinstance(data, dict):
+        return _invalid_rerank_request("request body must be a JSON object")
+
+    question = data.get("question")
+    candidates = data.get("candidates")
+    top_k = data.get("top_k", MAX_TOP_K)
+
+    if not isinstance(question, str) or not question.strip():
+        return _invalid_rerank_request("question must be a non-empty string")
+    if not isinstance(candidates, list):
+        return _invalid_rerank_request("candidates must be an array")
+    if not candidates:
+        return _invalid_rerank_request("candidates must contain at least one item")
+    if len(candidates) > MAX_CANDIDATES:
+        return _invalid_rerank_request(
+            f"candidates must contain at most {MAX_CANDIDATES} items"
+        )
+    if (
+        not isinstance(top_k, int)
+        or isinstance(top_k, bool)
+        or not 1 <= top_k <= MAX_TOP_K
+    ):
+        return _invalid_rerank_request(
+            f"top_k must be an integer between 1 and {MAX_TOP_K}"
+        )
+    for candidate in candidates:
+        if (
+            not isinstance(candidate, dict)
+            or not isinstance(candidate.get("text"), str)
+            or not candidate["text"].strip()
+        ):
+            return _invalid_rerank_request(
+                "each candidate must be an object with non-empty text"
+            )
+
+    outcome = reranker.rerank(question.strip(), candidates, top_k=top_k)
+    chunks = outcome["results"]
+    return jsonify({
+        "chunks": chunks,
+        "rerank": {key: value for key, value in outcome.items() if key != "results"},
+    })
+
+
+def _invalid_rerank_request(message: str):
+    return jsonify({
+        "error": message,
+        "code": "INVALID_RERANK_REQUEST",
+    }), 400
+
 
 @app.route("/search", methods=["POST"])
 def search():

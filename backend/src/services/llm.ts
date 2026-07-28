@@ -3,6 +3,7 @@ import type { Chunk, Source, KGPath, RetrievalMode, SpatialAnalysis, SpatialData
 import { gateway } from './llm/gateway.js'
 import { DeepSeekProvider } from './llm/deepseek.js'
 import { TongyiProvider } from './llm/tongyi.js'
+import type { LLMToolCall, LLMToolDefinition } from './llm/provider.js'
 
 // ============================================================
 // 初始化：注册已配置的 LLM Provider
@@ -63,8 +64,8 @@ export function buildPrompt(
     ragSection = `## 文档检索上下文（RAG — 地质调查报告/区域地质文献）
 ${ragChunks
       .map(
-        (r, i) =>
-          `[文档片段 ${i + 1}]（来源：《${r.chunk.docTitle}》第${r.chunk.page}页，相关度: ${(r.score * 100).toFixed(1)}%）\n${r.chunk.content}`
+        (r) =>
+          `[D${r.chunk.id}-P${r.chunk.page}]（文档证据，相关度: ${(r.score * 100).toFixed(1)}%）\n${r.chunk.content}`
       )
       .join('\n\n')}`
   }
@@ -73,9 +74,9 @@ ${ragChunks
   if (showKg && factualKgContext.length > 0) {
     kgSection = `## 知识图谱上下文（KG — 岩石-构造-矿产-地质年代关系）
 ${factualKgContext
-      .map((p) => {
+      .map((p, index) => {
         const relationKind = p.inferred ? '，该关系由OWL规则推得' : ''
-        return `- 「${p.from}」${formatOwlTypes(p.fromOwlTypes)}—[${p.relation}${relationKind}]→「${p.to}」${formatOwlTypes(p.toOwlTypes)}`
+        return `- [KG${index + 1}] 「${p.from}」${formatOwlTypes(p.fromOwlTypes)}—[${p.relation}${relationKind}]→「${p.to}」${formatOwlTypes(p.toOwlTypes)}`
       })
       .join('\n')}`
   }
@@ -131,7 +132,8 @@ ${question}
 5. 结尾最多使用 1 句总结，不列“关键地质实体”，不重复界面组件已经展示的信息
 6. 禁止用“根据您提供的资料”开头，禁止用“现有资料还覆盖了以下相关信息”扩写
 7. OWL类别只表示对应证据存在，不得据此虚构成因或把围岩年代当作成矿年代
-8. 空间结果只在明确的位置、范围、距离、地图或空间分析问题中用于正文`
+8. 空间结果只在明确的位置、范围、距离、地图或空间分析问题中用于正文
+9. 每个事实性结论必须紧跟一个最直接的证据引用，只能使用上下文给出的 [D数字-P数字] 或 [KG数字] 标识；无可靠证据时明确拒答`
 }
 
 // ============================================================
@@ -153,6 +155,14 @@ export async function generateAnswer(
     retrievalMode,
     spatialContext,
   )
+}
+
+export async function generateAgentToolCalls(
+  systemPrompt: string,
+  userPrompt: string,
+  definitions: LLMToolDefinition[],
+): Promise<LLMToolCall[]> {
+  return gateway.generateToolCalls(systemPrompt, userPrompt, definitions)
 }
 
 /** SSE 流式生成回答 */

@@ -1,0 +1,66 @@
+{
+  "synthetic": true,
+  "isMock": true,
+  "documents": [
+    {
+      "id": "SYN-DOC-01",
+      "chunkId": 9001,
+      "title": "Synthetic Geological Note 01",
+      "page": 1,
+      "docType": "synthetic",
+      "content": "# Synthetic Aurora Deposit 1\n\nSynthetic demonstration document. It does not describe a real survey site.\n\nSynthetic Aurora Deposit 1 is hosted in Synthetic Lumen Granite 1. It is controlled by Synthetic Meridian Fault 1, formed in Synthetic Epoch Alpha 1, and lies in Synthetic Northfield Region 1. The evidence is fictional and isMock=true.\n",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-DOC-02",
+      "chunkId": 9002,
+      "title": "Synthetic Geological Note 02",
+      "page": 1,
+      "docType": "synthetic",
+      "content": "# Synthetic Borealis Deposit 2\n\nSynthetic demonstration document. It does not describe a real survey site.\n\nSynthetic Borealis Deposit 2 is hosted in Synthetic Prism Diorite 2. It is controlled by Synthetic Horizon Fault 2, formed in Synthetic Epoch Beta 2, and lies in Synthetic Eastfield Region 2. The evidence is fictional and isMock=true.\n",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-DOC-03",
+      "chunkId": 9003,
+      "title": "Synthetic Geological Note 03",
+      "page": 1,
+      "docType": "synthetic",
+      "content": "# Synthetic Cirrus Deposit 3\n\nSynthetic demonstration document. It does not describe a real survey site.\n\nSynthetic Cirrus Deposit 3 is hosted in Synthetic Echo Schist 3. It is controlled by Synthetic Vector Fault 3, formed in Synthetic Epoch Gamma 3, and lies in Synthetic Southfield Region 3. The evidence is fictional and isMock=true.\n",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-DOC-04",
+      "chunkId": 9004,
+      "title": "Synthetic Geological Note 04",
+      "page": 1,
+      "docType": "synthetic",
+      "content": "# Synthetic Dawn Deposit 4\n\nSynthetic demonstration document. It does not describe a real survey site.\n\nSynthetic Dawn Deposit 4 is hosted in Synthetic Nova Gabbro 4. It is controlled by Synthetic Zenith Fault 4, formed in Synthetic Epoch Delta 4, and lies in Synthetic Westfield Region 4. The evidence is fictional and isMock=true.\n",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-DOC-05",
+      "chunkId": 9005,
+      "title": "Synthetic Geological Note 05",
+      "page": 1,
+      "docType": "synthetic",
+      "content": "# Synthetic Ember Deposit 5\n\nSynthetic demonstration document. It does not describe a real survey site.\n\nSynthetic Ember Deposit 5 is hosted in Synthetic Halo Quartzite 5. It is controlled by Synthetic Parallax Fault 5, formed in Synthetic Epoch Epsilon 5, and lies in Synthetic Centralfield Region 5. The evidence is fictional and isMock=true.\n",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-DOC-06",
+      "chunkId": 9006,
+      "title": "Synthetic Geological Note 06",
+      "page": 1,
+      "docType": "synthetic",
+      "content": "# Synthetic Frost Deposit 6\n\nSynthetic demonstration document. It does not describe a real survey site.\n\nSynthetic Frost Deposit 6 is hosted in Synthetic Orbit Rhyolite 6. It is controlled by Synthetic Solstice Fault 6, formed in Synthetic Epoch Zeta 6, and lies in Synthetic Highfield Region 6. The evidence is fictional and isMock=true.\n",
+      "synthetic": true,
+      "isMock": true
+    }
+  ]
+}

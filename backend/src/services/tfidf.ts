@@ -1,5 +1,6 @@
 import type { Chunk, Source } from '../types/index.js'
 import type { RuntimeSettings } from './runtime-settings.js'
+import { getSyntheticDemoRepository, syntheticDemoEnabled } from './synthetic-demo.js'
 
 /**
  * TF-IDF 向量检索器 — 通过 HTTP 调用 Flask 微服务 (:5000/search)
@@ -21,6 +22,9 @@ export async function search(
   topK: number,
   mode: RuntimeSettings['ragMode'],
 ): Promise<RagSearchResponse> {
+  if (syntheticDemoEnabled()) {
+    return getSyntheticDemoRepository().searchDocuments(query, topK, mode)
+  }
   try {
     const resp = await fetch('http://127.0.0.1:5000/search', {
       method: 'POST',
@@ -63,5 +67,7 @@ export function toSources(
     docTitle: r.chunk.docTitle,
     page: r.chunk.page,
     snippet: r.chunk.content.slice(0, 120) + '...',
+    synthetic: r.chunk.synthetic,
+    isMock: r.chunk.isMock,
   }))
 }

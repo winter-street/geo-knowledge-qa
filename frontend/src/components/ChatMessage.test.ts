@@ -19,4 +19,12 @@ describe('ChatMessage presentation contract', () => {
     expect(source).not.toContain('已自动执行')
     expect(source).toContain("'open-map': [message: Message]")
   })
+
+  it('renders a compact sanitized Agent execution timeline', () => {
+    expect(source).toContain('agent-timeline')
+    expect(source).toContain('toolTrace')
+    expect(source).toContain('evidenceCount')
+    expect(source).not.toContain('chainOfThought')
+    expect(source).not.toContain('思考过程')
+  })
 })

@@ -1,0 +1,200 @@
+{
+  "synthetic": true,
+  "isMock": true,
+  "markers": [
+    {
+      "id": "SYN-MINERAL-01",
+      "name": "Synthetic Aurora Deposit 1",
+      "type": "Mineral",
+      "lng": 10.173,
+      "lat": 20.137,
+      "region": "Synthetic Northfield Region 1",
+      "mineralKind": "Synthetic copper occurrence",
+      "era": "Synthetic Epoch Alpha 1",
+      "isMock": true,
+      "synthetic": true,
+      "evidence": "Fictional coordinate for public demonstration only."
+    },
+    {
+      "id": "SYN-MINERAL-02",
+      "name": "Synthetic Borealis Deposit 2",
+      "type": "Mineral",
+      "lng": 10.346,
+      "lat": 20.274,
+      "region": "Synthetic Eastfield Region 2",
+      "mineralKind": "Synthetic copper occurrence",
+      "era": "Synthetic Epoch Beta 2",
+      "isMock": true,
+      "synthetic": true,
+      "evidence": "Fictional coordinate for public demonstration only."
+    },
+    {
+      "id": "SYN-MINERAL-03",
+      "name": "Synthetic Cirrus Deposit 3",
+      "type": "Mineral",
+      "lng": 10.519,
+      "lat": 20.411,
+      "region": "Synthetic Southfield Region 3",
+      "mineralKind": "Synthetic copper occurrence",
+      "era": "Synthetic Epoch Gamma 3",
+      "isMock": true,
+      "synthetic": true,
+      "evidence": "Fictional coordinate for public demonstration only."
+    },
+    {
+      "id": "SYN-MINERAL-04",
+      "name": "Synthetic Dawn Deposit 4",
+      "type": "Mineral",
+      "lng": 10.692,
+      "lat": 20.548,
+      "region": "Synthetic Westfield Region 4",
+      "mineralKind": "Synthetic copper occurrence",
+      "era": "Synthetic Epoch Delta 4",
+      "isMock": true,
+      "synthetic": true,
+      "evidence": "Fictional coordinate for public demonstration only."
+    },
+    {
+      "id": "SYN-MINERAL-05",
+      "name": "Synthetic Ember Deposit 5",
+      "type": "Mineral",
+      "lng": 10.865,
+      "lat": 20.685,
+      "region": "Synthetic Centralfield Region 5",
+      "mineralKind": "Synthetic copper occurrence",
+      "era": "Synthetic Epoch Epsilon 5",
+      "isMock": true,
+      "synthetic": true,
+      "evidence": "Fictional coordinate for public demonstration only."
+    },
+    {
+      "id": "SYN-MINERAL-06",
+      "name": "Synthetic Frost Deposit 6",
+      "type": "Mineral",
+      "lng": 11.038,
+      "lat": 20.822,
+      "region": "Synthetic Highfield Region 6",
+      "mineralKind": "Synthetic copper occurrence",
+      "era": "Synthetic Epoch Zeta 6",
+      "isMock": true,
+      "synthetic": true,
+      "evidence": "Fictional coordinate for public demonstration only."
+    }
+  ],
+  "polylines": [
+    {
+      "id": "SYN-STRUCTURE-01",
+      "type": "fault",
+      "label": "Synthetic Meridian Fault 1",
+      "region": "Synthetic Northfield Region 1",
+      "path": [
+        [
+          10.093,
+          20.087
+        ],
+        [
+          10.253,
+          20.187
+        ]
+      ],
+      "isMock": true,
+      "synthetic": true,
+      "evidence": "Fictional geometry for public demonstration only."
+    },
+    {
+      "id": "SYN-STRUCTURE-02",
+      "type": "fault",
+      "label": "Synthetic Horizon Fault 2",
+      "region": "Synthetic Eastfield Region 2",
+      "path": [
+        [
+          10.266,
+          20.224
+        ],
+        [
+          10.426,
+          20.324
+        ]
+      ],
+      "isMock": true,
+      "synthetic": true,
+      "evidence": "Fictional geometry for public demonstration only."
+    },
+    {
+      "id": "SYN-STRUCTURE-03",
+      "type": "fault",
+      "label": "Synthetic Vector Fault 3",
+      "region": "Synthetic Southfield Region 3",
+      "path": [
+        [
+          10.439,
+          20.361
+        ],
+        [
+          10.599,
+          20.461000000000002
+        ]
+      ],
+      "isMock": true,
+      "synthetic": true,
+      "evidence": "Fictional geometry for public demonstration only."
+    },
+    {
+      "id": "SYN-STRUCTURE-04",
+      "type": "fault",
+      "label": "Synthetic Zenith Fault 4",
+      "region": "Synthetic Westfield Region 4",
+      "path": [
+        [
+          10.612,
+          20.497999999999998
+        ],
+        [
+          10.772,
+          20.598
+        ]
+      ],
+      "isMock": true,
+      "synthetic": true,
+      "evidence": "Fictional geometry for public demonstration only."
+    },
+    {
+      "id": "SYN-STRUCTURE-05",
+      "type": "fault",
+      "label": "Synthetic Parallax Fault 5",
+      "region": "Synthetic Centralfield Region 5",
+      "path": [
+        [
+          10.785,
+          20.634999999999998
+        ],
+        [
+          10.945,
+          20.735
+        ]
+      ],
+      "isMock": true,
+      "synthetic": true,
+      "evidence": "Fictional geometry for public demonstration only."
+    },
+    {
+      "id": "SYN-STRUCTURE-06",
+      "type": "fault",
+      "label": "Synthetic Solstice Fault 6",
+      "region": "Synthetic Highfield Region 6",
+      "path": [
+        [
+          10.958,
+          20.772
+        ],
+        [
+          11.118,
+          20.872
+        ]
+      ],
+      "isMock": true,
+      "synthetic": true,
+      "evidence": "Fictional geometry for public demonstration only."
+    }
+  ]
+}

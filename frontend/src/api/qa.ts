@@ -1,12 +1,33 @@
-import type { QaAskResponse, Conversation, Source, KGPath, MapAction, MapPlan, SpatialAnalysis, SpatialData, RetrievalMode } from '@/types'
+import type {
+  AgentMode,
+  AgentPlan,
+  AgentResponseMetadata,
+  AgentToolTrace,
+  Conversation,
+  KGPath,
+  MapAction,
+  MapPlan,
+  QaAskResponse,
+  RetrievalMode,
+  Source,
+  SpatialAnalysis,
+  SpatialData,
+} from '@/types'
 import request from './request'
 
 /** 提交问题，获取 AI 回答（普通 JSON 模式） */
 export async function askQuestion(
   question: string,
   retrievalMode: RetrievalMode = 'hybrid',
+  conversationId?: string,
+  agentMode: AgentMode = 'agent',
 ): Promise<QaAskResponse> {
-  const response = await request.post<unknown, QaAskResponse>('/qa/ask', { question, retrievalMode })
+  const response = await request.post<unknown, QaAskResponse>('/qa/ask', {
+    question,
+    retrievalMode,
+    conversationId,
+    agentMode,
+  })
   return { ...response, mapPlan: normalizeMapPlan(response.mapPlan) }
 }
 
@@ -122,9 +143,64 @@ export function normalizeMapPlan(raw: any): MapPlan | undefined {
 /** SSE 流式问答的回调集合 */
 export interface QaStreamCallbacks {
   onMeta: (meta: { ragCount: number; kgCount: number; kgContext: KGPath[]; spatialData?: SpatialData; spatialAnalysis?: SpatialAnalysis; mapPlan?: MapPlan }) => void
+  onPlan?: (plan: AgentPlan) => void
+  onToolStart?: (tool: AgentToolTrace) => void
+  onToolEnd?: (tool: AgentToolTrace) => void
   onChunk: (text: string) => void
-  onDone: (sources: Source[], kgContext: KGPath[], spatialData?: SpatialData, spatialAnalysis?: SpatialAnalysis, mapPlan?: MapPlan) => void
+  onDone: (sources: Source[], kgContext: KGPath[], spatialData?: SpatialData, spatialAnalysis?: SpatialAnalysis, mapPlan?: MapPlan, agent?: AgentResponseMetadata) => void
   onError: (err: Error) => void
+}
+
+function agentMetadata(event: any): AgentResponseMetadata | undefined {
+  const metadata: AgentResponseMetadata = {
+    ...(typeof event.conversationId === 'string' ? { conversationId: event.conversationId } : {}),
+    ...(typeof event.intent === 'string' ? { intent: event.intent } : {}),
+    ...(Array.isArray(event.linkedEntities) ? { linkedEntities: event.linkedEntities } : {}),
+    ...(Array.isArray(event.citations) ? { citations: event.citations } : {}),
+    ...(Array.isArray(event.toolTrace) ? { toolTrace: event.toolTrace } : {}),
+    ...(event.plan && Array.isArray(event.plan.steps) ? { plan: event.plan } : {}),
+  }
+  return Object.keys(metadata).length > 0 ? metadata : undefined
+}
+
+export function dispatchQaSseEvent(event: any, callbacks: QaStreamCallbacks): void {
+  switch (event?.type) {
+    case 'meta':
+      callbacks.onMeta({
+        ragCount: event.ragCount,
+        kgCount: event.kgCount,
+        kgContext: event.kgContext ?? [],
+        spatialData: normalizeSpatial(event.spatialData),
+        spatialAnalysis: normalizeSpatialAnalysis(event.spatialAnalysis),
+        mapPlan: normalizeMapPlan(event.mapPlan),
+      })
+      break
+    case 'plan':
+      if (event.plan && Array.isArray(event.plan.steps)) callbacks.onPlan?.(event.plan)
+      break
+    case 'tool_start':
+      if (event.tool && typeof event.tool.toolName === 'string') callbacks.onToolStart?.(event.tool)
+      break
+    case 'tool_end':
+      if (event.tool && typeof event.tool.toolName === 'string') callbacks.onToolEnd?.(event.tool)
+      break
+    case 'chunk':
+      callbacks.onChunk(event.content)
+      break
+    case 'done':
+      callbacks.onDone(
+        event.sources || [],
+        event.kgContext || [],
+        normalizeSpatial(event.spatialData),
+        normalizeSpatialAnalysis(event.spatialAnalysis),
+        normalizeMapPlan(event.mapPlan),
+        agentMetadata(event),
+      )
+      break
+    case 'error':
+      callbacks.onError(new Error(event.message || 'Stream error'))
+      break
+  }
 }
 
 /**
@@ -138,6 +214,8 @@ export function askQuestionStream(
   question: string,
   retrievalMode: RetrievalMode = 'hybrid',
   callbacks: QaStreamCallbacks,
+  conversationId?: string,
+  agentMode: AgentMode = 'agent',
 ): () => void {
   const controller = new AbortController()
 
@@ -145,14 +223,15 @@ export function askQuestionStream(
     try {
       const token = localStorage.getItem('token')
       // 绕过 Vite 代理直连后端（代理会缓冲 SSE 响应导致失去流式效果）
-      const backendUrl = import.meta.env.DEV ? 'http://localhost:3000/api/qa/ask' : '/api/qa/ask'
+      const backendOrigin = import.meta.env.VITE_BACKEND_ORIGIN || 'http://localhost:3000'
+      const backendUrl = import.meta.env.DEV ? `${backendOrigin}/api/qa/ask` : '/api/qa/ask'
       const resp = await fetch(backendUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
-        body: JSON.stringify({ question, stream: true, retrievalMode }),
+        body: JSON.stringify({ question, stream: true, retrievalMode, conversationId, agentMode }),
         signal: controller.signal,
       })
 
@@ -182,6 +261,10 @@ export function askQuestionStream(
           if (!line.startsWith('data: ')) continue
           try {
             const event = JSON.parse(line.slice(6))
+            if (event.type === 'plan' || event.type === 'tool_start' || event.type === 'tool_end') {
+              dispatchQaSseEvent(event, callbacks)
+              continue
+            }
             switch (event.type) {
               case 'meta':
                 callbacks.onMeta({
@@ -204,6 +287,7 @@ export function askQuestionStream(
                   normalizeSpatial(event.spatialData),
                   normalizeSpatialAnalysis(event.spatialAnalysis),
                   normalizeMapPlan(event.mapPlan),
+                  agentMetadata(event),
                 )
                 break
               case 'error':

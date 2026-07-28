@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "synthetic": true,
+  "isMock": true,
+  "document_count": 6,
+  "chunk_count": 6,
+  "graph_node_count": 30,
+  "graph_edge_count": 24,
+  "spatial_feature_count": 12,
+  "sha256": {
+    "documents.json": "00b5bcbc18cbf8bf87b7857cd89a1f35b7b5ad972971312279a63abd4ab261c1",
+    "graph.json": "585be0e0176c6b5a614560975df4d68477b4920753eed07157688b8d84be2857",
+    "spatial.json": "aa3fa5712c68734867b6e4ec857da2110f6df80b66e11845edddc45d3c7768eb",
+    "documents/01-synthetic-aurora-deposit.md": "7a79409336b92673f2a27b21e39e21f234296c4836cf432c63fc0a87b13ae024",
+    "documents/02-synthetic-borealis-deposit.md": "95342aaa8df53b5838f2222fb25306839a2a152a7fe6c5e71549458f5a26af6e",
+    "documents/03-synthetic-cirrus-deposit.md": "68bf02a64628bc2ff0b534df65a52a7ab4b938d5149e2ac2e1236de63b2a2183",
+    "documents/04-synthetic-dawn-deposit.md": "7cb59f6494651f5dfea72b3bc2d0d919ecb9cb43ca426eb014b9296fb202464c",
+    "documents/05-synthetic-ember-deposit.md": "cb6cad4f403c1337cbe574a3124a3d7df6289dcf9cf335dc9044108d97ef5952",
+    "documents/06-synthetic-frost-deposit.md": "6406375d266c60b72343688838c8f6f5b822f317c291ce47dc3ecc9841eb4b55"
+  }
+}

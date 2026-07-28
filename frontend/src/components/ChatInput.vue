@@ -1,21 +1,28 @@
 <script setup lang="ts">
 import { nextTick, ref, watch } from 'vue'
-import type { RetrievalMode } from '@/types'
+import type { AgentMode, RetrievalMode } from '@/types'
 
 const props = defineProps<{
   loading?: boolean
   retrievalMode: RetrievalMode
+  agentMode: AgentMode
 }>()
 
 const emit = defineEmits<{
   send: [text: string]
   'update:retrievalMode': [mode: RetrievalMode]
+  'update:agentMode': [mode: AgentMode]
 }>()
 
 const MODE_OPTIONS: { value: RetrievalMode; label: string }[] = [
   { value: 'rag', label: 'RAG检索' },
   { value: 'kg', label: '知识图谱' },
   { value: 'hybrid', label: '混合检索' },
+]
+
+const AGENT_OPTIONS: { value: AgentMode; label: string }[] = [
+  { value: 'agent', label: 'Agent' },
+  { value: 'direct', label: '直接问答' },
 ]
 
 const text = ref('')
@@ -38,6 +45,10 @@ function handleSend() {
 
 function selectMode(mode: RetrievalMode) {
   emit('update:retrievalMode', mode)
+}
+
+function selectAgentMode(mode: AgentMode) {
+  emit('update:agentMode', mode)
 }
 
 function handleKeydown(event: KeyboardEvent) {
@@ -86,6 +97,16 @@ watch(text, resizeTextarea)
       </button>
     </div>
     <div class="mode-bar">
+      <div class="agent-toggle" role="group" aria-label="问答方式">
+        <button
+          v-for="mode in AGENT_OPTIONS"
+          :key="mode.value"
+          class="mode-btn"
+          :class="{ active: agentMode === mode.value }"
+          :disabled="loading"
+          @click="selectAgentMode(mode.value)"
+        >{{ mode.label }}</button>
+      </div>
       <button
         v-for="m in MODE_OPTIONS"
         :key="m.value"
@@ -177,6 +198,27 @@ textarea::placeholder {
   margin-top: 8px;
 }
 
+.agent-toggle {
+  display: flex;
+  margin-right: 8px;
+}
+
+.agent-toggle .mode-btn {
+  border-radius: 0;
+}
+
+.agent-toggle .mode-btn + .mode-btn {
+  margin-left: -1px;
+}
+
+.agent-toggle .mode-btn:first-child {
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+
+.agent-toggle .mode-btn:last-child {
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
 .mode-btn {
   padding: 2px 10px;
   height: 24px;
@@ -213,5 +255,30 @@ textarea::placeholder {
   font-size: 10px;
   color: var(--color-ink-300);
   letter-spacing: 0.04em;
+}
+
+@media (max-width: 760px) {
+  .input-area { padding: 12px; }
+  .input-row { gap: 8px; }
+
+  .send-btn {
+    width: 44px;
+    flex: 0 0 44px;
+    padding: 0;
+    justify-content: center;
+    gap: 0;
+    font-size: 0;
+  }
+
+  .send-btn svg { width: 16px; height: 16px; }
+
+  .mode-bar {
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
+
+  .agent-toggle { margin-right: 4px; }
+  .mode-btn { padding: 2px 8px; }
+  .hint { display: none; }
 }
 </style>

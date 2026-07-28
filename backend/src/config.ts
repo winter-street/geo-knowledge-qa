@@ -6,7 +6,9 @@ dotenv.config()
 function requireEnv(key: string): string {
   const value = process.env[key]
   if (!value) {
-    console.warn(`[config] 缺少环境变量 ${key}，使用默认值`)
+    if (process.env.SYNTHETIC_DEMO?.trim().toLowerCase() !== 'true') {
+      console.warn(`[config] 缺少环境变量 ${key}，使用默认值`)
+    }
     return ''
   }
   return value

@@ -1,5 +1,5 @@
 import OpenAI from 'openai'
-import type { LLMProvider } from './provider.js'
+import type { LLMProvider, LLMToolCall, LLMToolDefinition } from './provider.js'
 import type { Chunk, Source, KGPath } from '../../types/index.js'
 import { getRuntimeSettings } from '../runtime-settings.js'
 
@@ -67,6 +67,8 @@ export class TongyiProvider implements LLMProvider {
       docTitle: r.chunk.docTitle,
       page: r.chunk.page,
       snippet: r.chunk.content.slice(0, 150) + '...',
+      synthetic: r.chunk.synthetic,
+      isMock: r.chunk.isMock,
     }))
     return { answer, sources }
   }
@@ -107,10 +109,43 @@ export class TongyiProvider implements LLMProvider {
         docTitle: r.chunk.docTitle,
         page: r.chunk.page,
         snippet: r.chunk.content.slice(0, 150) + '...',
+        synthetic: r.chunk.synthetic,
+        isMock: r.chunk.isMock,
       }))
       callbacks.onDone(sources)
     } catch (err) {
       callbacks.onError(err as Error)
     }
+  }
+
+  async generateToolCalls(
+    systemPrompt: string,
+    userPrompt: string,
+    definitions: LLMToolDefinition[],
+  ): Promise<LLMToolCall[]> {
+    const client = this.ensureClient()
+    const completion = await client.chat.completions.create({
+      model: this.model,
+      messages: [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: userPrompt },
+      ],
+      tools: definitions.map((definition) => ({
+        type: 'function' as const,
+        function: definition,
+      })),
+      tool_choice: 'auto',
+      parallel_tool_calls: true,
+      temperature: 0,
+      max_tokens: 512,
+    }, { timeout: 10_000 })
+    return (completion.choices[0]?.message.tool_calls ?? []).map((call) => {
+      let args: Record<string, unknown> = {}
+      try {
+        const parsed = JSON.parse(call.function.arguments)
+        if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) args = parsed
+      } catch { /* invalid arguments are rejected by Zod in the planner */ }
+      return { id: call.id, name: call.function.name, arguments: args }
+    })
   }
 }

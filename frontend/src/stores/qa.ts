@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed, reactive } from 'vue'
-import type { Message, Conversation } from '@/types'
+import type { AgentToolTrace, Message, Conversation } from '@/types'
 import { getHistory, askQuestion, askQuestionStream } from '@/api/qa'
 import { createConversationTitle, DEFAULT_CONVERSATION_TITLE } from '@/utils/conversation'
 import { useSpatialTaskStore } from './spatial-task'
@@ -33,6 +33,7 @@ export const useQaStore = defineStore('qa', () => {
   const loading = ref(false)
   const error = ref<string | null>(null)
   const retrievalMode = ref<'rag' | 'kg' | 'hybrid'>('hybrid')
+  const agentMode = ref<'direct' | 'agent'>('agent')
 
   const currentConversation = computed(() =>
     conversations.value.find((c) => c.id === currentId.value)
@@ -150,7 +151,7 @@ export const useQaStore = defineStore('qa', () => {
     error.value = null
 
     try {
-      const res = await askQuestion(normalizedContent, retrievalMode.value)
+      const res = await askQuestion(normalizedContent, retrievalMode.value, cid, agentMode.value)
       const aiMsg: Message = {
         id: `msg-${Date.now()}-ai`,
         role: 'assistant',
@@ -160,6 +161,10 @@ export const useQaStore = defineStore('qa', () => {
         spatialData: res.spatialData,
         spatialAnalysis: res.spatialAnalysis,
         mapPlan: res.mapPlan,
+        agentPlan: res.plan,
+        toolTrace: res.toolTrace,
+        linkedEntities: res.linkedEntities,
+        citations: res.citations,
         timestamp: Date.now(),
       }
       if (res.mapPlan) spatialTask.accept(res.mapPlan, res.spatialData, res.spatialAnalysis)
@@ -215,6 +220,15 @@ export const useQaStore = defineStore('qa', () => {
       }
     }
 
+    let currentTrace: AgentToolTrace[] = []
+    function upsertTrace(tool: AgentToolTrace) {
+      const index = currentTrace.findIndex((item) => item.id === tool.id)
+      currentTrace = index === -1
+        ? [...currentTrace, tool]
+        : currentTrace.map((item, itemIndex) => itemIndex === index ? tool : item)
+      patchAiMsg({ toolTrace: currentTrace })
+    }
+
     cancelStream = askQuestionStream(normalizedContent, retrievalMode.value, {
       onMeta(meta) {
         // 后端若在 meta 阶段就带回空间数据，先挂到消息上，地图可先于文字开始渲染
@@ -227,11 +241,20 @@ export const useQaStore = defineStore('qa', () => {
         }
         if (meta.mapPlan) spatialTask.accept(meta.mapPlan, meta.spatialData, meta.spatialAnalysis)
       },
+      onPlan(plan) {
+        patchAiMsg({ agentPlan: plan })
+      },
+      onToolStart(tool) {
+        upsertTrace(tool)
+      },
+      onToolEnd(tool) {
+        upsertTrace(tool)
+      },
       onChunk(text) {
         aiMsg.content += text
         patchAiMsg({ content: aiMsg.content })
       },
-      onDone(sources, kgContext, spatialData, spatialAnalysis, mapPlan) {
+      onDone(sources, kgContext, spatialData, spatialAnalysis, mapPlan, agent) {
         // done 为权威结果；若 done 未带 spatialData 则保留 meta 阶段已挂的，避免被 undefined 覆盖
         patchAiMsg({
           sources,
@@ -239,6 +262,10 @@ export const useQaStore = defineStore('qa', () => {
           ...(spatialData ? { spatialData } : {}),
           ...(spatialAnalysis ? { spatialAnalysis } : {}),
           ...(mapPlan ? { mapPlan } : {}),
+          ...(agent?.plan ? { agentPlan: agent.plan } : {}),
+          ...(agent?.toolTrace ? { toolTrace: agent.toolTrace } : {}),
+          ...(agent?.linkedEntities ? { linkedEntities: agent.linkedEntities } : {}),
+          ...(agent?.citations ? { citations: agent.citations } : {}),
         })
         if (mapPlan) spatialTask.accept(mapPlan, spatialData, spatialAnalysis)
 
@@ -254,7 +281,7 @@ export const useQaStore = defineStore('qa', () => {
         persist()
         cancelStream = null
       },
-    })
+    }, cid, agentMode.value)
   }
 
   function persist() {
@@ -268,6 +295,7 @@ export const useQaStore = defineStore('qa', () => {
     loading,
     error,
     retrievalMode,
+    agentMode,
     currentConversation,
     loadHistory,
     selectConversation,

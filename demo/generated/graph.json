@@ -1,0 +1,814 @@
+{
+  "synthetic": true,
+  "isMock": true,
+  "nodes": [
+    {
+      "id": "SYN-MINERAL-01",
+      "label": "Synthetic Aurora Deposit 1",
+      "name": "Synthetic Aurora Deposit 1",
+      "type": "Mineral",
+      "aliases": [
+        "Synthetic Deposit 1"
+      ],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-01"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-ROCK-01",
+      "label": "Synthetic Lumen Granite 1",
+      "name": "Synthetic Lumen Granite 1",
+      "type": "Rock",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-01"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-STRUCTURE-01",
+      "label": "Synthetic Meridian Fault 1",
+      "name": "Synthetic Meridian Fault 1",
+      "type": "Structure",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-01"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-TIME-01",
+      "label": "Synthetic Epoch Alpha 1",
+      "name": "Synthetic Epoch Alpha 1",
+      "type": "TimePeriod",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-01"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-REGION-01",
+      "label": "Synthetic Northfield Region 1",
+      "name": "Synthetic Northfield Region 1",
+      "type": "Region",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-01"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-MINERAL-02",
+      "label": "Synthetic Borealis Deposit 2",
+      "name": "Synthetic Borealis Deposit 2",
+      "type": "Mineral",
+      "aliases": [
+        "Synthetic Deposit 2"
+      ],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-02"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-ROCK-02",
+      "label": "Synthetic Prism Diorite 2",
+      "name": "Synthetic Prism Diorite 2",
+      "type": "Rock",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-02"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-STRUCTURE-02",
+      "label": "Synthetic Horizon Fault 2",
+      "name": "Synthetic Horizon Fault 2",
+      "type": "Structure",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-02"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-TIME-02",
+      "label": "Synthetic Epoch Beta 2",
+      "name": "Synthetic Epoch Beta 2",
+      "type": "TimePeriod",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-02"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-REGION-02",
+      "label": "Synthetic Eastfield Region 2",
+      "name": "Synthetic Eastfield Region 2",
+      "type": "Region",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-02"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-MINERAL-03",
+      "label": "Synthetic Cirrus Deposit 3",
+      "name": "Synthetic Cirrus Deposit 3",
+      "type": "Mineral",
+      "aliases": [
+        "Synthetic Deposit 3"
+      ],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-03"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-ROCK-03",
+      "label": "Synthetic Echo Schist 3",
+      "name": "Synthetic Echo Schist 3",
+      "type": "Rock",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-03"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-STRUCTURE-03",
+      "label": "Synthetic Vector Fault 3",
+      "name": "Synthetic Vector Fault 3",
+      "type": "Structure",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-03"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-TIME-03",
+      "label": "Synthetic Epoch Gamma 3",
+      "name": "Synthetic Epoch Gamma 3",
+      "type": "TimePeriod",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-03"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-REGION-03",
+      "label": "Synthetic Southfield Region 3",
+      "name": "Synthetic Southfield Region 3",
+      "type": "Region",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-03"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-MINERAL-04",
+      "label": "Synthetic Dawn Deposit 4",
+      "name": "Synthetic Dawn Deposit 4",
+      "type": "Mineral",
+      "aliases": [
+        "Synthetic Deposit 4"
+      ],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-04"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-ROCK-04",
+      "label": "Synthetic Nova Gabbro 4",
+      "name": "Synthetic Nova Gabbro 4",
+      "type": "Rock",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-04"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-STRUCTURE-04",
+      "label": "Synthetic Zenith Fault 4",
+      "name": "Synthetic Zenith Fault 4",
+      "type": "Structure",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-04"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-TIME-04",
+      "label": "Synthetic Epoch Delta 4",
+      "name": "Synthetic Epoch Delta 4",
+      "type": "TimePeriod",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-04"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-REGION-04",
+      "label": "Synthetic Westfield Region 4",
+      "name": "Synthetic Westfield Region 4",
+      "type": "Region",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-04"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-MINERAL-05",
+      "label": "Synthetic Ember Deposit 5",
+      "name": "Synthetic Ember Deposit 5",
+      "type": "Mineral",
+      "aliases": [
+        "Synthetic Deposit 5"
+      ],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-05"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-ROCK-05",
+      "label": "Synthetic Halo Quartzite 5",
+      "name": "Synthetic Halo Quartzite 5",
+      "type": "Rock",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-05"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-STRUCTURE-05",
+      "label": "Synthetic Parallax Fault 5",
+      "name": "Synthetic Parallax Fault 5",
+      "type": "Structure",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-05"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-TIME-05",
+      "label": "Synthetic Epoch Epsilon 5",
+      "name": "Synthetic Epoch Epsilon 5",
+      "type": "TimePeriod",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-05"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-REGION-05",
+      "label": "Synthetic Centralfield Region 5",
+      "name": "Synthetic Centralfield Region 5",
+      "type": "Region",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-05"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-MINERAL-06",
+      "label": "Synthetic Frost Deposit 6",
+      "name": "Synthetic Frost Deposit 6",
+      "type": "Mineral",
+      "aliases": [
+        "Synthetic Deposit 6"
+      ],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-06"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-ROCK-06",
+      "label": "Synthetic Orbit Rhyolite 6",
+      "name": "Synthetic Orbit Rhyolite 6",
+      "type": "Rock",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-06"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-STRUCTURE-06",
+      "label": "Synthetic Solstice Fault 6",
+      "name": "Synthetic Solstice Fault 6",
+      "type": "Structure",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-06"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-TIME-06",
+      "label": "Synthetic Epoch Zeta 6",
+      "name": "Synthetic Epoch Zeta 6",
+      "type": "TimePeriod",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-06"
+      },
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-REGION-06",
+      "label": "Synthetic Highfield Region 6",
+      "name": "Synthetic Highfield Region 6",
+      "type": "Region",
+      "aliases": [],
+      "properties": {
+        "sourceDocumentId": "SYN-DOC-06"
+      },
+      "synthetic": true,
+      "isMock": true
+    }
+  ],
+  "edges": [
+    {
+      "id": "SYN-EDGE-01-HOSTED_IN",
+      "source": "SYN-MINERAL-01",
+      "target": "SYN-ROCK-01",
+      "type": "HOSTED_IN",
+      "label": "hosted in",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-01-CONTROLLED_BY",
+      "source": "SYN-MINERAL-01",
+      "target": "SYN-STRUCTURE-01",
+      "type": "CONTROLLED_BY",
+      "label": "controlled by",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-01-FORMED_IN",
+      "source": "SYN-MINERAL-01",
+      "target": "SYN-TIME-01",
+      "type": "FORMED_IN",
+      "label": "formed in",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-01-LIES_IN",
+      "source": "SYN-MINERAL-01",
+      "target": "SYN-REGION-01",
+      "type": "LIES_IN",
+      "label": "lies in",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-02-HOSTED_IN",
+      "source": "SYN-MINERAL-02",
+      "target": "SYN-ROCK-02",
+      "type": "HOSTED_IN",
+      "label": "hosted in",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-02-CONTROLLED_BY",
+      "source": "SYN-MINERAL-02",
+      "target": "SYN-STRUCTURE-02",
+      "type": "CONTROLLED_BY",
+      "label": "controlled by",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-02-FORMED_IN",
+      "source": "SYN-MINERAL-02",
+      "target": "SYN-TIME-02",
+      "type": "FORMED_IN",
+      "label": "formed in",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-02-LIES_IN",
+      "source": "SYN-MINERAL-02",
+      "target": "SYN-REGION-02",
+      "type": "LIES_IN",
+      "label": "lies in",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-03-HOSTED_IN",
+      "source": "SYN-MINERAL-03",
+      "target": "SYN-ROCK-03",
+      "type": "HOSTED_IN",
+      "label": "hosted in",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-03-CONTROLLED_BY",
+      "source": "SYN-MINERAL-03",
+      "target": "SYN-STRUCTURE-03",
+      "type": "CONTROLLED_BY",
+      "label": "controlled by",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-03-FORMED_IN",
+      "source": "SYN-MINERAL-03",
+      "target": "SYN-TIME-03",
+      "type": "FORMED_IN",
+      "label": "formed in",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-03-LIES_IN",
+      "source": "SYN-MINERAL-03",
+      "target": "SYN-REGION-03",
+      "type": "LIES_IN",
+      "label": "lies in",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-04-HOSTED_IN",
+      "source": "SYN-MINERAL-04",
+      "target": "SYN-ROCK-04",
+      "type": "HOSTED_IN",
+      "label": "hosted in",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-04-CONTROLLED_BY",
+      "source": "SYN-MINERAL-04",
+      "target": "SYN-STRUCTURE-04",
+      "type": "CONTROLLED_BY",
+      "label": "controlled by",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-04-FORMED_IN",
+      "source": "SYN-MINERAL-04",
+      "target": "SYN-TIME-04",
+      "type": "FORMED_IN",
+      "label": "formed in",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-04-LIES_IN",
+      "source": "SYN-MINERAL-04",
+      "target": "SYN-REGION-04",
+      "type": "LIES_IN",
+      "label": "lies in",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-05-HOSTED_IN",
+      "source": "SYN-MINERAL-05",
+      "target": "SYN-ROCK-05",
+      "type": "HOSTED_IN",
+      "label": "hosted in",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-05-CONTROLLED_BY",
+      "source": "SYN-MINERAL-05",
+      "target": "SYN-STRUCTURE-05",
+      "type": "CONTROLLED_BY",
+      "label": "controlled by",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-05-FORMED_IN",
+      "source": "SYN-MINERAL-05",
+      "target": "SYN-TIME-05",
+      "type": "FORMED_IN",
+      "label": "formed in",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-05-LIES_IN",
+      "source": "SYN-MINERAL-05",
+      "target": "SYN-REGION-05",
+      "type": "LIES_IN",
+      "label": "lies in",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-06-HOSTED_IN",
+      "source": "SYN-MINERAL-06",
+      "target": "SYN-ROCK-06",
+      "type": "HOSTED_IN",
+      "label": "hosted in",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-06-CONTROLLED_BY",
+      "source": "SYN-MINERAL-06",
+      "target": "SYN-STRUCTURE-06",
+      "type": "CONTROLLED_BY",
+      "label": "controlled by",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-06-FORMED_IN",
+      "source": "SYN-MINERAL-06",
+      "target": "SYN-TIME-06",
+      "type": "FORMED_IN",
+      "label": "formed in",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "id": "SYN-EDGE-06-LIES_IN",
+      "source": "SYN-MINERAL-06",
+      "target": "SYN-REGION-06",
+      "type": "LIES_IN",
+      "label": "lies in",
+      "synthetic": true,
+      "isMock": true
+    }
+  ],
+  "paths": [
+    {
+      "from": "Synthetic Aurora Deposit 1",
+      "relation": "hosted in",
+      "relationType": "HOSTED_IN",
+      "to": "Synthetic Lumen Granite 1",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Aurora Deposit 1",
+      "relation": "controlled by",
+      "relationType": "CONTROLLED_BY",
+      "to": "Synthetic Meridian Fault 1",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Aurora Deposit 1",
+      "relation": "formed in",
+      "relationType": "FORMED_IN",
+      "to": "Synthetic Epoch Alpha 1",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Aurora Deposit 1",
+      "relation": "lies in",
+      "relationType": "LIES_IN",
+      "to": "Synthetic Northfield Region 1",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Borealis Deposit 2",
+      "relation": "hosted in",
+      "relationType": "HOSTED_IN",
+      "to": "Synthetic Prism Diorite 2",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Borealis Deposit 2",
+      "relation": "controlled by",
+      "relationType": "CONTROLLED_BY",
+      "to": "Synthetic Horizon Fault 2",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Borealis Deposit 2",
+      "relation": "formed in",
+      "relationType": "FORMED_IN",
+      "to": "Synthetic Epoch Beta 2",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Borealis Deposit 2",
+      "relation": "lies in",
+      "relationType": "LIES_IN",
+      "to": "Synthetic Eastfield Region 2",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Cirrus Deposit 3",
+      "relation": "hosted in",
+      "relationType": "HOSTED_IN",
+      "to": "Synthetic Echo Schist 3",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Cirrus Deposit 3",
+      "relation": "controlled by",
+      "relationType": "CONTROLLED_BY",
+      "to": "Synthetic Vector Fault 3",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Cirrus Deposit 3",
+      "relation": "formed in",
+      "relationType": "FORMED_IN",
+      "to": "Synthetic Epoch Gamma 3",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Cirrus Deposit 3",
+      "relation": "lies in",
+      "relationType": "LIES_IN",
+      "to": "Synthetic Southfield Region 3",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Dawn Deposit 4",
+      "relation": "hosted in",
+      "relationType": "HOSTED_IN",
+      "to": "Synthetic Nova Gabbro 4",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Dawn Deposit 4",
+      "relation": "controlled by",
+      "relationType": "CONTROLLED_BY",
+      "to": "Synthetic Zenith Fault 4",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Dawn Deposit 4",
+      "relation": "formed in",
+      "relationType": "FORMED_IN",
+      "to": "Synthetic Epoch Delta 4",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Dawn Deposit 4",
+      "relation": "lies in",
+      "relationType": "LIES_IN",
+      "to": "Synthetic Westfield Region 4",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Ember Deposit 5",
+      "relation": "hosted in",
+      "relationType": "HOSTED_IN",
+      "to": "Synthetic Halo Quartzite 5",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Ember Deposit 5",
+      "relation": "controlled by",
+      "relationType": "CONTROLLED_BY",
+      "to": "Synthetic Parallax Fault 5",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Ember Deposit 5",
+      "relation": "formed in",
+      "relationType": "FORMED_IN",
+      "to": "Synthetic Epoch Epsilon 5",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Ember Deposit 5",
+      "relation": "lies in",
+      "relationType": "LIES_IN",
+      "to": "Synthetic Centralfield Region 5",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Frost Deposit 6",
+      "relation": "hosted in",
+      "relationType": "HOSTED_IN",
+      "to": "Synthetic Orbit Rhyolite 6",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Frost Deposit 6",
+      "relation": "controlled by",
+      "relationType": "CONTROLLED_BY",
+      "to": "Synthetic Solstice Fault 6",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Frost Deposit 6",
+      "relation": "formed in",
+      "relationType": "FORMED_IN",
+      "to": "Synthetic Epoch Zeta 6",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    },
+    {
+      "from": "Synthetic Frost Deposit 6",
+      "relation": "lies in",
+      "relationType": "LIES_IN",
+      "to": "Synthetic Highfield Region 6",
+      "source": "synthetic-demo-v1",
+      "synthetic": true,
+      "isMock": true
+    }
+  ]
+}
