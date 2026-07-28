@@ -473,7 +473,9 @@ _processes: dict[str, subprocess.Popen] = {}
 
 SERVICE_CONFIG: dict[str, dict] = {
     "neo4j": {
-        "cmd": [os.environ.get("NEO4J_COMMAND", "neo4j"), "console"],
+        "cmd": ["powershell", "-ExecutionPolicy", "Bypass",
+                "-File", r"D:\neo4j-community-5.26.4-windows\neo4j-community-5.26.4\bin\neo4j.ps1",
+                "console"],
         "cwd": None,
         "check_url": "http://localhost:7474",
     },

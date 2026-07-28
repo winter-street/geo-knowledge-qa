@@ -10,7 +10,7 @@
 | 文件 | 行数 | 功能 | 关键内容 |
 |------|:---:|------|---------|
 | `config.py` | 72 | 全局配置（含敏感信息，gitignore） | PDF_FILES（12篇地质PDF）、SQLite/TF-IDF路径、chunk参数(512/128)、jieba、DeepSeek API(deepseek-chat, temp=1.0, max_tokens=8192)、Neo4j连接、RETRIEVAL_MODE="bge" |
-| `config.example.py` | 57 | 配置模板（安全，可提交git） | 同上结构，API Key和密码默认为空字符串 |
+| `config.example.py` | 57 | 配置模板（安全，可提交git） | 同上结构，API Key和密码为占位符 `sk-YOUR-API-KEY-HERE` |
 
 ---
 

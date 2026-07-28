@@ -11,7 +11,7 @@ import webbrowser
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 ML_SERVICE_DIR = os.path.join(ROOT, "ml-service")
-PYTHON = sys.executable
+PYTHON = r"D:\py313\python.exe"
 HEALTH_URL = "http://127.0.0.1:5000/health"
 
 sys.path.insert(0, ML_SERVICE_DIR)

@@ -9,13 +9,13 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 from ner_annotate import annotate_text, bio_to_conll
 from parse_pdf import parse_pdf
-from config import LLM_CONFIG, PDF_FILES
+from config import LLM_CONFIG
 
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "..", "output")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# 使用 config.py 中配置的第一份文档。
-PDF_PATH = PDF_FILES[0]["path"]
+# 第一份 PDF：编制指南
+PDF_PATH = "D:/1GISwork/6-GISdevelop/data/samples/202009-自资部-市级国土空间总体规划编制指南（试行）（自然资办发[2020]46号）.pdf"
 
 # 分段参数
 SEGMENT_CHARS = 250   # 每段最多 250 字

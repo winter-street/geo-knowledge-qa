@@ -1,7 +1,6 @@
 import { config } from '../config.js'
 import type { Chunk, Source, KGPath, RetrievalMode, SpatialAnalysis, SpatialData } from '../types/index.js'
 import { gateway } from './llm/gateway.js'
-import type { GenerationOptions } from './llm/provider.js'
 import { DeepSeekProvider } from './llm/deepseek.js'
 import { TongyiProvider } from './llm/tongyi.js'
 
@@ -19,7 +18,7 @@ if (config.deepseek.apiKey && config.deepseek.apiKey !== 'sk-placeholder') {
 }
 
 // 通义千问（备用模型 — 仅在配置了 key 时激活）
-if (config.tongyi?.apiKey) {
+if (config.tongyi?.apiKey && config.tongyi.apiKey !== 'sk-your-tongyi-key-here') {
   gateway.register(new TongyiProvider({
     apiKey: config.tongyi.apiKey,
     model: config.tongyi.model,
@@ -146,7 +145,6 @@ export async function generateAnswer(
   kgContext: KGPath[],
   retrievalMode: RetrievalMode = 'hybrid',
   spatialContext?: { data: SpatialData; analysis: SpatialAnalysis },
-  options?: GenerationOptions,
 ): Promise<{ answer: string; sources: Source[] }> {
   return gateway.generateAnswer(
     question,
@@ -154,19 +152,6 @@ export async function generateAnswer(
     kgContext,
     retrievalMode,
     spatialContext,
-    options,
-  )
-}
-
-/** 供离线评测使用的无检索直接回答。 */
-export async function generateDirectAnswer(
-  question: string,
-  options?: GenerationOptions,
-): Promise<string> {
-  return gateway.generateText(
-    '你是专业的地质找矿知识问答助手。请直接、简洁地回答问题；不确定或缺少可靠依据时应明确说明，不得编造具体事实。',
-    `用户问题：${question}`,
-    options,
   )
 }
 

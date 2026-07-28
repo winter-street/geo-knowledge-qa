@@ -6,7 +6,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, os.path.dirname(__file__))
 from ner_annotate import annotate_text, bio_to_conll
 from parse_pdf import parse_pdf
-from config import LLM_CONFIG, PDF_FILES
+from config import LLM_CONFIG
 
 OUT_DIR = os.path.join(os.path.dirname(__file__), "..", "output")
 os.makedirs(OUT_DIR, exist_ok=True)
@@ -30,8 +30,8 @@ def load_seed():
 seed = load_seed()
 print(f"种子词典: {len(seed)} 条")
 
-# 解析 config.py 中配置的第一份文档。
-parsed = parse_pdf(PDF_FILES[0]["path"])
+# 解析编制指南
+parsed = parse_pdf("D:/1GISwork/6-GISdevelop/data/samples/202009-自资部-市级国土空间总体规划编制指南（试行）（自然资办发[2020]46号）.pdf")
 body = "\n".join(p["text"] for p in parsed["pages"])[500:]
 
 # 分段

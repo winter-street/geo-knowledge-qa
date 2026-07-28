@@ -41,10 +41,7 @@ def test_real_glossary():
     from scripts.extract_glossary import extract_terms
     from scripts.parse_pdf import parse_pdf
 
-    pdf_path = os.environ.get("GEO_TEST_GLOSSARY_PDF")
-    if not pdf_path:
-        print("[SKIP] Set GEO_TEST_GLOSSARY_PDF to test with your own glossary PDF")
-        return True
+    pdf_path = "D:/1GISwork/6-GISdevelop/data/samples/2025.04.03-《国土空间规划术语》（征求意见稿）.pdf"
     parsed = parse_pdf(pdf_path)
     terms = extract_terms(parsed)[:30]  # 取前 30 条
 

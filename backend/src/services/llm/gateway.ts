@@ -1,4 +1,4 @@
-import type { GenerationOptions, LLMProvider } from './provider.js'
+import type { LLMProvider } from './provider.js'
 import type { Chunk, Source, KGPath, RetrievalMode, SpatialAnalysis, SpatialData } from '../../types/index.js'
 import { buildPrompt, SYSTEM_PROMPT } from '../llm.js'
 
@@ -42,7 +42,6 @@ export class LLMGateway {
     kgContext: KGPath[],
     retrievalMode: RetrievalMode = 'hybrid',
     spatialContext?: { data: SpatialData; analysis: SpatialAnalysis },
-    options?: GenerationOptions,
   ): Promise<{ answer: string; sources: Source[] }> {
     const prompt = buildPrompt(question, ragChunks, kgContext, retrievalMode, spatialContext)
 
@@ -51,7 +50,7 @@ export class LLMGateway {
       try {
         console.log(`[gateway] 调用 ${provider.name} (${i + 1}/${this.providers.length})`)
         const result = await provider.generateAnswer(
-          question, ragChunks, kgContext, SYSTEM_PROMPT, prompt, options,
+          question, ragChunks, kgContext, SYSTEM_PROMPT, prompt
         )
         return result
       } catch (err) {
@@ -71,17 +70,6 @@ export class LLMGateway {
     }
 
     return this.mockAnswer(question, ragChunks, kgContext, retrievalMode, spatialContext)
-  }
-
-  /** 直接调用当前主模型，不注入检索上下文，也不使用 mock 回答降级。 */
-  async generateText(
-    systemPrompt: string,
-    userPrompt: string,
-    options?: GenerationOptions,
-  ): Promise<string> {
-    const primary = this.providers[0]
-    if (!primary) throw new Error('没有可用的 LLM Provider')
-    return primary.generateText(systemPrompt, userPrompt, options)
   }
 
   /** 流式生成（当前不支持流式异常互备，回退到非流式） */

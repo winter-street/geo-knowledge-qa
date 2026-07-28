@@ -39,7 +39,7 @@ JIEBA_STOP_WORDS = None    # 停用词文件路径（可选）
 # ============================================================
 LLM_CONFIG = {
     "provider": "deepseek",                        # 或 "tongyi"
-    "api_key": "",                                 # 填写你自己的 API Key
+    "api_key": "sk-YOUR-API-KEY-HERE",             # <-- 填你的 key
     "base_url": "https://api.deepseek.com/v1",
     "model": "deepseek-chat",
     "temperature": 0.1,
@@ -52,5 +52,5 @@ LLM_CONFIG = {
 NEO4J_CONFIG = {
     "uri": "bolt://localhost:7687",
     "user": "neo4j",
-    "password": "",                                # 填写你自己的密码
+    "password": "your-neo4j-password-here",        # <-- 填你的密码
 }

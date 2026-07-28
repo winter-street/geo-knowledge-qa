@@ -1,10 +1,5 @@
 [
-  {
-    "docId": "demo-doc-001",
-    "title": "公开演示地质文档",
-    "docType": "演示文档",
-    "status": "completed",
-    "chunkCount": 3,
-    "uploadedAt": "2026-01-01"
-  }
+  { "docId": "doc-001", "title": "新疆尾亚地区铁矿床地质调查报告", "docType": "地质报告", "status": "completed", "chunkCount": 74, "uploadedAt": "2026-06-28" },
+  { "docId": "doc-002", "title": "东天山成矿带成矿规律研究", "docType": "研究报告", "status": "completed", "chunkCount": 47, "uploadedAt": "2026-06-28" },
+  { "docId": "doc-003", "title": "香山西段铜镍矿勘查评价报告", "docType": "勘查报告", "status": "processing", "chunkCount": 0, "uploadedAt": "2026-07-05" }
 ]

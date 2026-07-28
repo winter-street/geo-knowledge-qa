@@ -11,11 +11,11 @@ def test_split_sections():
     """测试文本分段"""
     from scripts.extract_concepts import split_into_sections
 
-    text = ("第一章 地质背景\n\n"
-            "第一条 演示矿物赋存于演示岩体中，需要开展详细研究。"
-            "第二条 演示构造控制了区域内的矿化分布。"
-            "\n\n第二章 成矿作用\n\n"
-            "第三条 演示矿物形成于演示地质年代。")
+    text = ("第一章 总则\n\n"
+            "第一条 这是关于国土空间规划的重要内容，需要详细阐述。"
+            "第二条 更多关于规划编制和实施管理的具体规定。"
+            "\n\n第二章 规划\n\n"
+            "第三条 规划内容涉及城镇开发边界和生态保护红线的划定。")
     sections = split_into_sections(text, min_chars=20, max_chars=500)
 
     assert len(sections) >= 1, "应至少有一个分段"
@@ -34,7 +34,7 @@ def test_build_prompt():
     from scripts.extract_concepts import build_extraction_prompt
 
     prompt = build_extraction_prompt("测试文本段落内容")
-    assert "地质找矿" in prompt, "prompt 应包含角色设定"
+    assert "国土空间规划" in prompt, "prompt 应包含角色设定"
     assert "测试文本段落内容" in prompt, "prompt 应包含输入文本"
     assert "JSON" in prompt, "prompt 应要求 JSON 输出"
     assert "concepts" in prompt, "prompt 应提及 concepts"
@@ -50,10 +50,10 @@ def test_parse_llm_response():
     from scripts.extract_concepts import parse_llm_response
 
     # 正常 JSON
-    resp = '{"concepts":[{"name":"演示矿物","type":"Mineral","description":"..."}],"relations":[]}'
+    resp = '{"concepts":[{"name":"城镇开发边界","type":"空间管控","description":"..."}],"relations":[]}'
     result = parse_llm_response(resp)
     assert len(result["concepts"]) == 1
-    assert result["concepts"][0]["name"] == "演示矿物"
+    assert result["concepts"][0]["name"] == "城镇开发边界"
     assert len(result["relations"]) == 0
 
     # JSON in code block
@@ -73,17 +73,17 @@ def test_deduplicate():
 
     results = [
         {"concepts": [
-            {"name": "演示矿物", "type": "Mineral", "description": "a"},
-            {"name": "演示岩体", "type": "Rock", "description": "b"},
+            {"name": "城镇开发边界", "type": "空间管控", "description": "a"},
+            {"name": "容积率", "type": "规划指标", "description": "b"},
         ], "relations": [
-            {"from": "演示矿物", "relation": "HOSTED_IN", "to": "演示岩体"},
+            {"from": "城镇开发边界", "relation": "GOVERNS", "to": "容积率"},
         ]},
         {"concepts": [
-            {"name": "演示矿物", "type": "Mineral", "description": "c"},
-            {"name": "演示构造", "type": "Structure", "description": "d"},
+            {"name": "城镇开发边界", "type": "空间管控", "description": "c"},
+            {"name": "建筑密度", "type": "规划指标", "description": "d"},
         ], "relations": [
-            {"from": "演示矿物", "relation": "HOSTED_IN", "to": "演示岩体"},
-            {"from": "演示矿物", "relation": "CONTROLLED_BY", "to": "演示构造"},
+            {"from": "城镇开发边界", "relation": "GOVERNS", "to": "容积率"},
+            {"from": "城镇开发边界", "relation": "GOVERNS", "to": "建筑密度"},
         ]},
     ]
 
@@ -91,7 +91,7 @@ def test_deduplicate():
 
     # 概念去重（同名合并）
     concept_names = [c["name"] for c in merged["concepts"]]
-    assert concept_names == ["演示矿物", "演示岩体", "演示构造"], f"去重后应为 3 个概念: {concept_names}"
+    assert concept_names == ["城镇开发边界", "容积率", "建筑密度"], f"去重后应为 3 个概念: {concept_names}"
 
     # 关系去重
     assert len(merged["relations"]) == 2, "应有 2 条去重关系"

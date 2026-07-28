@@ -1,52 +1,62 @@
-# Secrets and local configuration
-.env
-.env.*
-!.env.example
-ml-service/config.py
-
-# Private or derived data
-data/
-ml-service/output/
-ml-service/models/
-ml-service/eval/
-backend/evaluation/
-backend/uploads/
-*.db
-*.db-shm
-*.db-wal
-*.pkl
-*.dump
-*.conll
-*.pdf
-*.tif
-*.tiff
-
-# Course-delivery and binary report artifacts
-*.zip
-*.7z
-*.rar
-*.docx
-*.pptx
-*.mp4
-*.log
-
-# Dependencies and build output
-node_modules/
-dist/
-.npm-cache/
-frontend/auto-imports.d.ts
-frontend/components.d.ts
-.venv/
-venv/
-__pycache__/
-*.pyc
-
-# Local tools and editors
+# Claude Code personal config (not shared with team)
 .claude/
 .codex/
 .agents/
 .superpowers/
+skills-lock.json
 .worktrees/
+
+# ML model cache
+ml-service/models/
+ml-service/output/relation_cache.json
+
+# Sensitive config (API keys, passwords)
+ml-service/config.py
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node
+node_modules/
+dist/
+.npm-cache/
+
+# 环境变量（含 API key，切勿提交）
+.env
+ml-service/config.py
+
+# SQLite 数据文件（运行时生成）
+*.db
+*.db-shm
+*.db-wal
+
+# 上传的 PDF 文件
+backend/uploads/*.pdf
+
+# Docker
+docker-compose.override.yml
+
+# IDE
 .idea/
 .vscode/
 *.swp
+
+# 样本 PDF 语料（体积大/政府与标准文档版权考量，不入库，各人本地持有）
+data/samples/*.pdf
+data/samples/**/*.pdf
+
+# 地质语料与地质图（大二进制，本地持有，不入库）
+News_waitingforclassification/
+data/参考文献/*.pdf
+data/参考文献/**/*.pdf
+data/地质图/
+data/地质图/*.tif
+data/地质图/**/*.tif
+
+# PPT 和报告（大二进制，本地持有，不入库）
+docs/ppt/
+docs/reports/
+frontend/a的一些补充/

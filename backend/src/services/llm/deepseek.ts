@@ -1,5 +1,5 @@
 import OpenAI from 'openai'
-import type { GenerationOptions, LLMProvider } from './provider.js'
+import type { LLMProvider } from './provider.js'
 import type { Chunk, Source, KGPath } from '../../types/index.js'
 import { getRuntimeSettings } from '../runtime-settings.js'
 
@@ -29,10 +29,22 @@ export class DeepSeekProvider implements LLMProvider {
     _ragChunks: { chunk: Chunk; score: number }[],
     _kgContext: KGPath[],
     systemPrompt: string,
-    userPrompt: string,
-    options?: GenerationOptions,
+    userPrompt: string
   ): Promise<{ answer: string; sources: Source[] }> {
-    const answer = await this.generateText(systemPrompt, userPrompt, options)
+    const completion = await this.client.chat.completions.create(
+      {
+        model: getRuntimeSettings().llmModel || this.model,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt },
+        ],
+        temperature: getRuntimeSettings().temperature,
+        max_tokens: getRuntimeSettings().maxTokens,
+      },
+      { timeout: 30000 }
+    )
+
+    const answer = completion.choices[0]?.message?.content || '抱歉，未能生成回答。'
     const sources: Source[] = _ragChunks.map((r) => ({
       docId: r.chunk.id,
       docTitle: r.chunk.docTitle,
@@ -40,28 +52,6 @@ export class DeepSeekProvider implements LLMProvider {
       snippet: r.chunk.content.slice(0, 150) + '...',
     }))
     return { answer, sources }
-  }
-
-  async generateText(
-    systemPrompt: string,
-    userPrompt: string,
-    options?: GenerationOptions,
-  ): Promise<string> {
-    const settings = getRuntimeSettings()
-    const completion = await this.client.chat.completions.create(
-      {
-        model: options?.model || settings.llmModel || this.model,
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: userPrompt },
-        ],
-        temperature: options?.temperature ?? settings.temperature,
-        max_tokens: options?.maxTokens ?? settings.maxTokens,
-      },
-      { timeout: 30000 }
-    )
-
-    return completion.choices[0]?.message?.content || '抱歉，未能生成回答。'
   }
 
   async generateAnswerStream(
@@ -74,19 +64,18 @@ export class DeepSeekProvider implements LLMProvider {
       onChunk: (text: string) => void
       onDone: (sources: Source[]) => void
       onError: (err: Error) => void
-    },
-    options?: GenerationOptions,
+    }
   ): Promise<void> {
     try {
       const stream = await this.client.chat.completions.create(
         {
-        model: options?.model || getRuntimeSettings().llmModel || this.model,
+          model: getRuntimeSettings().llmModel || this.model,
           messages: [
             { role: 'system', content: systemPrompt },
             { role: 'user', content: userPrompt },
           ],
-        temperature: options?.temperature ?? getRuntimeSettings().temperature,
-        max_tokens: options?.maxTokens ?? getRuntimeSettings().maxTokens,
+          temperature: getRuntimeSettings().temperature,
+          max_tokens: getRuntimeSettings().maxTokens,
           stream: true,
         },
         { timeout: 60000 }

@@ -1,18 +1,12 @@
 [
-  {
-    "entityId": 1,
-    "name": "演示矿物 A",
-    "type": "Mineral",
-    "relationCount": 1,
-    "sourceDoc": "公开演示地质文档",
-    "status": "verified"
-  },
-  {
-    "entityId": 2,
-    "name": "演示岩石 A",
-    "type": "Rock",
-    "relationCount": 1,
-    "sourceDoc": "公开演示地质文档",
-    "status": "verified"
-  }
+  { "entityId": 1, "name": "钒钛磁铁矿", "type": "Mineral", "relationCount": 14, "sourceDoc": "新疆尾亚地区铁矿床地质调查报告", "status": "verified" },
+  { "entityId": 2, "name": "磁铁矿", "type": "Mineral", "relationCount": 11, "sourceDoc": "新疆尾亚地区铁矿床地质调查报告", "status": "verified" },
+  { "entityId": 3, "name": "铜镍矿", "type": "DepositType", "relationCount": 9, "sourceDoc": "香山西段铜镍矿勘查评价报告", "status": "verified" },
+  { "entityId": 4, "name": "辉长岩", "type": "Rock", "relationCount": 7, "sourceDoc": "新疆尾亚地区铁矿床地质调查报告", "status": "verified" },
+  { "entityId": 5, "name": "玄武岩", "type": "Rock", "relationCount": 2, "sourceDoc": "东天山成矿带成矿规律研究", "status": "completed" },
+  { "entityId": 6, "name": "超镁铁岩", "type": "Rock", "relationCount": 3, "sourceDoc": "新疆尾亚地区铁矿床地质调查报告", "status": "completed" },
+  { "entityId": 7, "name": "尾亚断裂带", "type": "Structure", "relationCount": 6, "sourceDoc": "新疆尾亚地区铁矿床地质调查报告", "status": "completed" },
+  { "entityId": 8, "name": "香山西段断裂", "type": "Structure", "relationCount": 5, "sourceDoc": "香山西段铜镍矿勘查评价报告", "status": "processing" },
+  { "entityId": 9, "name": "二叠纪", "type": "TimePeriod", "relationCount": 4, "sourceDoc": "东天山成矿带成矿规律研究", "status": "pending" },
+  { "entityId": 10, "name": "岩浆型成矿作用", "type": "DepositType", "relationCount": 3, "sourceDoc": "东天山成矿带成矿规律研究", "status": "pending" }
 ]

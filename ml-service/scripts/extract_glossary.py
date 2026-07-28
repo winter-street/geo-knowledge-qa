@@ -132,9 +132,7 @@ if __name__ == "__main__":
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
     from parse_pdf import parse_pdf
 
-    if len(sys.argv) < 2:
-        raise SystemExit("Usage: python scripts/extract_glossary.py <glossary.pdf>")
-    pdf_path = sys.argv[1]
+    pdf_path = "D:/1GISwork/6-GISdevelop/data/samples/2025.04.03-《国土空间规划术语》（征求意见稿）.pdf"
     parsed = parse_pdf(pdf_path)
     terms = extract_terms(parsed)
     print(f"提取 {len(terms)} 条术语")

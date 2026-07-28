@@ -1,11 +1,9 @@
 [
-  {
-    "id": "demo-log-001",
-    "question": "演示矿物与演示岩石有什么关系？",
-    "pathUsed": ["rag", "kg"],
-    "hitDocs": 1,
-    "latency": 500,
-    "satisfaction": "good",
-    "createdAt": "2026-01-01 12:00"
-  }
+  { "id": "log-001", "question": "尾亚钒钛磁铁矿的成因类型是什么", "pathUsed": ["bm25", "kg"], "hitDocs": 4, "latency": 1240, "satisfaction": "good", "createdAt": "2026-07-05 14:30" },
+  { "id": "log-002", "question": "辉长岩与钒钛磁铁矿的成矿关系", "pathUsed": ["bm25", "kg"], "hitDocs": 6, "latency": 1580, "satisfaction": "good", "createdAt": "2026-07-05 14:35" },
+  { "id": "log-003", "question": "二叠纪末岩浆活动对成矿的控制作用", "pathUsed": ["bm25"], "hitDocs": 2, "latency": 890, "satisfaction": "good", "createdAt": "2026-07-05 14:42" },
+  { "id": "log-004", "question": "香山西段铜镍矿的勘查进展如何", "pathUsed": ["bm25"], "hitDocs": 1, "latency": 760, "satisfaction": "poor", "createdAt": "2026-07-05 15:10" },
+  { "id": "log-005", "question": "尾亚断裂带对铁矿的控制特征", "pathUsed": ["bm25", "kg"], "hitDocs": 5, "latency": 1320, "satisfaction": "good", "createdAt": "2026-07-05 15:22" },
+  { "id": "log-006", "question": "磁铁矿与超镁铁岩的共生关系", "pathUsed": ["kg"], "hitDocs": 3, "latency": 1040, "satisfaction": "good", "createdAt": "2026-07-05 16:01" },
+  { "id": "log-007", "question": "研究区有利成矿远景区预测", "pathUsed": ["bm25", "kg"], "hitDocs": 4, "latency": 1180, "satisfaction": null, "createdAt": "2026-07-05 16:18" }
 ]

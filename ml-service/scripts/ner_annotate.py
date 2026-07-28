@@ -171,9 +171,8 @@ if __name__ == "__main__":
     from config import LLM_CONFIG
     from parse_pdf import parse_pdf
 
-    if len(sys.argv) < 2:
-        raise SystemExit("Usage: python scripts/ner_annotate.py <document.pdf>")
-    pdf_path = sys.argv[1]
+    # 取编制指南前 200 字做标注测试
+    pdf_path = "D:/1GISwork/6-GISdevelop/data/samples/202009-自资部-市级国土空间总体规划编制指南（试行）（自然资办发[2020]46号）.pdf"
     parsed = parse_pdf(pdf_path)
     # 取一段有意义的内容
     text = ""

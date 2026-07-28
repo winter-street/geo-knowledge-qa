@@ -1,5 +1,5 @@
 import OpenAI from 'openai'
-import type { GenerationOptions, LLMProvider } from './provider.js'
+import type { LLMProvider } from './provider.js'
 import type { Chunk, Source, KGPath } from '../../types/index.js'
 import { getRuntimeSettings } from '../runtime-settings.js'
 
@@ -29,7 +29,7 @@ export class TongyiProvider implements LLMProvider {
     this.config = config
     this.model = config.model
     // 仅在有 key 时创建客户端
-    if (config.apiKey) {
+    if (config.apiKey && config.apiKey !== 'sk-your-tongyi-key-here') {
       this.client = new OpenAI({ apiKey: config.apiKey, baseURL: config.baseURL })
     }
   }
@@ -46,10 +46,22 @@ export class TongyiProvider implements LLMProvider {
     _ragChunks: { chunk: Chunk; score: number }[],
     _kgContext: KGPath[],
     systemPrompt: string,
-    userPrompt: string,
-    options?: GenerationOptions,
+    userPrompt: string
   ): Promise<{ answer: string; sources: Source[] }> {
-    const answer = await this.generateText(systemPrompt, userPrompt, options)
+    const client = this.ensureClient()
+    const completion = await client.chat.completions.create(
+      {
+        model: this.model,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt },
+        ],
+        temperature: getRuntimeSettings().temperature,
+        max_tokens: getRuntimeSettings().maxTokens,
+      },
+      { timeout: 30000 }
+    )
+    const answer = completion.choices[0]?.message?.content || '抱歉，未能生成回答。'
     const sources: Source[] = _ragChunks.map((r) => ({
       docId: r.chunk.id,
       docTitle: r.chunk.docTitle,
@@ -57,27 +69,6 @@ export class TongyiProvider implements LLMProvider {
       snippet: r.chunk.content.slice(0, 150) + '...',
     }))
     return { answer, sources }
-  }
-
-  async generateText(
-    systemPrompt: string,
-    userPrompt: string,
-    options?: GenerationOptions,
-  ): Promise<string> {
-    const client = this.ensureClient()
-    const completion = await client.chat.completions.create(
-      {
-        model: options?.model || this.model,
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: userPrompt },
-        ],
-        temperature: options?.temperature ?? getRuntimeSettings().temperature,
-        max_tokens: options?.maxTokens ?? getRuntimeSettings().maxTokens,
-      },
-      { timeout: 30000 },
-    )
-    return completion.choices[0]?.message?.content || '抱歉，未能生成回答。'
   }
 
   async generateAnswerStream(
@@ -90,20 +81,19 @@ export class TongyiProvider implements LLMProvider {
       onChunk: (text: string) => void
       onDone: (sources: Source[]) => void
       onError: (err: Error) => void
-    },
-    options?: GenerationOptions,
+    }
   ): Promise<void> {
     try {
       const client = this.ensureClient()
       const stream = await client.chat.completions.create(
         {
-          model: options?.model || this.model,
+          model: this.model,
           messages: [
             { role: 'system', content: systemPrompt },
             { role: 'user', content: userPrompt },
           ],
-          temperature: options?.temperature ?? getRuntimeSettings().temperature,
-          max_tokens: options?.maxTokens ?? getRuntimeSettings().maxTokens,
+          temperature: getRuntimeSettings().temperature,
+          max_tokens: getRuntimeSettings().maxTokens,
           stream: true,
         },
         { timeout: 60000 }

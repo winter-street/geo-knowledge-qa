@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>方向A · 内容工坊 — Notion 70% × Linear 30%</title>
+<!--
+  设计假设 + 推理：
+  - Notion 的核心是「内容温度」：温暖的中性色调、呼吸感排版、克制的视觉层次
+  - Linear 贡献了「精确间距」和「微妙动效暗示」
+  - 用 serif display 字体（Newsreader）做标题，传达学术/文档气质
+  - 配色走暖灰 + 深青，不用冷灰 — GIS 领域需要「大地感」不是「科技冷」
+  - 用户说不要 emoji → 全部用 SVG 线条图标
+-->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ===== Design Tokens ===== */
+  :root {
+    /* Notion-inspired warm palette */
+    --bg: #FFFFFF;
+    --bg-warm: #F7F6F3;
+    --bg-sidebar: #FBFAF8;
+    --surface: #FFFFFF;
+    --surface-hover: #F7F6F3;
+    --border: #E8E5E0;
+    --border-light: #F0EDE8;
+    /* Text */
+    --ink-900: #1A1A1A;
+    --ink-700: #37352F;
+    --ink-500: #787774;
+    --ink-300: #B4B0A8;
+    --ink-100: #E8E5E0;
+    /* Brand — earthy teal, not cold cyan */
+    --primary: #0C6E5D;
+    --primary-light: #E6F5F1;
+    --primary-hover: #0A5C4E;
+    /* Semantic */
+    --success: #2E7D5B;
+    --warning: #C77C14;
+    --danger: #C4463A;
+    /* Spacing */
+    --radius: 8px;
+    --radius-lg: 12px;
+    /* Fonts */
+    --font-display: 'Newsreader', 'Noto Serif SC', Georgia, serif;
+    --font-body: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; font-family: var(--font-body); background: var(--bg); color: var(--ink-700); }
+
+  /* ===== Page Container ===== */
+  .page { display: flex; flex-direction: column; min-height: 100vh; }
+  .page-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 32px; border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .page-label { font-size: 11px; color: var(--ink-300); letter-spacing: 0.08em; text-transform: uppercase; }
+  .page-title { font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--ink-900); }
+
+  /* ===== Section Labels ===== */
+  .section-label {
+    font-size: 11px; color: var(--ink-300); letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 24px 32px 12px;
+    border-bottom: 1px solid var(--border-light);
+    background: var(--bg-warm);
+  }
+
+  /* ==================== LOGIN PAGE ==================== */
+  .login-page {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    background: var(--bg-warm);
+    position: relative;
+  }
+  .login-page::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M0 60L60 0' stroke='%23E8E5E0' stroke-width='0.5'/%3E%3C/svg%3E");
+    opacity: 0.5;
+  }
+  .login-card {
+    width: 380px; background: var(--surface); border-radius: var(--radius-lg);
+    padding: 48px 40px; box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+    position: relative; z-index: 1;
+  }
+  .login-logo {
+    width: 48px; height: 48px; border-radius: 10px;
+    background: var(--primary); display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+  }
+  .login-logo svg { width: 24px; height: 24px; stroke: #fff; fill: none; stroke-width: 2; }
+  .login-title {
+    font-family: var(--font-display); font-size: 22px; font-weight: 600;
+    color: var(--ink-900); text-align: center; margin-bottom: 4px;
+  }
+  .login-sub { font-size: 13px; color: var(--ink-500); text-align: center; margin-bottom: 32px; }
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 12px; font-weight: 500; color: var(--ink-500); margin-bottom: 6px; }
+  .field input {
+    width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius);
+    font-size: 14px; font-family: var(--font-body); background: var(--bg);
+    transition: border-color 0.2s;
+  }
+  .field input:focus { outline: none; border-color: var(--primary); background: #fff; }
+  .login-btn {
+    width: 100%; padding: 11px; background: var(--primary); color: #fff;
+    border: none; border-radius: var(--radius); font-size: 14px; font-weight: 600;
+    cursor: pointer; margin-top: 8px; font-family: var(--font-body);
+    transition: background 0.2s;
+  }
+  .login-btn:hover { background: var(--primary-hover); }
+
+  /* ==================== QA PAGE ==================== */
+  .qa-page { display: flex; height: 100vh; }
+  /* Sidebar — conversation list */
+  .qa-sidebar {
+    width: 260px; background: var(--bg-sidebar); border-right: 1px solid var(--border);
+    display: flex; flex-direction: column; flex-shrink: 0;
+  }
+  .qa-sidebar-header {
+    padding: 16px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .qa-sidebar-header .logo-sm {
+    width: 28px; height: 28px; border-radius: 6px; background: var(--primary);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .qa-sidebar-header .logo-sm svg { width: 14px; height: 14px; stroke: #fff; fill: none; stroke-width: 2; }
+  .qa-sidebar-header span { font-family: var(--font-display); font-size: 15px; font-weight: 600; color: var(--ink-900); }
+  .search-box {
+    padding: 12px 16px; border-bottom: 1px solid var(--border-light);
+  }
+  .search-box input {
+    width: 100%; padding: 7px 10px 7px 32px; border: 1px solid var(--border);
+    border-radius: 6px; font-size: 13px; background: var(--bg); font-family: var(--font-body);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23B4B0A8' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: 10px center;
+  }
+  .search-box input:focus { outline: none; border-color: var(--primary); }
+  .conv-list { flex: 1; overflow-y: auto; padding: 8px; }
+  .conv-item {
+    padding: 10px 12px; border-radius: 6px; cursor: pointer; margin-bottom: 2px;
+    transition: background 0.15s;
+  }
+  .conv-item:hover { background: var(--surface-hover); }
+  .conv-item.active { background: var(--primary-light); }
+  .conv-item .title { font-size: 13px; font-weight: 500; color: var(--ink-900); margin-bottom: 2px; }
+  .conv-item .time { font-size: 11px; color: var(--ink-300); }
+  .new-btn {
+    margin: 12px 16px; padding: 9px; background: var(--primary); color: #fff;
+    border: none; border-radius: 6px; font-size: 13px; font-weight: 500;
+    cursor: pointer; font-family: var(--font-body); display: flex; align-items: center;
+    justify-content: center; gap: 6px;
+  }
+  .new-btn svg { width: 14px; height: 14px; stroke: #fff; fill: none; stroke-width: 2; }
+
+  /* Main chat area */
+  .qa-main { flex: 1; display: flex; flex-direction: column; background: var(--bg); }
+  .qa-topbar {
+    height: 48px; border-bottom: 1px solid var(--border-light);
+    display: flex; align-items: center; padding: 0 24px;
+    font-size: 13px; color: var(--ink-500);
+  }
+  .messages { flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+  .msg { display: flex; gap: 12px; max-width: 720px; }
+  .msg.user { align-self: flex-end; flex-direction: row-reverse; }
+  .msg-avatar {
+    width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .msg-avatar svg { width: 16px; height: 16px; stroke: #fff; fill: none; stroke-width: 2; }
+  .msg.user .msg-avatar { background: var(--primary); }
+  .msg.ai .msg-avatar { background: var(--ink-300); }
+  .msg-bubble {
+    padding: 14px 18px; border-radius: var(--radius-lg); font-size: 14px; line-height: 1.75;
+  }
+  .msg.user .msg-bubble {
+    background: var(--primary); color: #fff; border-bottom-right-radius: 4px;
+  }
+  .msg.ai .msg-bubble {
+    background: var(--surface); color: var(--ink-900);
+    border: 1px solid var(--border); border-bottom-left-radius: 4px;
+  }
+  .msg-bubble .source-tag {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 11px; padding: 3px 10px; background: var(--primary-light);
+    color: var(--primary); border-radius: 10px; margin-top: 8px; margin-right: 4px;
+    border: 1px solid rgba(12,110,93,0.12);
+  }
+  .source-tag svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+  /* Input area */
+  .input-area {
+    padding: 16px 24px; border-top: 1px solid var(--border-light); background: var(--bg);
+  }
+  .input-row { display: flex; gap: 10px; align-items: flex-end; }
+  .input-row textarea {
+    flex: 1; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius);
+    font-size: 14px; font-family: var(--font-body); resize: none; height: 44px;
+    background: var(--bg); line-height: 1.5;
+  }
+  .input-row textarea:focus { outline: none; border-color: var(--primary); }
+  .send-btn {
+    padding: 0 20px; height: 44px; background: var(--primary); color: #fff;
+    border: none; border-radius: var(--radius); font-size: 13px; font-weight: 600;
+    cursor: pointer; font-family: var(--font-body); display: flex; align-items: center;
+    gap: 6px; flex-shrink: 0;
+  }
+  .send-btn svg { width: 14px; height: 14px; stroke: #fff; fill: none; stroke-width: 2; }
+  .input-hint { font-size: 11px; color: var(--ink-300); margin-top: 6px; text-align: center; }
+
+  /* ===== Notion-style decorative details ===== */
+  .notion-divider {
+    width: 100%; height: 1px; background: var(--border-light); margin: 4px 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== LOGIN PAGE ==================== -->
+<div class="section-label" style="background:var(--bg-warm); padding:24px 32px 8px;">
+  方向 A · 登录页 — 「内容工坊」Notion 70% × Linear 30%
+</div>
+<div class="login-page" style="min-height:520px;">
+  <div class="login-card">
+    <div class="login-logo">
+      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+    </div>
+    <div class="login-title">Geo-Knowledge Q&A</div>
+    <div class="login-sub">国土空间规划知识问答系统</div>
+    <div class="field">
+      <label>账号</label>
+      <input type="text" placeholder="请输入账号" />
+    </div>
+    <div class="field">
+      <label>密码</label>
+      <input type="password" placeholder="请输入密码" />
+    </div>
+    <button class="login-btn">登 录</button>
+  </div>
+</div>
+
+<!-- ==================== QA PAGE ==================== -->
+<div class="section-label">方向 A · Q&A 页 — 对话界面</div>
+<div class="qa-page" style="height:600px;">
+  <aside class="qa-sidebar">
+    <div class="qa-sidebar-header">
+      <div class="logo-sm">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <span>智能问答</span>
+    </div>
+    <div class="search-box">
+      <input placeholder="搜索对话..." />
+    </div>
+    <div class="conv-list">
+      <div class="conv-item active">
+        <div class="title">城镇开发边界划定标准</div>
+        <div class="time">今天 14:32</div>
+      </div>
+      <div class="conv-item">
+        <div class="title">养老院用地分类查询</div>
+        <div class="time">今天 10:15</div>
+      </div>
+      <div class="conv-item">
+        <div class="title">三区三线管控要求</div>
+        <div class="time">昨天 16:40</div>
+      </div>
+      <div class="conv-item">
+        <div class="title">总体规划编制流程</div>
+        <div class="time">昨天 09:22</div>
+      </div>
+      <div class="conv-item">
+        <div class="title">生态保护红线调整规则</div>
+        <div class="time">6月28日</div>
+      </div>
+    </div>
+    <button class="new-btn">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      新建对话
+    </button>
+  </aside>
+
+  <div class="qa-main">
+    <div class="qa-topbar">
+      <span>城镇开发边界划定标准</span>
+      <span style="margin-left:auto; font-size:11px; color:var(--ink-300);">3 条消息</span>
+    </div>
+    <div class="messages">
+      <!-- User message -->
+      <div class="msg user">
+        <div class="msg-avatar">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="msg-bubble">城镇开发边界划定需要考虑哪些核心要素？与生态保护红线如何协调？</div>
+      </div>
+      <!-- AI message -->
+      <div class="msg ai">
+        <div class="msg-avatar">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="msg-bubble">
+          <div style="font-family:var(--font-display); font-size:15px; font-weight:600; margin-bottom:8px; color:var(--ink-900);">城镇开发边界划定的核心要素</div>
+          <p style="margin-bottom:12px;">根据《市级国土空间总体规划编制指南》，城镇开发边界划定需综合考虑以下要素：</p>
+          <p style="margin-bottom:8px;"><strong>1. 资源环境承载能力</strong> — 以水资源、土地资源承载力为刚性约束，结合地质灾害风险评估确定不宜建设区域。</p>
+          <p style="margin-bottom:8px;"><strong>2. 城镇发展需求预测</strong> — 基于人口增长趋势、经济发展目标和城镇化率，合理预测城镇建设用地需求规模。</p>
+          <p style="margin-bottom:12px;"><strong>3. 与生态保护红线的协调</strong> — 城镇开发边界不得突破生态保护红线，在边界衔接处需设置缓冲过渡带，确保生态安全格局完整。</p>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <span class="source-tag">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              市级国土空间总体规划编制指南 p.23
+            </span>
+            <span class="source-tag">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              三区三线划定技术规程 p.15
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="input-area">
+      <div class="input-row">
+        <textarea placeholder="输入你的问题..."></textarea>
+        <button class="send-btn">
+          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          发送
+        </button>
+      </div>
+      <div class="input-hint">Enter 发送 · Shift+Enter 换行</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
