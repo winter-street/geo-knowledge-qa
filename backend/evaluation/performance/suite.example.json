@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "1.0",
+  "cases": [
+    {
+      "id": "private-case-001",
+      "kind": "supported",
+      "question": "Replace only in the ignored private suite.",
+      "relevantDocumentIds": ["PRIVATE-DOC-ID"],
+      "acceptedCitationIds": ["D1-P1"],
+      "expectedIntent": "geology_qa",
+      "expectedTools": ["search_documents"]
+    }
+  ]
+}
