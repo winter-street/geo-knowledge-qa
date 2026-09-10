@@ -1,0 +1,2588 @@
+{
+  "schemaVersion": "1.0",
+  "synthetic": true,
+  "singleTurnCases": [
+    {
+      "id": "supported-001",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "What evidence describes Synthetic Aurora Deposit 1?",
+      "evaluationMode": "direct",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents"
+      ],
+      "expectedEntityId": "SYN-ENTITY-01",
+      "expectedStructureId": "SYN-STRUCTURE-01",
+      "expectedRegionId": "SYN-REGION-01",
+      "relevantDocumentIds": [
+        "SYN-DOC-01"
+      ],
+      "acceptedCitationIds": [
+        "D1-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-002",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Show the entity detail for Synthetic Aurora Deposit 1.",
+      "evaluationMode": "rag",
+      "expectedIntent": "entity_lookup",
+      "expectedTools": [
+        "get_entity_detail"
+      ],
+      "expectedEntityId": "SYN-ENTITY-01",
+      "expectedStructureId": "SYN-STRUCTURE-01",
+      "expectedRegionId": "SYN-REGION-01",
+      "relevantDocumentIds": [
+        "SYN-DOC-01"
+      ],
+      "acceptedCitationIds": [
+        "D2-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-003",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Which synthetic structures are near Synthetic Aurora Deposit 1?",
+      "evaluationMode": "kg",
+      "expectedIntent": "spatial_analysis",
+      "expectedTools": [
+        "spatial_query"
+      ],
+      "expectedEntityId": "SYN-ENTITY-01",
+      "expectedStructureId": "SYN-STRUCTURE-01",
+      "expectedRegionId": "SYN-REGION-01",
+      "relevantDocumentIds": [
+        "SYN-DOC-01"
+      ],
+      "acceptedCitationIds": [
+        "D3-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-004",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Compare Synthetic Aurora Deposit 1 with Synthetic Northfield Region 1.",
+      "evaluationMode": "hybrid",
+      "expectedIntent": "region_comparison",
+      "expectedTools": [
+        "spatial_query",
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-01",
+      "expectedStructureId": "SYN-STRUCTURE-01",
+      "expectedRegionId": "SYN-REGION-01",
+      "relevantDocumentIds": [
+        "SYN-DOC-01"
+      ],
+      "acceptedCitationIds": [
+        "D4-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-005",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "How is Synthetic Aurora Deposit 1 related to Synthetic Meridian Fault 1?",
+      "evaluationMode": "agent",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-01",
+      "expectedStructureId": "SYN-STRUCTURE-01",
+      "expectedRegionId": "SYN-REGION-01",
+      "relevantDocumentIds": [
+        "SYN-DOC-01"
+      ],
+      "acceptedCitationIds": [
+        "D5-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-006",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Summarize document and graph evidence for Synthetic Aurora Deposit 1.",
+      "evaluationMode": "direct",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents",
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-01",
+      "expectedStructureId": "SYN-STRUCTURE-01",
+      "expectedRegionId": "SYN-REGION-01",
+      "relevantDocumentIds": [
+        "SYN-DOC-01"
+      ],
+      "acceptedCitationIds": [
+        "D6-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-007",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "What evidence describes Synthetic Aurora Deposit 2?",
+      "evaluationMode": "rag",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents"
+      ],
+      "expectedEntityId": "SYN-ENTITY-02",
+      "expectedStructureId": "SYN-STRUCTURE-02",
+      "expectedRegionId": "SYN-REGION-02",
+      "relevantDocumentIds": [
+        "SYN-DOC-02"
+      ],
+      "acceptedCitationIds": [
+        "D7-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-008",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Show the entity detail for Synthetic Aurora Deposit 2.",
+      "evaluationMode": "kg",
+      "expectedIntent": "entity_lookup",
+      "expectedTools": [
+        "get_entity_detail"
+      ],
+      "expectedEntityId": "SYN-ENTITY-02",
+      "expectedStructureId": "SYN-STRUCTURE-02",
+      "expectedRegionId": "SYN-REGION-02",
+      "relevantDocumentIds": [
+        "SYN-DOC-02"
+      ],
+      "acceptedCitationIds": [
+        "D8-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-009",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Which synthetic structures are near Synthetic Aurora Deposit 2?",
+      "evaluationMode": "hybrid",
+      "expectedIntent": "spatial_analysis",
+      "expectedTools": [
+        "spatial_query"
+      ],
+      "expectedEntityId": "SYN-ENTITY-02",
+      "expectedStructureId": "SYN-STRUCTURE-02",
+      "expectedRegionId": "SYN-REGION-02",
+      "relevantDocumentIds": [
+        "SYN-DOC-02"
+      ],
+      "acceptedCitationIds": [
+        "D9-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-010",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Compare Synthetic Aurora Deposit 2 with Synthetic Northfield Region 2.",
+      "evaluationMode": "agent",
+      "expectedIntent": "region_comparison",
+      "expectedTools": [
+        "spatial_query",
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-02",
+      "expectedStructureId": "SYN-STRUCTURE-02",
+      "expectedRegionId": "SYN-REGION-02",
+      "relevantDocumentIds": [
+        "SYN-DOC-02"
+      ],
+      "acceptedCitationIds": [
+        "D10-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-011",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "How is Synthetic Aurora Deposit 2 related to Synthetic Meridian Fault 2?",
+      "evaluationMode": "direct",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-02",
+      "expectedStructureId": "SYN-STRUCTURE-02",
+      "expectedRegionId": "SYN-REGION-02",
+      "relevantDocumentIds": [
+        "SYN-DOC-02"
+      ],
+      "acceptedCitationIds": [
+        "D11-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-012",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Summarize document and graph evidence for Synthetic Aurora Deposit 2.",
+      "evaluationMode": "rag",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents",
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-02",
+      "expectedStructureId": "SYN-STRUCTURE-02",
+      "expectedRegionId": "SYN-REGION-02",
+      "relevantDocumentIds": [
+        "SYN-DOC-02"
+      ],
+      "acceptedCitationIds": [
+        "D12-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-013",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "What evidence describes Synthetic Aurora Deposit 3?",
+      "evaluationMode": "kg",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents"
+      ],
+      "expectedEntityId": "SYN-ENTITY-03",
+      "expectedStructureId": "SYN-STRUCTURE-03",
+      "expectedRegionId": "SYN-REGION-03",
+      "relevantDocumentIds": [
+        "SYN-DOC-03"
+      ],
+      "acceptedCitationIds": [
+        "D13-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-014",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Show the entity detail for Synthetic Aurora Deposit 3.",
+      "evaluationMode": "hybrid",
+      "expectedIntent": "entity_lookup",
+      "expectedTools": [
+        "get_entity_detail"
+      ],
+      "expectedEntityId": "SYN-ENTITY-03",
+      "expectedStructureId": "SYN-STRUCTURE-03",
+      "expectedRegionId": "SYN-REGION-03",
+      "relevantDocumentIds": [
+        "SYN-DOC-03"
+      ],
+      "acceptedCitationIds": [
+        "D14-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-015",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Which synthetic structures are near Synthetic Aurora Deposit 3?",
+      "evaluationMode": "agent",
+      "expectedIntent": "spatial_analysis",
+      "expectedTools": [
+        "spatial_query"
+      ],
+      "expectedEntityId": "SYN-ENTITY-03",
+      "expectedStructureId": "SYN-STRUCTURE-03",
+      "expectedRegionId": "SYN-REGION-03",
+      "relevantDocumentIds": [
+        "SYN-DOC-03"
+      ],
+      "acceptedCitationIds": [
+        "D15-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-016",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Compare Synthetic Aurora Deposit 3 with Synthetic Northfield Region 3.",
+      "evaluationMode": "direct",
+      "expectedIntent": "region_comparison",
+      "expectedTools": [
+        "spatial_query",
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-03",
+      "expectedStructureId": "SYN-STRUCTURE-03",
+      "expectedRegionId": "SYN-REGION-03",
+      "relevantDocumentIds": [
+        "SYN-DOC-03"
+      ],
+      "acceptedCitationIds": [
+        "D16-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-017",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "How is Synthetic Aurora Deposit 3 related to Synthetic Meridian Fault 3?",
+      "evaluationMode": "rag",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-03",
+      "expectedStructureId": "SYN-STRUCTURE-03",
+      "expectedRegionId": "SYN-REGION-03",
+      "relevantDocumentIds": [
+        "SYN-DOC-03"
+      ],
+      "acceptedCitationIds": [
+        "D17-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-018",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Summarize document and graph evidence for Synthetic Aurora Deposit 3.",
+      "evaluationMode": "kg",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents",
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-03",
+      "expectedStructureId": "SYN-STRUCTURE-03",
+      "expectedRegionId": "SYN-REGION-03",
+      "relevantDocumentIds": [
+        "SYN-DOC-03"
+      ],
+      "acceptedCitationIds": [
+        "D18-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-019",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "What evidence describes Synthetic Aurora Deposit 4?",
+      "evaluationMode": "hybrid",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents"
+      ],
+      "expectedEntityId": "SYN-ENTITY-04",
+      "expectedStructureId": "SYN-STRUCTURE-04",
+      "expectedRegionId": "SYN-REGION-04",
+      "relevantDocumentIds": [
+        "SYN-DOC-04"
+      ],
+      "acceptedCitationIds": [
+        "D19-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-020",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Show the entity detail for Synthetic Aurora Deposit 4.",
+      "evaluationMode": "agent",
+      "expectedIntent": "entity_lookup",
+      "expectedTools": [
+        "get_entity_detail"
+      ],
+      "expectedEntityId": "SYN-ENTITY-04",
+      "expectedStructureId": "SYN-STRUCTURE-04",
+      "expectedRegionId": "SYN-REGION-04",
+      "relevantDocumentIds": [
+        "SYN-DOC-04"
+      ],
+      "acceptedCitationIds": [
+        "D20-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-021",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Which synthetic structures are near Synthetic Aurora Deposit 4?",
+      "evaluationMode": "direct",
+      "expectedIntent": "spatial_analysis",
+      "expectedTools": [
+        "spatial_query"
+      ],
+      "expectedEntityId": "SYN-ENTITY-04",
+      "expectedStructureId": "SYN-STRUCTURE-04",
+      "expectedRegionId": "SYN-REGION-04",
+      "relevantDocumentIds": [
+        "SYN-DOC-04"
+      ],
+      "acceptedCitationIds": [
+        "D21-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-022",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Compare Synthetic Aurora Deposit 4 with Synthetic Northfield Region 4.",
+      "evaluationMode": "rag",
+      "expectedIntent": "region_comparison",
+      "expectedTools": [
+        "spatial_query",
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-04",
+      "expectedStructureId": "SYN-STRUCTURE-04",
+      "expectedRegionId": "SYN-REGION-04",
+      "relevantDocumentIds": [
+        "SYN-DOC-04"
+      ],
+      "acceptedCitationIds": [
+        "D22-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-023",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "How is Synthetic Aurora Deposit 4 related to Synthetic Meridian Fault 4?",
+      "evaluationMode": "kg",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-04",
+      "expectedStructureId": "SYN-STRUCTURE-04",
+      "expectedRegionId": "SYN-REGION-04",
+      "relevantDocumentIds": [
+        "SYN-DOC-04"
+      ],
+      "acceptedCitationIds": [
+        "D23-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-024",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Summarize document and graph evidence for Synthetic Aurora Deposit 4.",
+      "evaluationMode": "hybrid",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents",
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-04",
+      "expectedStructureId": "SYN-STRUCTURE-04",
+      "expectedRegionId": "SYN-REGION-04",
+      "relevantDocumentIds": [
+        "SYN-DOC-04"
+      ],
+      "acceptedCitationIds": [
+        "D24-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-025",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "What evidence describes Synthetic Aurora Deposit 5?",
+      "evaluationMode": "agent",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents"
+      ],
+      "expectedEntityId": "SYN-ENTITY-05",
+      "expectedStructureId": "SYN-STRUCTURE-05",
+      "expectedRegionId": "SYN-REGION-05",
+      "relevantDocumentIds": [
+        "SYN-DOC-05"
+      ],
+      "acceptedCitationIds": [
+        "D25-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-026",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Show the entity detail for Synthetic Aurora Deposit 5.",
+      "evaluationMode": "direct",
+      "expectedIntent": "entity_lookup",
+      "expectedTools": [
+        "get_entity_detail"
+      ],
+      "expectedEntityId": "SYN-ENTITY-05",
+      "expectedStructureId": "SYN-STRUCTURE-05",
+      "expectedRegionId": "SYN-REGION-05",
+      "relevantDocumentIds": [
+        "SYN-DOC-05"
+      ],
+      "acceptedCitationIds": [
+        "D26-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-027",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Which synthetic structures are near Synthetic Aurora Deposit 5?",
+      "evaluationMode": "rag",
+      "expectedIntent": "spatial_analysis",
+      "expectedTools": [
+        "spatial_query"
+      ],
+      "expectedEntityId": "SYN-ENTITY-05",
+      "expectedStructureId": "SYN-STRUCTURE-05",
+      "expectedRegionId": "SYN-REGION-05",
+      "relevantDocumentIds": [
+        "SYN-DOC-05"
+      ],
+      "acceptedCitationIds": [
+        "D27-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-028",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Compare Synthetic Aurora Deposit 5 with Synthetic Northfield Region 5.",
+      "evaluationMode": "kg",
+      "expectedIntent": "region_comparison",
+      "expectedTools": [
+        "spatial_query",
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-05",
+      "expectedStructureId": "SYN-STRUCTURE-05",
+      "expectedRegionId": "SYN-REGION-05",
+      "relevantDocumentIds": [
+        "SYN-DOC-05"
+      ],
+      "acceptedCitationIds": [
+        "D28-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-029",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "How is Synthetic Aurora Deposit 5 related to Synthetic Meridian Fault 5?",
+      "evaluationMode": "hybrid",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-05",
+      "expectedStructureId": "SYN-STRUCTURE-05",
+      "expectedRegionId": "SYN-REGION-05",
+      "relevantDocumentIds": [
+        "SYN-DOC-05"
+      ],
+      "acceptedCitationIds": [
+        "D29-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-030",
+      "split": "development",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Summarize document and graph evidence for Synthetic Aurora Deposit 5.",
+      "evaluationMode": "agent",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents",
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-05",
+      "expectedStructureId": "SYN-STRUCTURE-05",
+      "expectedRegionId": "SYN-REGION-05",
+      "relevantDocumentIds": [
+        "SYN-DOC-05"
+      ],
+      "acceptedCitationIds": [
+        "D30-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-031",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "What evidence describes Synthetic Aurora Deposit 11?",
+      "evaluationMode": "direct",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents"
+      ],
+      "expectedEntityId": "SYN-ENTITY-11",
+      "expectedStructureId": "SYN-STRUCTURE-11",
+      "expectedRegionId": "SYN-REGION-11",
+      "relevantDocumentIds": [
+        "SYN-DOC-11"
+      ],
+      "acceptedCitationIds": [
+        "D31-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-032",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Show the entity detail for Synthetic Aurora Deposit 11.",
+      "evaluationMode": "rag",
+      "expectedIntent": "entity_lookup",
+      "expectedTools": [
+        "get_entity_detail"
+      ],
+      "expectedEntityId": "SYN-ENTITY-11",
+      "expectedStructureId": "SYN-STRUCTURE-11",
+      "expectedRegionId": "SYN-REGION-11",
+      "relevantDocumentIds": [
+        "SYN-DOC-11"
+      ],
+      "acceptedCitationIds": [
+        "D32-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-033",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Which synthetic structures are near Synthetic Aurora Deposit 11?",
+      "evaluationMode": "kg",
+      "expectedIntent": "spatial_analysis",
+      "expectedTools": [
+        "spatial_query"
+      ],
+      "expectedEntityId": "SYN-ENTITY-11",
+      "expectedStructureId": "SYN-STRUCTURE-11",
+      "expectedRegionId": "SYN-REGION-11",
+      "relevantDocumentIds": [
+        "SYN-DOC-11"
+      ],
+      "acceptedCitationIds": [
+        "D33-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-034",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Compare Synthetic Aurora Deposit 11 with Synthetic Northfield Region 11.",
+      "evaluationMode": "hybrid",
+      "expectedIntent": "region_comparison",
+      "expectedTools": [
+        "spatial_query",
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-11",
+      "expectedStructureId": "SYN-STRUCTURE-11",
+      "expectedRegionId": "SYN-REGION-11",
+      "relevantDocumentIds": [
+        "SYN-DOC-11"
+      ],
+      "acceptedCitationIds": [
+        "D34-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-035",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "How is Synthetic Aurora Deposit 11 related to Synthetic Meridian Fault 11?",
+      "evaluationMode": "agent",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-11",
+      "expectedStructureId": "SYN-STRUCTURE-11",
+      "expectedRegionId": "SYN-REGION-11",
+      "relevantDocumentIds": [
+        "SYN-DOC-11"
+      ],
+      "acceptedCitationIds": [
+        "D35-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-036",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Summarize document and graph evidence for Synthetic Aurora Deposit 11.",
+      "evaluationMode": "direct",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents",
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-11",
+      "expectedStructureId": "SYN-STRUCTURE-11",
+      "expectedRegionId": "SYN-REGION-11",
+      "relevantDocumentIds": [
+        "SYN-DOC-11"
+      ],
+      "acceptedCitationIds": [
+        "D36-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-037",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "What evidence describes Synthetic Aurora Deposit 12?",
+      "evaluationMode": "rag",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents"
+      ],
+      "expectedEntityId": "SYN-ENTITY-12",
+      "expectedStructureId": "SYN-STRUCTURE-12",
+      "expectedRegionId": "SYN-REGION-12",
+      "relevantDocumentIds": [
+        "SYN-DOC-12"
+      ],
+      "acceptedCitationIds": [
+        "D37-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-038",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Show the entity detail for Synthetic Aurora Deposit 12.",
+      "evaluationMode": "kg",
+      "expectedIntent": "entity_lookup",
+      "expectedTools": [
+        "get_entity_detail"
+      ],
+      "expectedEntityId": "SYN-ENTITY-12",
+      "expectedStructureId": "SYN-STRUCTURE-12",
+      "expectedRegionId": "SYN-REGION-12",
+      "relevantDocumentIds": [
+        "SYN-DOC-12"
+      ],
+      "acceptedCitationIds": [
+        "D38-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-039",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Which synthetic structures are near Synthetic Aurora Deposit 12?",
+      "evaluationMode": "hybrid",
+      "expectedIntent": "spatial_analysis",
+      "expectedTools": [
+        "spatial_query"
+      ],
+      "expectedEntityId": "SYN-ENTITY-12",
+      "expectedStructureId": "SYN-STRUCTURE-12",
+      "expectedRegionId": "SYN-REGION-12",
+      "relevantDocumentIds": [
+        "SYN-DOC-12"
+      ],
+      "acceptedCitationIds": [
+        "D39-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-040",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Compare Synthetic Aurora Deposit 12 with Synthetic Northfield Region 12.",
+      "evaluationMode": "agent",
+      "expectedIntent": "region_comparison",
+      "expectedTools": [
+        "spatial_query",
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-12",
+      "expectedStructureId": "SYN-STRUCTURE-12",
+      "expectedRegionId": "SYN-REGION-12",
+      "relevantDocumentIds": [
+        "SYN-DOC-12"
+      ],
+      "acceptedCitationIds": [
+        "D40-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-041",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "How is Synthetic Aurora Deposit 12 related to Synthetic Meridian Fault 12?",
+      "evaluationMode": "direct",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-12",
+      "expectedStructureId": "SYN-STRUCTURE-12",
+      "expectedRegionId": "SYN-REGION-12",
+      "relevantDocumentIds": [
+        "SYN-DOC-12"
+      ],
+      "acceptedCitationIds": [
+        "D41-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-042",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Summarize document and graph evidence for Synthetic Aurora Deposit 12.",
+      "evaluationMode": "rag",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents",
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-12",
+      "expectedStructureId": "SYN-STRUCTURE-12",
+      "expectedRegionId": "SYN-REGION-12",
+      "relevantDocumentIds": [
+        "SYN-DOC-12"
+      ],
+      "acceptedCitationIds": [
+        "D42-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-043",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "What evidence describes Synthetic Aurora Deposit 13?",
+      "evaluationMode": "kg",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents"
+      ],
+      "expectedEntityId": "SYN-ENTITY-13",
+      "expectedStructureId": "SYN-STRUCTURE-13",
+      "expectedRegionId": "SYN-REGION-13",
+      "relevantDocumentIds": [
+        "SYN-DOC-13"
+      ],
+      "acceptedCitationIds": [
+        "D43-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-044",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Show the entity detail for Synthetic Aurora Deposit 13.",
+      "evaluationMode": "hybrid",
+      "expectedIntent": "entity_lookup",
+      "expectedTools": [
+        "get_entity_detail"
+      ],
+      "expectedEntityId": "SYN-ENTITY-13",
+      "expectedStructureId": "SYN-STRUCTURE-13",
+      "expectedRegionId": "SYN-REGION-13",
+      "relevantDocumentIds": [
+        "SYN-DOC-13"
+      ],
+      "acceptedCitationIds": [
+        "D44-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-045",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Which synthetic structures are near Synthetic Aurora Deposit 13?",
+      "evaluationMode": "agent",
+      "expectedIntent": "spatial_analysis",
+      "expectedTools": [
+        "spatial_query"
+      ],
+      "expectedEntityId": "SYN-ENTITY-13",
+      "expectedStructureId": "SYN-STRUCTURE-13",
+      "expectedRegionId": "SYN-REGION-13",
+      "relevantDocumentIds": [
+        "SYN-DOC-13"
+      ],
+      "acceptedCitationIds": [
+        "D45-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-046",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Compare Synthetic Aurora Deposit 13 with Synthetic Northfield Region 13.",
+      "evaluationMode": "direct",
+      "expectedIntent": "region_comparison",
+      "expectedTools": [
+        "spatial_query",
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-13",
+      "expectedStructureId": "SYN-STRUCTURE-13",
+      "expectedRegionId": "SYN-REGION-13",
+      "relevantDocumentIds": [
+        "SYN-DOC-13"
+      ],
+      "acceptedCitationIds": [
+        "D46-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-047",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "How is Synthetic Aurora Deposit 13 related to Synthetic Meridian Fault 13?",
+      "evaluationMode": "rag",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-13",
+      "expectedStructureId": "SYN-STRUCTURE-13",
+      "expectedRegionId": "SYN-REGION-13",
+      "relevantDocumentIds": [
+        "SYN-DOC-13"
+      ],
+      "acceptedCitationIds": [
+        "D47-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-048",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Summarize document and graph evidence for Synthetic Aurora Deposit 13.",
+      "evaluationMode": "kg",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents",
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-13",
+      "expectedStructureId": "SYN-STRUCTURE-13",
+      "expectedRegionId": "SYN-REGION-13",
+      "relevantDocumentIds": [
+        "SYN-DOC-13"
+      ],
+      "acceptedCitationIds": [
+        "D48-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-049",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "What evidence describes Synthetic Aurora Deposit 14?",
+      "evaluationMode": "hybrid",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents"
+      ],
+      "expectedEntityId": "SYN-ENTITY-14",
+      "expectedStructureId": "SYN-STRUCTURE-14",
+      "expectedRegionId": "SYN-REGION-14",
+      "relevantDocumentIds": [
+        "SYN-DOC-14"
+      ],
+      "acceptedCitationIds": [
+        "D49-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-050",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Show the entity detail for Synthetic Aurora Deposit 14.",
+      "evaluationMode": "agent",
+      "expectedIntent": "entity_lookup",
+      "expectedTools": [
+        "get_entity_detail"
+      ],
+      "expectedEntityId": "SYN-ENTITY-14",
+      "expectedStructureId": "SYN-STRUCTURE-14",
+      "expectedRegionId": "SYN-REGION-14",
+      "relevantDocumentIds": [
+        "SYN-DOC-14"
+      ],
+      "acceptedCitationIds": [
+        "D50-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-051",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Which synthetic structures are near Synthetic Aurora Deposit 14?",
+      "evaluationMode": "direct",
+      "expectedIntent": "spatial_analysis",
+      "expectedTools": [
+        "spatial_query"
+      ],
+      "expectedEntityId": "SYN-ENTITY-14",
+      "expectedStructureId": "SYN-STRUCTURE-14",
+      "expectedRegionId": "SYN-REGION-14",
+      "relevantDocumentIds": [
+        "SYN-DOC-14"
+      ],
+      "acceptedCitationIds": [
+        "D51-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-052",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Compare Synthetic Aurora Deposit 14 with Synthetic Northfield Region 14.",
+      "evaluationMode": "rag",
+      "expectedIntent": "region_comparison",
+      "expectedTools": [
+        "spatial_query",
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-14",
+      "expectedStructureId": "SYN-STRUCTURE-14",
+      "expectedRegionId": "SYN-REGION-14",
+      "relevantDocumentIds": [
+        "SYN-DOC-14"
+      ],
+      "acceptedCitationIds": [
+        "D52-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-053",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "How is Synthetic Aurora Deposit 14 related to Synthetic Meridian Fault 14?",
+      "evaluationMode": "kg",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-14",
+      "expectedStructureId": "SYN-STRUCTURE-14",
+      "expectedRegionId": "SYN-REGION-14",
+      "relevantDocumentIds": [
+        "SYN-DOC-14"
+      ],
+      "acceptedCitationIds": [
+        "D53-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-054",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Summarize document and graph evidence for Synthetic Aurora Deposit 14.",
+      "evaluationMode": "hybrid",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents",
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-14",
+      "expectedStructureId": "SYN-STRUCTURE-14",
+      "expectedRegionId": "SYN-REGION-14",
+      "relevantDocumentIds": [
+        "SYN-DOC-14"
+      ],
+      "acceptedCitationIds": [
+        "D54-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-055",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "What evidence describes Synthetic Aurora Deposit 15?",
+      "evaluationMode": "agent",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents"
+      ],
+      "expectedEntityId": "SYN-ENTITY-15",
+      "expectedStructureId": "SYN-STRUCTURE-15",
+      "expectedRegionId": "SYN-REGION-15",
+      "relevantDocumentIds": [
+        "SYN-DOC-15"
+      ],
+      "acceptedCitationIds": [
+        "D55-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-056",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Show the entity detail for Synthetic Aurora Deposit 15.",
+      "evaluationMode": "direct",
+      "expectedIntent": "entity_lookup",
+      "expectedTools": [
+        "get_entity_detail"
+      ],
+      "expectedEntityId": "SYN-ENTITY-15",
+      "expectedStructureId": "SYN-STRUCTURE-15",
+      "expectedRegionId": "SYN-REGION-15",
+      "relevantDocumentIds": [
+        "SYN-DOC-15"
+      ],
+      "acceptedCitationIds": [
+        "D56-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-057",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Which synthetic structures are near Synthetic Aurora Deposit 15?",
+      "evaluationMode": "rag",
+      "expectedIntent": "spatial_analysis",
+      "expectedTools": [
+        "spatial_query"
+      ],
+      "expectedEntityId": "SYN-ENTITY-15",
+      "expectedStructureId": "SYN-STRUCTURE-15",
+      "expectedRegionId": "SYN-REGION-15",
+      "relevantDocumentIds": [
+        "SYN-DOC-15"
+      ],
+      "acceptedCitationIds": [
+        "D57-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-058",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Compare Synthetic Aurora Deposit 15 with Synthetic Northfield Region 15.",
+      "evaluationMode": "kg",
+      "expectedIntent": "region_comparison",
+      "expectedTools": [
+        "spatial_query",
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-15",
+      "expectedStructureId": "SYN-STRUCTURE-15",
+      "expectedRegionId": "SYN-REGION-15",
+      "relevantDocumentIds": [
+        "SYN-DOC-15"
+      ],
+      "acceptedCitationIds": [
+        "D58-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-059",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "How is Synthetic Aurora Deposit 15 related to Synthetic Meridian Fault 15?",
+      "evaluationMode": "hybrid",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-15",
+      "expectedStructureId": "SYN-STRUCTURE-15",
+      "expectedRegionId": "SYN-REGION-15",
+      "relevantDocumentIds": [
+        "SYN-DOC-15"
+      ],
+      "acceptedCitationIds": [
+        "D59-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "supported-060",
+      "split": "test",
+      "kind": "supported",
+      "synthetic": true,
+      "question": "Summarize document and graph evidence for Synthetic Aurora Deposit 15.",
+      "evaluationMode": "agent",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents",
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-15",
+      "expectedStructureId": "SYN-STRUCTURE-15",
+      "expectedRegionId": "SYN-REGION-15",
+      "relevantDocumentIds": [
+        "SYN-DOC-15"
+      ],
+      "acceptedCitationIds": [
+        "D60-P1",
+        "KG1"
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "refusal-001",
+      "split": "development",
+      "kind": "refusal",
+      "synthetic": true,
+      "question": "Give the verified reserve tonnage for Synthetic Aurora Deposit 1, although no reserve evidence exists.",
+      "evaluationMode": "direct",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents"
+      ],
+      "expectedEntityId": "SYN-ENTITY-01",
+      "expectedStructureId": "SYN-STRUCTURE-01",
+      "expectedRegionId": "SYN-REGION-01",
+      "relevantDocumentIds": [],
+      "acceptedCitationIds": [],
+      "humanBlindReview": null
+    },
+    {
+      "id": "refusal-002",
+      "split": "development",
+      "kind": "refusal",
+      "synthetic": true,
+      "question": "State the 2035 production output for Synthetic Aurora Deposit 2, although no production evidence exists.",
+      "evaluationMode": "rag",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-02",
+      "expectedStructureId": "SYN-STRUCTURE-02",
+      "expectedRegionId": "SYN-REGION-02",
+      "relevantDocumentIds": [],
+      "acceptedCitationIds": [],
+      "humanBlindReview": null
+    },
+    {
+      "id": "refusal-003",
+      "split": "development",
+      "kind": "refusal",
+      "synthetic": true,
+      "question": "Give the verified reserve tonnage for Synthetic Aurora Deposit 3, although no reserve evidence exists.",
+      "evaluationMode": "kg",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents"
+      ],
+      "expectedEntityId": "SYN-ENTITY-03",
+      "expectedStructureId": "SYN-STRUCTURE-03",
+      "expectedRegionId": "SYN-REGION-03",
+      "relevantDocumentIds": [],
+      "acceptedCitationIds": [],
+      "humanBlindReview": null
+    },
+    {
+      "id": "refusal-004",
+      "split": "development",
+      "kind": "refusal",
+      "synthetic": true,
+      "question": "State the 2035 production output for Synthetic Aurora Deposit 4, although no production evidence exists.",
+      "evaluationMode": "hybrid",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-04",
+      "expectedStructureId": "SYN-STRUCTURE-04",
+      "expectedRegionId": "SYN-REGION-04",
+      "relevantDocumentIds": [],
+      "acceptedCitationIds": [],
+      "humanBlindReview": null
+    },
+    {
+      "id": "refusal-005",
+      "split": "development",
+      "kind": "refusal",
+      "synthetic": true,
+      "question": "Give the verified reserve tonnage for Synthetic Aurora Deposit 5, although no reserve evidence exists.",
+      "evaluationMode": "agent",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents"
+      ],
+      "expectedEntityId": "SYN-ENTITY-05",
+      "expectedStructureId": "SYN-STRUCTURE-05",
+      "expectedRegionId": "SYN-REGION-05",
+      "relevantDocumentIds": [],
+      "acceptedCitationIds": [],
+      "humanBlindReview": null
+    },
+    {
+      "id": "refusal-006",
+      "split": "development",
+      "kind": "refusal",
+      "synthetic": true,
+      "question": "State the 2035 production output for Synthetic Aurora Deposit 6, although no production evidence exists.",
+      "evaluationMode": "direct",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-06",
+      "expectedStructureId": "SYN-STRUCTURE-06",
+      "expectedRegionId": "SYN-REGION-06",
+      "relevantDocumentIds": [],
+      "acceptedCitationIds": [],
+      "humanBlindReview": null
+    },
+    {
+      "id": "refusal-007",
+      "split": "development",
+      "kind": "refusal",
+      "synthetic": true,
+      "question": "Give the verified reserve tonnage for Synthetic Aurora Deposit 7, although no reserve evidence exists.",
+      "evaluationMode": "rag",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents"
+      ],
+      "expectedEntityId": "SYN-ENTITY-07",
+      "expectedStructureId": "SYN-STRUCTURE-07",
+      "expectedRegionId": "SYN-REGION-07",
+      "relevantDocumentIds": [],
+      "acceptedCitationIds": [],
+      "humanBlindReview": null
+    },
+    {
+      "id": "refusal-008",
+      "split": "development",
+      "kind": "refusal",
+      "synthetic": true,
+      "question": "State the 2035 production output for Synthetic Aurora Deposit 8, although no production evidence exists.",
+      "evaluationMode": "kg",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-08",
+      "expectedStructureId": "SYN-STRUCTURE-08",
+      "expectedRegionId": "SYN-REGION-08",
+      "relevantDocumentIds": [],
+      "acceptedCitationIds": [],
+      "humanBlindReview": null
+    },
+    {
+      "id": "refusal-009",
+      "split": "development",
+      "kind": "refusal",
+      "synthetic": true,
+      "question": "Give the verified reserve tonnage for Synthetic Aurora Deposit 9, although no reserve evidence exists.",
+      "evaluationMode": "hybrid",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents"
+      ],
+      "expectedEntityId": "SYN-ENTITY-09",
+      "expectedStructureId": "SYN-STRUCTURE-09",
+      "expectedRegionId": "SYN-REGION-09",
+      "relevantDocumentIds": [],
+      "acceptedCitationIds": [],
+      "humanBlindReview": null
+    },
+    {
+      "id": "refusal-010",
+      "split": "development",
+      "kind": "refusal",
+      "synthetic": true,
+      "question": "State the 2035 production output for Synthetic Aurora Deposit 10, although no production evidence exists.",
+      "evaluationMode": "agent",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-10",
+      "expectedStructureId": "SYN-STRUCTURE-10",
+      "expectedRegionId": "SYN-REGION-10",
+      "relevantDocumentIds": [],
+      "acceptedCitationIds": [],
+      "humanBlindReview": null
+    },
+    {
+      "id": "refusal-011",
+      "split": "test",
+      "kind": "refusal",
+      "synthetic": true,
+      "question": "Give the verified reserve tonnage for Synthetic Aurora Deposit 11, although no reserve evidence exists.",
+      "evaluationMode": "direct",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents"
+      ],
+      "expectedEntityId": "SYN-ENTITY-11",
+      "expectedStructureId": "SYN-STRUCTURE-11",
+      "expectedRegionId": "SYN-REGION-11",
+      "relevantDocumentIds": [],
+      "acceptedCitationIds": [],
+      "humanBlindReview": null
+    },
+    {
+      "id": "refusal-012",
+      "split": "test",
+      "kind": "refusal",
+      "synthetic": true,
+      "question": "State the 2035 production output for Synthetic Aurora Deposit 12, although no production evidence exists.",
+      "evaluationMode": "rag",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-12",
+      "expectedStructureId": "SYN-STRUCTURE-12",
+      "expectedRegionId": "SYN-REGION-12",
+      "relevantDocumentIds": [],
+      "acceptedCitationIds": [],
+      "humanBlindReview": null
+    },
+    {
+      "id": "refusal-013",
+      "split": "test",
+      "kind": "refusal",
+      "synthetic": true,
+      "question": "Give the verified reserve tonnage for Synthetic Aurora Deposit 13, although no reserve evidence exists.",
+      "evaluationMode": "kg",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents"
+      ],
+      "expectedEntityId": "SYN-ENTITY-13",
+      "expectedStructureId": "SYN-STRUCTURE-13",
+      "expectedRegionId": "SYN-REGION-13",
+      "relevantDocumentIds": [],
+      "acceptedCitationIds": [],
+      "humanBlindReview": null
+    },
+    {
+      "id": "refusal-014",
+      "split": "test",
+      "kind": "refusal",
+      "synthetic": true,
+      "question": "State the 2035 production output for Synthetic Aurora Deposit 14, although no production evidence exists.",
+      "evaluationMode": "hybrid",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-14",
+      "expectedStructureId": "SYN-STRUCTURE-14",
+      "expectedRegionId": "SYN-REGION-14",
+      "relevantDocumentIds": [],
+      "acceptedCitationIds": [],
+      "humanBlindReview": null
+    },
+    {
+      "id": "refusal-015",
+      "split": "test",
+      "kind": "refusal",
+      "synthetic": true,
+      "question": "Give the verified reserve tonnage for Synthetic Aurora Deposit 15, although no reserve evidence exists.",
+      "evaluationMode": "agent",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents"
+      ],
+      "expectedEntityId": "SYN-ENTITY-15",
+      "expectedStructureId": "SYN-STRUCTURE-15",
+      "expectedRegionId": "SYN-REGION-15",
+      "relevantDocumentIds": [],
+      "acceptedCitationIds": [],
+      "humanBlindReview": null
+    },
+    {
+      "id": "refusal-016",
+      "split": "test",
+      "kind": "refusal",
+      "synthetic": true,
+      "question": "State the 2035 production output for Synthetic Aurora Deposit 16, although no production evidence exists.",
+      "evaluationMode": "direct",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-16",
+      "expectedStructureId": "SYN-STRUCTURE-16",
+      "expectedRegionId": "SYN-REGION-16",
+      "relevantDocumentIds": [],
+      "acceptedCitationIds": [],
+      "humanBlindReview": null
+    },
+    {
+      "id": "refusal-017",
+      "split": "test",
+      "kind": "refusal",
+      "synthetic": true,
+      "question": "Give the verified reserve tonnage for Synthetic Aurora Deposit 17, although no reserve evidence exists.",
+      "evaluationMode": "rag",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents"
+      ],
+      "expectedEntityId": "SYN-ENTITY-17",
+      "expectedStructureId": "SYN-STRUCTURE-17",
+      "expectedRegionId": "SYN-REGION-17",
+      "relevantDocumentIds": [],
+      "acceptedCitationIds": [],
+      "humanBlindReview": null
+    },
+    {
+      "id": "refusal-018",
+      "split": "test",
+      "kind": "refusal",
+      "synthetic": true,
+      "question": "State the 2035 production output for Synthetic Aurora Deposit 18, although no production evidence exists.",
+      "evaluationMode": "kg",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-18",
+      "expectedStructureId": "SYN-STRUCTURE-18",
+      "expectedRegionId": "SYN-REGION-18",
+      "relevantDocumentIds": [],
+      "acceptedCitationIds": [],
+      "humanBlindReview": null
+    },
+    {
+      "id": "refusal-019",
+      "split": "test",
+      "kind": "refusal",
+      "synthetic": true,
+      "question": "Give the verified reserve tonnage for Synthetic Aurora Deposit 19, although no reserve evidence exists.",
+      "evaluationMode": "hybrid",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "search_documents"
+      ],
+      "expectedEntityId": "SYN-ENTITY-19",
+      "expectedStructureId": "SYN-STRUCTURE-19",
+      "expectedRegionId": "SYN-REGION-19",
+      "relevantDocumentIds": [],
+      "acceptedCitationIds": [],
+      "humanBlindReview": null
+    },
+    {
+      "id": "refusal-020",
+      "split": "test",
+      "kind": "refusal",
+      "synthetic": true,
+      "question": "State the 2035 production output for Synthetic Aurora Deposit 20, although no production evidence exists.",
+      "evaluationMode": "agent",
+      "expectedIntent": "geology_qa",
+      "expectedTools": [
+        "query_knowledge_graph"
+      ],
+      "expectedEntityId": "SYN-ENTITY-20",
+      "expectedStructureId": "SYN-STRUCTURE-20",
+      "expectedRegionId": "SYN-REGION-20",
+      "relevantDocumentIds": [],
+      "acceptedCitationIds": [],
+      "humanBlindReview": null
+    }
+  ],
+  "multiTurnCases": [
+    {
+      "id": "multi-001",
+      "split": "development",
+      "synthetic": true,
+      "turns": [
+        {
+          "id": "multi-1-turn-1",
+          "question": "Introduce Synthetic Aurora Deposit 1.",
+          "expectedIntent": "entity_lookup",
+          "expectedTools": [
+            "get_entity_detail"
+          ],
+          "expectedEntityId": "SYN-ENTITY-01",
+          "expectedStructureId": "SYN-STRUCTURE-01",
+          "expectedRegionId": "SYN-REGION-01"
+        },
+        {
+          "id": "multi-1-turn-2",
+          "question": "Which structure controls it?",
+          "expectedIntent": "geology_qa",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-01",
+          "expectedStructureId": "SYN-STRUCTURE-01",
+          "expectedRegionId": "SYN-REGION-01"
+        },
+        {
+          "id": "multi-1-turn-3",
+          "question": "Compare it with Synthetic Aurora Deposit 2.",
+          "expectedIntent": "region_comparison",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-01",
+          "expectedStructureId": "SYN-STRUCTURE-01",
+          "expectedRegionId": "SYN-REGION-01"
+        }
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "multi-002",
+      "split": "development",
+      "synthetic": true,
+      "turns": [
+        {
+          "id": "multi-2-turn-1",
+          "question": "Introduce Synthetic Aurora Deposit 2.",
+          "expectedIntent": "entity_lookup",
+          "expectedTools": [
+            "get_entity_detail"
+          ],
+          "expectedEntityId": "SYN-ENTITY-02",
+          "expectedStructureId": "SYN-STRUCTURE-02",
+          "expectedRegionId": "SYN-REGION-02"
+        },
+        {
+          "id": "multi-2-turn-2",
+          "question": "Which structure controls it?",
+          "expectedIntent": "geology_qa",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-02",
+          "expectedStructureId": "SYN-STRUCTURE-02",
+          "expectedRegionId": "SYN-REGION-02"
+        },
+        {
+          "id": "multi-2-turn-3",
+          "question": "Compare it with Synthetic Aurora Deposit 3.",
+          "expectedIntent": "region_comparison",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-02",
+          "expectedStructureId": "SYN-STRUCTURE-02",
+          "expectedRegionId": "SYN-REGION-02"
+        }
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "multi-003",
+      "split": "development",
+      "synthetic": true,
+      "turns": [
+        {
+          "id": "multi-3-turn-1",
+          "question": "Introduce Synthetic Aurora Deposit 3.",
+          "expectedIntent": "entity_lookup",
+          "expectedTools": [
+            "get_entity_detail"
+          ],
+          "expectedEntityId": "SYN-ENTITY-03",
+          "expectedStructureId": "SYN-STRUCTURE-03",
+          "expectedRegionId": "SYN-REGION-03"
+        },
+        {
+          "id": "multi-3-turn-2",
+          "question": "Which structure controls it?",
+          "expectedIntent": "geology_qa",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-03",
+          "expectedStructureId": "SYN-STRUCTURE-03",
+          "expectedRegionId": "SYN-REGION-03"
+        },
+        {
+          "id": "multi-3-turn-3",
+          "question": "Compare it with Synthetic Aurora Deposit 4.",
+          "expectedIntent": "region_comparison",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-03",
+          "expectedStructureId": "SYN-STRUCTURE-03",
+          "expectedRegionId": "SYN-REGION-03"
+        }
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "multi-004",
+      "split": "development",
+      "synthetic": true,
+      "turns": [
+        {
+          "id": "multi-4-turn-1",
+          "question": "Introduce Synthetic Aurora Deposit 4.",
+          "expectedIntent": "entity_lookup",
+          "expectedTools": [
+            "get_entity_detail"
+          ],
+          "expectedEntityId": "SYN-ENTITY-04",
+          "expectedStructureId": "SYN-STRUCTURE-04",
+          "expectedRegionId": "SYN-REGION-04"
+        },
+        {
+          "id": "multi-4-turn-2",
+          "question": "Which structure controls it?",
+          "expectedIntent": "geology_qa",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-04",
+          "expectedStructureId": "SYN-STRUCTURE-04",
+          "expectedRegionId": "SYN-REGION-04"
+        },
+        {
+          "id": "multi-4-turn-3",
+          "question": "Compare it with Synthetic Aurora Deposit 5.",
+          "expectedIntent": "region_comparison",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-04",
+          "expectedStructureId": "SYN-STRUCTURE-04",
+          "expectedRegionId": "SYN-REGION-04"
+        }
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "multi-005",
+      "split": "development",
+      "synthetic": true,
+      "turns": [
+        {
+          "id": "multi-5-turn-1",
+          "question": "Introduce Synthetic Aurora Deposit 5.",
+          "expectedIntent": "entity_lookup",
+          "expectedTools": [
+            "get_entity_detail"
+          ],
+          "expectedEntityId": "SYN-ENTITY-05",
+          "expectedStructureId": "SYN-STRUCTURE-05",
+          "expectedRegionId": "SYN-REGION-05"
+        },
+        {
+          "id": "multi-5-turn-2",
+          "question": "Which structure controls it?",
+          "expectedIntent": "geology_qa",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-05",
+          "expectedStructureId": "SYN-STRUCTURE-05",
+          "expectedRegionId": "SYN-REGION-05"
+        },
+        {
+          "id": "multi-5-turn-3",
+          "question": "Compare it with Synthetic Aurora Deposit 6.",
+          "expectedIntent": "region_comparison",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-05",
+          "expectedStructureId": "SYN-STRUCTURE-05",
+          "expectedRegionId": "SYN-REGION-05"
+        }
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "multi-006",
+      "split": "development",
+      "synthetic": true,
+      "turns": [
+        {
+          "id": "multi-6-turn-1",
+          "question": "Introduce Synthetic Aurora Deposit 6.",
+          "expectedIntent": "entity_lookup",
+          "expectedTools": [
+            "get_entity_detail"
+          ],
+          "expectedEntityId": "SYN-ENTITY-06",
+          "expectedStructureId": "SYN-STRUCTURE-06",
+          "expectedRegionId": "SYN-REGION-06"
+        },
+        {
+          "id": "multi-6-turn-2",
+          "question": "Which structure controls it?",
+          "expectedIntent": "geology_qa",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-06",
+          "expectedStructureId": "SYN-STRUCTURE-06",
+          "expectedRegionId": "SYN-REGION-06"
+        },
+        {
+          "id": "multi-6-turn-3",
+          "question": "Compare it with Synthetic Aurora Deposit 7.",
+          "expectedIntent": "region_comparison",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-06",
+          "expectedStructureId": "SYN-STRUCTURE-06",
+          "expectedRegionId": "SYN-REGION-06"
+        }
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "multi-007",
+      "split": "development",
+      "synthetic": true,
+      "turns": [
+        {
+          "id": "multi-7-turn-1",
+          "question": "Introduce Synthetic Aurora Deposit 7.",
+          "expectedIntent": "entity_lookup",
+          "expectedTools": [
+            "get_entity_detail"
+          ],
+          "expectedEntityId": "SYN-ENTITY-07",
+          "expectedStructureId": "SYN-STRUCTURE-07",
+          "expectedRegionId": "SYN-REGION-07"
+        },
+        {
+          "id": "multi-7-turn-2",
+          "question": "Which structure controls it?",
+          "expectedIntent": "geology_qa",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-07",
+          "expectedStructureId": "SYN-STRUCTURE-07",
+          "expectedRegionId": "SYN-REGION-07"
+        },
+        {
+          "id": "multi-7-turn-3",
+          "question": "Compare it with Synthetic Aurora Deposit 8.",
+          "expectedIntent": "region_comparison",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-07",
+          "expectedStructureId": "SYN-STRUCTURE-07",
+          "expectedRegionId": "SYN-REGION-07"
+        }
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "multi-008",
+      "split": "development",
+      "synthetic": true,
+      "turns": [
+        {
+          "id": "multi-8-turn-1",
+          "question": "Introduce Synthetic Aurora Deposit 8.",
+          "expectedIntent": "entity_lookup",
+          "expectedTools": [
+            "get_entity_detail"
+          ],
+          "expectedEntityId": "SYN-ENTITY-08",
+          "expectedStructureId": "SYN-STRUCTURE-08",
+          "expectedRegionId": "SYN-REGION-08"
+        },
+        {
+          "id": "multi-8-turn-2",
+          "question": "Which structure controls it?",
+          "expectedIntent": "geology_qa",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-08",
+          "expectedStructureId": "SYN-STRUCTURE-08",
+          "expectedRegionId": "SYN-REGION-08"
+        },
+        {
+          "id": "multi-8-turn-3",
+          "question": "Compare it with Synthetic Aurora Deposit 9.",
+          "expectedIntent": "region_comparison",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-08",
+          "expectedStructureId": "SYN-STRUCTURE-08",
+          "expectedRegionId": "SYN-REGION-08"
+        }
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "multi-009",
+      "split": "development",
+      "synthetic": true,
+      "turns": [
+        {
+          "id": "multi-9-turn-1",
+          "question": "Introduce Synthetic Aurora Deposit 9.",
+          "expectedIntent": "entity_lookup",
+          "expectedTools": [
+            "get_entity_detail"
+          ],
+          "expectedEntityId": "SYN-ENTITY-09",
+          "expectedStructureId": "SYN-STRUCTURE-09",
+          "expectedRegionId": "SYN-REGION-09"
+        },
+        {
+          "id": "multi-9-turn-2",
+          "question": "Which structure controls it?",
+          "expectedIntent": "geology_qa",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-09",
+          "expectedStructureId": "SYN-STRUCTURE-09",
+          "expectedRegionId": "SYN-REGION-09"
+        },
+        {
+          "id": "multi-9-turn-3",
+          "question": "Compare it with Synthetic Aurora Deposit 10.",
+          "expectedIntent": "region_comparison",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-09",
+          "expectedStructureId": "SYN-STRUCTURE-09",
+          "expectedRegionId": "SYN-REGION-09"
+        }
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "multi-010",
+      "split": "development",
+      "synthetic": true,
+      "turns": [
+        {
+          "id": "multi-10-turn-1",
+          "question": "Introduce Synthetic Aurora Deposit 10.",
+          "expectedIntent": "entity_lookup",
+          "expectedTools": [
+            "get_entity_detail"
+          ],
+          "expectedEntityId": "SYN-ENTITY-10",
+          "expectedStructureId": "SYN-STRUCTURE-10",
+          "expectedRegionId": "SYN-REGION-10"
+        },
+        {
+          "id": "multi-10-turn-2",
+          "question": "Which structure controls it?",
+          "expectedIntent": "geology_qa",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-10",
+          "expectedStructureId": "SYN-STRUCTURE-10",
+          "expectedRegionId": "SYN-REGION-10"
+        },
+        {
+          "id": "multi-10-turn-3",
+          "question": "Compare it with Synthetic Aurora Deposit 1.",
+          "expectedIntent": "region_comparison",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-10",
+          "expectedStructureId": "SYN-STRUCTURE-10",
+          "expectedRegionId": "SYN-REGION-10"
+        }
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "multi-011",
+      "split": "test",
+      "synthetic": true,
+      "turns": [
+        {
+          "id": "multi-11-turn-1",
+          "question": "Introduce Synthetic Aurora Deposit 11.",
+          "expectedIntent": "entity_lookup",
+          "expectedTools": [
+            "get_entity_detail"
+          ],
+          "expectedEntityId": "SYN-ENTITY-11",
+          "expectedStructureId": "SYN-STRUCTURE-11",
+          "expectedRegionId": "SYN-REGION-11"
+        },
+        {
+          "id": "multi-11-turn-2",
+          "question": "Which structure controls it?",
+          "expectedIntent": "geology_qa",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-11",
+          "expectedStructureId": "SYN-STRUCTURE-11",
+          "expectedRegionId": "SYN-REGION-11"
+        },
+        {
+          "id": "multi-11-turn-3",
+          "question": "Compare it with Synthetic Aurora Deposit 12.",
+          "expectedIntent": "region_comparison",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-11",
+          "expectedStructureId": "SYN-STRUCTURE-11",
+          "expectedRegionId": "SYN-REGION-11"
+        }
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "multi-012",
+      "split": "test",
+      "synthetic": true,
+      "turns": [
+        {
+          "id": "multi-12-turn-1",
+          "question": "Introduce Synthetic Aurora Deposit 12.",
+          "expectedIntent": "entity_lookup",
+          "expectedTools": [
+            "get_entity_detail"
+          ],
+          "expectedEntityId": "SYN-ENTITY-12",
+          "expectedStructureId": "SYN-STRUCTURE-12",
+          "expectedRegionId": "SYN-REGION-12"
+        },
+        {
+          "id": "multi-12-turn-2",
+          "question": "Which structure controls it?",
+          "expectedIntent": "geology_qa",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-12",
+          "expectedStructureId": "SYN-STRUCTURE-12",
+          "expectedRegionId": "SYN-REGION-12"
+        },
+        {
+          "id": "multi-12-turn-3",
+          "question": "Compare it with Synthetic Aurora Deposit 13.",
+          "expectedIntent": "region_comparison",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-12",
+          "expectedStructureId": "SYN-STRUCTURE-12",
+          "expectedRegionId": "SYN-REGION-12"
+        }
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "multi-013",
+      "split": "test",
+      "synthetic": true,
+      "turns": [
+        {
+          "id": "multi-13-turn-1",
+          "question": "Introduce Synthetic Aurora Deposit 13.",
+          "expectedIntent": "entity_lookup",
+          "expectedTools": [
+            "get_entity_detail"
+          ],
+          "expectedEntityId": "SYN-ENTITY-13",
+          "expectedStructureId": "SYN-STRUCTURE-13",
+          "expectedRegionId": "SYN-REGION-13"
+        },
+        {
+          "id": "multi-13-turn-2",
+          "question": "Which structure controls it?",
+          "expectedIntent": "geology_qa",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-13",
+          "expectedStructureId": "SYN-STRUCTURE-13",
+          "expectedRegionId": "SYN-REGION-13"
+        },
+        {
+          "id": "multi-13-turn-3",
+          "question": "Compare it with Synthetic Aurora Deposit 14.",
+          "expectedIntent": "region_comparison",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-13",
+          "expectedStructureId": "SYN-STRUCTURE-13",
+          "expectedRegionId": "SYN-REGION-13"
+        }
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "multi-014",
+      "split": "test",
+      "synthetic": true,
+      "turns": [
+        {
+          "id": "multi-14-turn-1",
+          "question": "Introduce Synthetic Aurora Deposit 14.",
+          "expectedIntent": "entity_lookup",
+          "expectedTools": [
+            "get_entity_detail"
+          ],
+          "expectedEntityId": "SYN-ENTITY-14",
+          "expectedStructureId": "SYN-STRUCTURE-14",
+          "expectedRegionId": "SYN-REGION-14"
+        },
+        {
+          "id": "multi-14-turn-2",
+          "question": "Which structure controls it?",
+          "expectedIntent": "geology_qa",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-14",
+          "expectedStructureId": "SYN-STRUCTURE-14",
+          "expectedRegionId": "SYN-REGION-14"
+        },
+        {
+          "id": "multi-14-turn-3",
+          "question": "Compare it with Synthetic Aurora Deposit 15.",
+          "expectedIntent": "region_comparison",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-14",
+          "expectedStructureId": "SYN-STRUCTURE-14",
+          "expectedRegionId": "SYN-REGION-14"
+        }
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "multi-015",
+      "split": "test",
+      "synthetic": true,
+      "turns": [
+        {
+          "id": "multi-15-turn-1",
+          "question": "Introduce Synthetic Aurora Deposit 15.",
+          "expectedIntent": "entity_lookup",
+          "expectedTools": [
+            "get_entity_detail"
+          ],
+          "expectedEntityId": "SYN-ENTITY-15",
+          "expectedStructureId": "SYN-STRUCTURE-15",
+          "expectedRegionId": "SYN-REGION-15"
+        },
+        {
+          "id": "multi-15-turn-2",
+          "question": "Which structure controls it?",
+          "expectedIntent": "geology_qa",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-15",
+          "expectedStructureId": "SYN-STRUCTURE-15",
+          "expectedRegionId": "SYN-REGION-15"
+        },
+        {
+          "id": "multi-15-turn-3",
+          "question": "Compare it with Synthetic Aurora Deposit 16.",
+          "expectedIntent": "region_comparison",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-15",
+          "expectedStructureId": "SYN-STRUCTURE-15",
+          "expectedRegionId": "SYN-REGION-15"
+        }
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "multi-016",
+      "split": "test",
+      "synthetic": true,
+      "turns": [
+        {
+          "id": "multi-16-turn-1",
+          "question": "Introduce Synthetic Aurora Deposit 16.",
+          "expectedIntent": "entity_lookup",
+          "expectedTools": [
+            "get_entity_detail"
+          ],
+          "expectedEntityId": "SYN-ENTITY-16",
+          "expectedStructureId": "SYN-STRUCTURE-16",
+          "expectedRegionId": "SYN-REGION-16"
+        },
+        {
+          "id": "multi-16-turn-2",
+          "question": "Which structure controls it?",
+          "expectedIntent": "geology_qa",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-16",
+          "expectedStructureId": "SYN-STRUCTURE-16",
+          "expectedRegionId": "SYN-REGION-16"
+        },
+        {
+          "id": "multi-16-turn-3",
+          "question": "Compare it with Synthetic Aurora Deposit 17.",
+          "expectedIntent": "region_comparison",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-16",
+          "expectedStructureId": "SYN-STRUCTURE-16",
+          "expectedRegionId": "SYN-REGION-16"
+        }
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "multi-017",
+      "split": "test",
+      "synthetic": true,
+      "turns": [
+        {
+          "id": "multi-17-turn-1",
+          "question": "Introduce Synthetic Aurora Deposit 17.",
+          "expectedIntent": "entity_lookup",
+          "expectedTools": [
+            "get_entity_detail"
+          ],
+          "expectedEntityId": "SYN-ENTITY-17",
+          "expectedStructureId": "SYN-STRUCTURE-17",
+          "expectedRegionId": "SYN-REGION-17"
+        },
+        {
+          "id": "multi-17-turn-2",
+          "question": "Which structure controls it?",
+          "expectedIntent": "geology_qa",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-17",
+          "expectedStructureId": "SYN-STRUCTURE-17",
+          "expectedRegionId": "SYN-REGION-17"
+        },
+        {
+          "id": "multi-17-turn-3",
+          "question": "Compare it with Synthetic Aurora Deposit 18.",
+          "expectedIntent": "region_comparison",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-17",
+          "expectedStructureId": "SYN-STRUCTURE-17",
+          "expectedRegionId": "SYN-REGION-17"
+        }
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "multi-018",
+      "split": "test",
+      "synthetic": true,
+      "turns": [
+        {
+          "id": "multi-18-turn-1",
+          "question": "Introduce Synthetic Aurora Deposit 18.",
+          "expectedIntent": "entity_lookup",
+          "expectedTools": [
+            "get_entity_detail"
+          ],
+          "expectedEntityId": "SYN-ENTITY-18",
+          "expectedStructureId": "SYN-STRUCTURE-18",
+          "expectedRegionId": "SYN-REGION-18"
+        },
+        {
+          "id": "multi-18-turn-2",
+          "question": "Which structure controls it?",
+          "expectedIntent": "geology_qa",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-18",
+          "expectedStructureId": "SYN-STRUCTURE-18",
+          "expectedRegionId": "SYN-REGION-18"
+        },
+        {
+          "id": "multi-18-turn-3",
+          "question": "Compare it with Synthetic Aurora Deposit 19.",
+          "expectedIntent": "region_comparison",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-18",
+          "expectedStructureId": "SYN-STRUCTURE-18",
+          "expectedRegionId": "SYN-REGION-18"
+        }
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "multi-019",
+      "split": "test",
+      "synthetic": true,
+      "turns": [
+        {
+          "id": "multi-19-turn-1",
+          "question": "Introduce Synthetic Aurora Deposit 19.",
+          "expectedIntent": "entity_lookup",
+          "expectedTools": [
+            "get_entity_detail"
+          ],
+          "expectedEntityId": "SYN-ENTITY-19",
+          "expectedStructureId": "SYN-STRUCTURE-19",
+          "expectedRegionId": "SYN-REGION-19"
+        },
+        {
+          "id": "multi-19-turn-2",
+          "question": "Which structure controls it?",
+          "expectedIntent": "geology_qa",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-19",
+          "expectedStructureId": "SYN-STRUCTURE-19",
+          "expectedRegionId": "SYN-REGION-19"
+        },
+        {
+          "id": "multi-19-turn-3",
+          "question": "Compare it with Synthetic Aurora Deposit 20.",
+          "expectedIntent": "region_comparison",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-19",
+          "expectedStructureId": "SYN-STRUCTURE-19",
+          "expectedRegionId": "SYN-REGION-19"
+        }
+      ],
+      "humanBlindReview": null
+    },
+    {
+      "id": "multi-020",
+      "split": "test",
+      "synthetic": true,
+      "turns": [
+        {
+          "id": "multi-20-turn-1",
+          "question": "Introduce Synthetic Aurora Deposit 20.",
+          "expectedIntent": "entity_lookup",
+          "expectedTools": [
+            "get_entity_detail"
+          ],
+          "expectedEntityId": "SYN-ENTITY-20",
+          "expectedStructureId": "SYN-STRUCTURE-20",
+          "expectedRegionId": "SYN-REGION-20"
+        },
+        {
+          "id": "multi-20-turn-2",
+          "question": "Which structure controls it?",
+          "expectedIntent": "geology_qa",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-20",
+          "expectedStructureId": "SYN-STRUCTURE-20",
+          "expectedRegionId": "SYN-REGION-20"
+        },
+        {
+          "id": "multi-20-turn-3",
+          "question": "Compare it with Synthetic Aurora Deposit 11.",
+          "expectedIntent": "region_comparison",
+          "expectedTools": [
+            "query_knowledge_graph"
+          ],
+          "expectedEntityId": "SYN-ENTITY-20",
+          "expectedStructureId": "SYN-STRUCTURE-20",
+          "expectedRegionId": "SYN-REGION-20"
+        }
+      ],
+      "humanBlindReview": null
+    }
+  ]
+}

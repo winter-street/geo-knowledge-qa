@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "runKind": "synthetic-harness-validation",
+  "split": "test",
+  "caseCounts": {
+    "singleTurn": 40,
+    "multiTurn": 10
+  },
+  "metrics": {
+    "recallAt5": 1,
+    "mrrAt10": 1,
+    "intentAccuracy": 1,
+    "toolSelectionAccuracy": 1,
+    "entityLinkTop1Accuracy": 1,
+    "citationPrecision": 1,
+    "refusalFalseAnswerRate": 0,
+    "multiTurnTaskSuccess": 1,
+    "unsupportedClaimRate": 0,
+    "directUnsupportedClaimRate": 0.5,
+    "unsupportedClaimImprovement": 0.5,
+    "orchestrationLatencyMs": {
+      "p50": 104,
+      "p95": 275
+    }
+  },
+  "acceptance": {
+    "recallAt5": {
+      "value": 1,
+      "threshold": 0.8,
+      "operator": ">=",
+      "passed": true
+    },
+    "mrrAt10": {
+      "value": 1,
+      "threshold": 0.7,
+      "operator": ">=",
+      "passed": true
+    },
+    "intentAccuracy": {
+      "value": 1,
+      "threshold": 0.9,
+      "operator": ">=",
+      "passed": true
+    },
+    "toolSelectionAccuracy": {
+      "value": 1,
+      "threshold": 0.9,
+      "operator": ">=",
+      "passed": true
+    },
+    "entityLinkTop1Accuracy": {
+      "value": 1,
+      "threshold": 0.85,
+      "operator": ">=",
+      "passed": true
+    },
+    "citationPrecision": {
+      "value": 1,
+      "threshold": 0.9,
+      "operator": ">=",
+      "passed": true
+    },
+    "refusalFalseAnswerRate": {
+      "value": 0,
+      "threshold": 0.1,
+      "operator": "<=",
+      "passed": true
+    },
+    "multiTurnTaskSuccess": {
+      "value": 1,
+      "threshold": 0.8,
+      "operator": ">=",
+      "passed": true
+    },
+    "unsupportedClaimRate": {
+      "value": 0,
+      "threshold": 0.35,
+      "operator": "<=",
+      "passed": true
+    },
+    "unsupportedClaimImprovement": {
+      "value": 0.5,
+      "threshold": 0.2,
+      "operator": ">=",
+      "passed": true
+    }
+  },
+  "judging": {
+    "automated": "auxiliary-only",
+    "humanBlindReview": {
+      "status": "pending",
+      "reviewer": null,
+      "notes": null
+    }
+  }
+}
