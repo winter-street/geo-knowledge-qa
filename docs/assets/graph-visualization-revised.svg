@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#f4f1ea"/>
+  <rect x="72" y="76" width="5" height="62" fill="#2e7d5b"/>
+  <text x="102" y="104" font-family="Microsoft YaHei, Arial, sans-serif" font-size="23" fill="#2e7d5b" font-weight="700">04 / 功能二</text>
+  <text x="102" y="156" font-family="Microsoft YaHei, Arial, sans-serif" font-size="42" fill="#1a1a2e" font-weight="700">知识图谱可视化：从关键词到局部证据网络</text>
+  <text x="102" y="194" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" fill="#5f625e">将 Neo4j 返回的节点与关系转为可点击、可追溯的局部子图</text>
+
+  <line x1="102" y1="254" x2="545" y2="254" stroke="#c9c4ba" stroke-width="2"/>
+  <text x="102" y="298" font-family="Microsoft YaHei, Arial, sans-serif" font-size="19" fill="#1e3a5f" font-weight="700">一次查询，经历三步</text>
+
+  <rect x="102" y="328" width="420" height="86" fill="#ffffff" stroke="#d9d4ca" stroke-width="2"/>
+  <rect x="102" y="328" width="8" height="86" fill="#1e3a5f"/>
+  <text x="134" y="362" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#1a1a2e" font-weight="700">1. 输入关键词与跳数</text>
+  <text x="134" y="390" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#5f625e">例如「钒钛磁铁矿」· 1 至 3 跳</text>
+
+  <rect x="102" y="432" width="420" height="86" fill="#ffffff" stroke="#d9d4ca" stroke-width="2"/>
+  <rect x="102" y="432" width="8" height="86" fill="#2e7d5b"/>
+  <text x="134" y="466" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#1a1a2e" font-weight="700">2. 后端返回局部子图</text>
+  <text x="134" y="494" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#5f625e">节点、关系、来源与 inferred 标记</text>
+
+  <rect x="102" y="536" width="420" height="86" fill="#ffffff" stroke="#d9d4ca" stroke-width="2"/>
+  <rect x="102" y="536" width="8" height="86" fill="#c79338"/>
+  <text x="134" y="570" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#1a1a2e" font-weight="700">3. G6 分层布局与交互</text>
+  <text x="134" y="598" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#5f625e">点击节点查看属性、关系和来源文档</text>
+
+  <line x1="102" y1="690" x2="522" y2="690" stroke="#c9c4ba" stroke-width="2"/>
+  <text x="102" y="726" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#1e3a5f" font-weight="700">图例</text>
+  <circle cx="116" cy="762" r="8" fill="#d39d3d"/><text x="136" y="768" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#434640">矿产</text>
+  <circle cx="250" cy="762" r="8" fill="#5e9c83"/><text x="270" y="768" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#434640">岩石 / 年代</text>
+  <circle cx="420" cy="762" r="8" fill="#6787a8"/><text x="440" y="768" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#434640">构造</text>
+
+  <rect x="580" y="254" width="940" height="548" fill="#142234"/>
+  <text x="620" y="298" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#b9c8d6">示例局部子图 · 节点颜色按实体类型区分</text>
+  <line x1="890" y1="510" x2="710" y2="372" stroke="#79a6a0" stroke-width="3"/>
+  <line x1="890" y1="510" x2="1130" y2="360" stroke="#7b9cbd" stroke-width="3"/>
+  <line x1="890" y1="510" x2="1190" y2="625" stroke="#79a6a0" stroke-width="3"/>
+  <line x1="890" y1="510" x2="700" y2="655" stroke="#d5a04a" stroke-width="3"/>
+  <line x1="1130" y1="360" x2="1290" y2="482" stroke="#e6cf86" stroke-width="3" stroke-dasharray="11 9"/>
+
+  <rect x="746" y="401" width="106" height="27" fill="#1d344b"/><text x="758" y="420" font-family="Microsoft YaHei, Arial, sans-serif" font-size="13" fill="#d7e6ec">HOSTED_IN</text>
+  <rect x="992" y="401" width="130" height="27" fill="#1d344b"/><text x="1003" y="420" font-family="Microsoft YaHei, Arial, sans-serif" font-size="13" fill="#d7e6ec">CONTROLLED_BY</text>
+  <rect x="1028" y="578" width="110" height="27" fill="#1d344b"/><text x="1040" y="597" font-family="Microsoft YaHei, Arial, sans-serif" font-size="13" fill="#d7e6ec">FORMED_IN</text>
+  <rect x="744" y="601" width="118" height="27" fill="#1d344b"/><text x="756" y="620" font-family="Microsoft YaHei, Arial, sans-serif" font-size="13" fill="#d7e6ec">ASSOCIATED</text>
+  <rect x="1190" y="395" width="128" height="27" fill="#4a3e25"/><text x="1201" y="414" font-family="Microsoft YaHei, Arial, sans-serif" font-size="13" fill="#f6df9d">inferred:true</text>
+
+  <circle cx="890" cy="510" r="82" fill="#d39d3d" stroke="#f5dca0" stroke-width="4"/>
+  <text x="890" y="501" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" fill="#172131" font-weight="700">目标矿产</text>
+  <text x="890" y="532" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#172131">关键词种子节点</text>
+
+  <circle cx="690" cy="356" r="54" fill="#5e9c83" stroke="#95c7b2" stroke-width="3"/>
+  <text x="690" y="350" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#ffffff" font-weight="700">围岩</text>
+  <text x="690" y="376" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="13" fill="#e5f1eb">岩石节点</text>
+
+  <circle cx="1140" cy="350" r="59" fill="#6787a8" stroke="#a1b9cf" stroke-width="3"/>
+  <text x="1140" y="343" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#ffffff" font-weight="700">断裂带</text>
+  <text x="1140" y="370" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="13" fill="#e7eef5">构造节点</text>
+
+  <circle cx="1204" cy="636" r="58" fill="#5e9c83" stroke="#95c7b2" stroke-width="3"/>
+  <text x="1204" y="629" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#ffffff" font-weight="700">形成时代</text>
+  <text x="1204" y="656" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="13" fill="#e5f1eb">年代节点</text>
+
+  <circle cx="674" cy="668" r="53" fill="#b77e3f" stroke="#e1b477" stroke-width="3"/>
+  <text x="674" y="662" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#ffffff" font-weight="700">伴生矿物</text>
+  <text x="674" y="688" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="13" fill="#fff0d8">矿产节点</text>
+
+  <circle cx="1306" cy="492" r="49" fill="#759667" stroke="#adc49e" stroke-width="3"/>
+  <text x="1306" y="486" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#ffffff" font-weight="700">父级年代</text>
+  <text x="1306" y="512" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#edf6e8">推理节点</text>
+
+  <rect x="620" y="745" width="852" height="1" fill="#526879"/>
+  <text x="620" y="780" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#d4dee6">实线：显式图谱关系</text>
+  <line x1="840" y1="774" x2="890" y2="774" stroke="#e6cf86" stroke-width="3" stroke-dasharray="10 7"/>
+  <text x="910" y="780" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#d4dee6">虚线：OWL / 规则推理后物化的关系</text>
+</svg>

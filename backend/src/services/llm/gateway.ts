@@ -1,4 +1,4 @@
-import type { LLMProvider } from './provider.js'
+import type { LLMProvider, LLMToolCall, LLMToolDefinition } from './provider.js'
 import type { Chunk, Source, KGPath, RetrievalMode, SpatialAnalysis, SpatialData } from '../../types/index.js'
 import { buildPrompt, SYSTEM_PROMPT } from '../llm.js'
 
@@ -33,6 +33,21 @@ export class LLMGateway {
   /** 获取可用的 Provider 列表 */
   getProviders(): string[] {
     return this.providers.map((p) => p.name)
+  }
+
+  async generateToolCalls(
+    systemPrompt: string,
+    userPrompt: string,
+    definitions: LLMToolDefinition[],
+  ): Promise<LLMToolCall[]> {
+    const primary = this.providers[0]
+    if (!primary) return []
+    try {
+      return await primary.generateToolCalls(systemPrompt, userPrompt, definitions)
+    } catch (error) {
+      console.warn('[gateway] Agent tool planning failed; using deterministic fallback:', (error as Error).message)
+      return []
+    }
   }
 
   /** 非流式生成（带异常互备） */
@@ -176,6 +191,8 @@ export class LLMGateway {
       docTitle: r.chunk.docTitle,
       page: r.chunk.page,
       snippet: r.chunk.content.slice(0, 150) + '...',
+      synthetic: r.chunk.synthetic,
+      isMock: r.chunk.isMock,
     }))
     return { answer, sources }
   }

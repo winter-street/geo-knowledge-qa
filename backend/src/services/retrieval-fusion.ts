@@ -1,5 +1,6 @@
 import type { Chunk, KGPath } from '../types/index.js'
 import { rerankRagResults } from './rag-reranker.js'
+import { selectDiverseEvidence } from './evidence-selection.js'
 import {
   applyRagWeight,
   type RetrievalPolicy,
@@ -7,7 +8,7 @@ import {
 } from './retrieval-policy.js'
 
 export function ragCandidateTopK(policy: RetrievalPolicy): number {
-  return policy.useRag ? Math.max(policy.ragTopK * 3, 15) : 0
+  return policy.useRag ? 20 : 0
 }
 
 export function finalizeRetrievalResults(
@@ -21,7 +22,11 @@ export function finalizeRetrievalResults(
     question,
     ragResults,
     policy.useKg ? kgPaths : [],
-    policy.ragTopK,
+    ragResults.length,
   )
-  return applyRagWeight(reranked, policy.ragWeight)
+  const finalLimit = Math.min(5, policy.ragTopK)
+  return applyRagWeight(
+    selectDiverseEvidence(reranked, finalLimit, 2),
+    policy.ragWeight,
+  )
 }

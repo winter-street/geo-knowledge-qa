@@ -28,8 +28,8 @@ const hybrid: RetrievalPolicy = {
   spatialWeight: 0.2,
 }
 
-assert.equal(ragCandidateTopK(hybrid), 15)
-assert.equal(ragCandidateTopK({ ...hybrid, ragTopK: 10 }), 30)
+assert.equal(ragCandidateTopK(hybrid), 20)
+assert.equal(ragCandidateTopK({ ...hybrid, ragTopK: 10 }), 20)
 assert.equal(ragCandidateTopK({ ...hybrid, useRag: false }), 0)
 
 const candidates = Array.from({ length: 15 }, (_item, index) =>

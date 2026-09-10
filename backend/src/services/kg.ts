@@ -1,6 +1,6 @@
 import neo4j, { type Driver, type Session } from 'neo4j-driver'
 import { config } from '../config.js'
-import type { KGPath, Subgraph, GeoEntityType } from '../types/index.js'
+import type { EntityLinkCandidate, KGPath, Subgraph, GeoEntityType } from '../types/index.js'
 import {
   analyzeKgQuestion,
   type KGQueryAnalysis,
@@ -10,6 +10,7 @@ import {
   type KGPathCandidate,
 } from './kg-ranking.js'
 import { tokenize } from './tokenizer.js'
+import { getSyntheticDemoRepository, syntheticDemoEnabled } from './synthetic-demo.js'
 
 // ============================================================
 // 地质知识图谱 — 实体类型常量
@@ -65,6 +66,11 @@ let connected = false
 
 /** 初始化 Neo4j 连接 */
 export function initNeo4j(): void {
+  if (syntheticDemoEnabled()) {
+    connected = false
+    console.log('[kg] Synthetic demo enabled; Neo4j initialization skipped.')
+    return
+  }
   const { uri, user, password } = config.neo4j
   if (!password || password === 'password') {
     console.warn('[kg] Neo4j 密码未配置或为默认值，KG 功能不可用')
@@ -102,6 +108,9 @@ export async function searchEntities(
   question: string,
   entityTypes?: GeoEntityType[]
 ): Promise<KGPath[]> {
+  if (syntheticDemoEnabled()) {
+    return getSyntheticDemoRepository().searchKnowledgeGraph(question)
+  }
   const session = getSession()
   if (!session) {
     console.log('[kg] Neo4j 不可用，跳过 KG 检索')
@@ -314,6 +323,9 @@ export async function getSubgraph(
   entityTypes?: GeoEntityType[],
   depth: number = 2
 ): Promise<Subgraph> {
+  if (syntheticDemoEnabled()) {
+    return getSyntheticDemoRepository().getSubgraph(query)
+  }
   const session = getSession()
   if (!session) return { nodes: [], edges: [] }
 
@@ -410,6 +422,9 @@ export async function getSubgraph(
  *                  无坐标数据时返回空数组，不报错
  */
 export async function getSpatialResults(question: string): Promise<import('../types/index.js').SpatialData> {
+  if (syntheticDemoEnabled()) {
+    return getSyntheticDemoRepository().getSpatialData(question)
+  }
   const session = getSession()
   if (!session) {
     console.log('[kg] Neo4j 不可用，spatial 返回空')
@@ -540,6 +555,9 @@ export async function getSpatialResults(question: string): Promise<import('../ty
 
 /** 获取单个实体详情 */
 export async function getEntityDetail(entityId: string): Promise<Record<string, unknown> | null> {
+  if (syntheticDemoEnabled()) {
+    return getSyntheticDemoRepository().getEntityDetail(entityId)
+  }
   const session = getSession()
   if (!session) return null
   try {
@@ -562,6 +580,7 @@ export async function getEntityDetail(entityId: string): Promise<Record<string, 
 
 /** 更新实体属性 */
 export async function updateEntity(entityId: string, props: Record<string, unknown>): Promise<boolean> {
+  if (syntheticDemoEnabled()) return false
   const session = getSession()
   if (!session) return false
   try {
@@ -589,6 +608,7 @@ export async function updateEntity(entityId: string, props: Record<string, unkno
 
 /** 删除实体（Neo4j 节点 + 关联关系） */
 export async function deleteEntity(entityId: string): Promise<boolean> {
+  if (syntheticDemoEnabled()) return false
   const session = getSession()
   if (!session) return false
   try {
@@ -622,6 +642,13 @@ export async function checkNeo4jAvailability(): Promise<{
   reason: string | null
   nodes?: number
 }> {
+  if (syntheticDemoEnabled()) {
+    return {
+      available: true,
+      reason: null,
+      nodes: getSyntheticDemoRepository().snapshot().entityCount,
+    }
+  }
   const session = getSession()
   if (!session) return { available: false, reason: 'Neo4j 未配置或尚未连接' }
   try {
@@ -641,6 +668,12 @@ export async function checkNeo4jAvailability(): Promise<{
 export async function searchEntitiesWithStatus(
   question: string,
 ): Promise<{ results: KGPath[]; succeeded: boolean; reason?: string }> {
+  if (syntheticDemoEnabled()) {
+    return {
+      results: getSyntheticDemoRepository().searchKnowledgeGraph(question),
+      succeeded: true,
+    }
+  }
   const session = getSession()
   if (!session) {
     return { results: [], succeeded: false, reason: 'Neo4j 未配置或尚未连接' }
@@ -659,12 +692,77 @@ export async function searchEntitiesWithStatus(
   }
 }
 
+export const ENTITY_CANDIDATE_CYPHER = `
+MATCH (n)
+WHERE any(label IN labels(n) WHERE label IN
+  ['Mineral', 'Rock', 'Structure', 'TimePeriod', 'DepositType', 'Region'])
+  AND n.name IS NOT NULL
+  AND (
+    $question CONTAINS n.name
+    OR any(alias IN coalesce(n.aliases, []) WHERE $question CONTAINS alias)
+  )
+RETURN elementId(n) AS entityId, n.name AS name, labels(n) AS labels,
+       coalesce(n.aliases, []) AS aliases
+ORDER BY size(n.name) DESC, n.name
+LIMIT 10
+`
+
+export async function findEntityCandidatesWithRunner(
+  question: string,
+  run: KgQueryRunner,
+): Promise<EntityLinkCandidate[]> {
+  const result = await run(ENTITY_CANDIDATE_CYPHER, { question })
+  return result.records.flatMap((record) => {
+    const labels = (record.get('labels') as string[] | null) ?? []
+    const type = labels.find((label): label is GeoEntityType => GEO_ENTITY_TYPES.includes(label as GeoEntityType))
+    const id = record.get('entityId')
+    const name = record.get('name')
+    if (!type || id == null || name == null) return []
+    const aliasesValue = record.get('aliases')
+    const aliases = Array.isArray(aliasesValue)
+      ? aliasesValue.filter((item): item is string => typeof item === 'string' && item.length > 0)
+      : []
+    return [{ id: String(id), name: String(name), type, aliases }]
+  })
+}
+
+export async function findEntityCandidates(question: string): Promise<EntityLinkCandidate[]> {
+  if (syntheticDemoEnabled()) {
+    return getSyntheticDemoRepository().findEntityCandidates(question)
+  }
+  const session = getSession()
+  if (!session) return []
+  try {
+    return await findEntityCandidatesWithRunner(
+      question,
+      (cypher, params) => session.run(cypher, params),
+    )
+  } catch (error) {
+    console.warn('[kg] entity candidate lookup failed:', (error as Error).message)
+    return []
+  } finally {
+    await session.close()
+  }
+}
+
 /** 图谱实体统计（供 Admin 实体管理 tab，按地质实体类型分组） */
 export async function getEntityStats(): Promise<{
   totalNodes: number
   byType: Record<string, number>
-  list: { entityId: string; name: string; type: string; relationCount: number; sourceDoc: string; status: string }[]
+  list: Array<{
+    entityId: string
+    name: string
+    type: string
+    relationCount: number
+    sourceDoc: string
+    status: string
+    synthetic?: boolean
+    isMock?: boolean
+  }>
 }> {
+  if (syntheticDemoEnabled()) {
+    return getSyntheticDemoRepository().entityStats()
+  }
   const session = getSession()
   if (!session) return { totalNodes: 0, byType: {}, list: [] }
 

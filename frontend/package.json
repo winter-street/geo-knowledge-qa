@@ -8,7 +8,7 @@
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
-    "test": "vitest run --dir src/utils markdown.test.ts search.test.ts",
+    "test": "node scripts/run-tests.mjs",
     "type-check": "vue-tsc --build"
   },
   "dependencies": {
@@ -24,8 +24,8 @@
     "vue-router": "^5.1.0"
   },
   "devDependencies": {
-    "@tsconfig/node24": "^24.0.4",
-    "@types/node": "^24.13.2",
+    "@tsconfig/node22": "^22.0.2",
+    "@types/node": "^22.14.0",
     "@vitejs/plugin-vue": "^6.0.7",
     "@vue/tsconfig": "^0.9.1",
     "npm-run-all2": "^9.0.2",
@@ -38,6 +38,6 @@
     "vue-tsc": "^3.3.5"
   },
   "engines": {
-    "node": "^22.18.0 || >=24.12.0"
+    "node": ">=22.18.0 <23"
   }
 }

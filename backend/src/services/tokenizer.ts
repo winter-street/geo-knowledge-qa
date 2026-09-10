@@ -1,27 +1,11 @@
-/**
- * 中文分词器 — 封装 nodejieba
- * 如果 nodejieba 不可用，回退到简单的字粒度切分
- */
+/** Node 22 内置分词器 + 领域词典，避免原生扩展的 ABI 与安装链风险。 */
 
-import { createRequire } from 'node:module'
-
-let jieba: any = null
-let jiebaAvailable = false
-
-function loadJieba(): void {
-  if (jieba !== null) return
-  try {
-    // nodejieba 是 native 模块，用 createRequire 加载比动态 import 更可靠
-    const _require = createRequire(import.meta.url)
-    jieba = _require('nodejieba')
-    jiebaAvailable = true
-    // 插入自定义词典（地质找矿领域术语 + 国土空间规划领域术语）
-    const terms = [
+const DOMAIN_TERMS = new Set([
       // --- 地质找矿领域 ---
       // 矿产
       '钒钛磁铁矿', '钛磁铁矿', '磁黄铁矿', '黄铜矿', '黄铁矿', '赤铁矿',
       '磁铁矿', '钛铁矿', '铜镍矿', '铬铁矿', '菱铁矿', '褐铁矿',
-      '铅锌矿', '斑岩铜矿', '矽卡岩', '热液矿床', '沉积矿床',
+      '铅锌矿', '斑岩铜矿', '铜矿', '矿床', '矽卡岩', '热液矿床', '沉积矿床',
       // 岩石
       '花岗岩', '辉长岩', '闪长岩', '大理岩', '辉石岩', '玄武岩',
       '碱性辉长岩', '片岩', '砂岩', '石灰岩', '页岩', '板岩',
@@ -49,15 +33,35 @@ function loadJieba(): void {
       '养老服务设施', '用途管制', '占补平衡',
       '城市体检', '双评价', '留白用地', '地下空间',
       '开发边界', '建设控制地带', '历史文化保护线',
-    ]
-    for (const term of terms) {
-      jieba.insertWord(term)
+])
+
+const segmenter = new Intl.Segmenter('zh-CN', { granularity: 'word' })
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+const domainTermPattern = new RegExp(
+  `(${[...DOMAIN_TERMS]
+    .sort((left, right) => right.length - left.length)
+    .map(escapeRegExp)
+    .join('|')})`,
+  'gu',
+)
+
+function segmentWithDomainTerms(text: string): string[] {
+  const result: string[] = []
+  for (const part of text.split(domainTermPattern)) {
+    if (!part) continue
+    if (DOMAIN_TERMS.has(part)) {
+      result.push(part)
+      continue
     }
-    console.log('[tokenizer] nodejieba 已加载，自定义词典已注入')
-  } catch {
-    jiebaAvailable = false
-    console.warn('[tokenizer] nodejieba 不可用，使用字粒度回退分词')
+    for (const token of segmenter.segment(part)) {
+      if (token.isWordLike) result.push(token.segment)
+    }
   }
+  return result
 }
 
 /** 停用词列表 */
@@ -74,28 +78,12 @@ const STOP_WORDS = new Set([
 
 /** 分词并过滤停用词 */
 export function tokenize(text: string): string[] {
-  loadJieba()
-
-  if (jiebaAvailable && jieba) {
-    const words: string[] = jieba.cut(text)
-    return words.filter((w) => {
-      const trimmed = w.trim()
-      if (trimmed.length === 0) return false
-      if (STOP_WORDS.has(trimmed)) return false
-      // 过滤纯数字/标点
-      if (/^[\d.,;:!?，。；：！？、""''（）\(\)\[\]【】《》\s]+$/.test(trimmed)) return false
-      return true
-    })
-  }
-
-  // 回退：按字符切分，过滤停用词和标点
-  return text
-    .split('')
-    .filter((ch) => {
-      if (STOP_WORDS.has(ch)) return false
-      if (/^[\d.,;:!?，。；：！？、""''（）\(\)\[\]【】《》\s]$/.test(ch)) return false
-      return ch.trim().length > 0
-    })
+  return segmentWithDomainTerms(text).filter((word) => {
+    const trimmed = word.trim()
+    return trimmed.length > 0
+      && !STOP_WORDS.has(trimmed)
+      && !/^\p{Number}+$/u.test(trimmed)
+  })
 }
 
 /** 批量分词 */

@@ -6,9 +6,16 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
+    "type-check": "tsc --noEmit",
+    "test": "node scripts/run-tests.mjs",
+    "evaluation:generate": "tsx scripts/generate-public-evaluation.ts",
     "start": "node dist/index.js"
   },
+  "engines": {
+    "node": ">=22.18.0 <23"
+  },
   "dependencies": {
+    "@langchain/langgraph": "^1.4.8",
     "@turf/turf": "^7.3.5",
     "bcryptjs": "^3.0.3",
     "better-sqlite3": "^12.11.1",
@@ -18,8 +25,8 @@
     "jsonwebtoken": "^9.0.3",
     "multer": "^2.2.0",
     "neo4j-driver": "^5.25.0",
-    "nodejieba": "^3.4.4",
-    "openai": "^4.67.0"
+    "openai": "^4.67.0",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
@@ -31,5 +38,8 @@
     "@types/node": "^20.14.0",
     "tsx": "^4.19.0",
     "typescript": "^5.5.0"
+  },
+  "overrides": {
+    "body-parser": "1.20.6"
   }
 }

@@ -5,9 +5,11 @@
 .superpowers/
 skills-lock.json
 .worktrees/
+.demo-runtime/
 
 # ML model cache
 ml-service/models/
+ml-service/output/
 ml-service/output/relation_cache.json
 
 # Sensitive config (API keys, passwords)

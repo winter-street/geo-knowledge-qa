@@ -9,11 +9,19 @@ import adminRouter from './routes/admin.js'
 import authRouter from './routes/auth.js'
 import uploadRouter from './routes/upload.js'
 import spatialRouter from './routes/spatial.js'
+import { getSyntheticDemoRepository, syntheticDemoEnabled } from './services/synthetic-demo.js'
 
 const app = express()
 
 // 中间件
-app.use(cors({ origin: ['http://localhost:5173', 'http://127.0.0.1:5173', 'http://192.168.31.169:5173', 'http://127.0.0.1:5000'], credentials: true }))
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  'http://192.168.31.169:5173',
+  'http://127.0.0.1:5000',
+  process.env.FRONTEND_ORIGIN,
+].filter((origin): origin is string => Boolean(origin))
+app.use(cors({ origin: allowedOrigins, credentials: true }))
 app.use(express.json({ limit: '1mb' }))
 
 // 鉴权中间件（/api/auth/login 和 /api/health 为公开路由）
@@ -29,12 +37,31 @@ app.use('/api', spatialRouter)
 
 // 健康检查
 app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() })
+  res.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    ...(syntheticDemoEnabled() ? { mode: 'synthetic-demo', synthetic: true, isMock: true } : {}),
+  })
 })
 
 // 详细健康检查（各依赖状态）
 app.get('/api/health/detailed', async (_req, res) => {
   const status: Record<string, any> = { server: 'ok', timestamp: new Date().toISOString() }
+
+  if (syntheticDemoEnabled()) {
+    const snapshot = getSyntheticDemoRepository().snapshot()
+    res.json({
+      ...status,
+      mode: 'synthetic-demo',
+      synthetic: true,
+      isMock: true,
+      retrieval: { ok: true, source: 'synthetic', documents: snapshot.documentCount, chunks: snapshot.chunkCount },
+      neo4j: { ok: true, source: 'synthetic', nodes: snapshot.entityCount },
+      spatial: { ok: true, source: 'synthetic', features: snapshot.spatialFeatureCount },
+      llm: { ok: true, source: 'deterministic-fallback' },
+    })
+    return
+  }
 
   // Neo4j
   try {

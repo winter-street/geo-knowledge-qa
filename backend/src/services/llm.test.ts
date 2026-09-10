@@ -18,6 +18,20 @@ assert.match(prompt, /300 至 500 个汉字/)
 assert.doesNotMatch(prompt, /在回答末尾用列表列出关键地质实体/)
 assert.doesNotMatch(prompt, /可以补充.*现有资料还覆盖/)
 
+const citationPrompt = buildPrompt('铜矿受什么控制？', [{
+  chunk: {
+    id: 12,
+    content: '北东向断裂控制铜矿热液活动。',
+    docTitle: 'Synthetic Report',
+    page: 3,
+    docType: 'synthetic',
+  },
+  score: 0.9,
+}], [{ from: '铜矿', relation: '受控于', to: '北东向断裂' }], 'hybrid')
+assert.match(citationPrompt, /\[D12-P3\]/)
+assert.match(citationPrompt, /\[KG1\]/)
+assert.match(citationPrompt, /每个事实性结论.*引用/)
+
 function spatialContext(spatialIntent: boolean): { data: SpatialData; analysis: SpatialAnalysis } {
   return {
     data: { markers: [{ id: 'm1', name: '测试矿点', type: 'Mineral', lng: 102, lat: 27 }], polylines: [] },
