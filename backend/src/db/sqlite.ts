@@ -1,17 +1,22 @@
 import Database from 'better-sqlite3'
+import { mkdirSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import type { RuntimeSettings, RuntimeSettingsRepository } from '../services/runtime-settings.js'
+import { getSyntheticDemoRepository, syntheticDemoEnabled } from '../services/synthetic-demo.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 /** 生产数据库（Python 预处理管线产物） */
-const DB_PATH = path.resolve(__dirname, '../../../ml-service/output/geo_knowledge.db')
+const DB_PATH = syntheticDemoEnabled()
+  ? path.resolve(__dirname, '../../data/synthetic-demo.db')
+  : path.resolve(__dirname, '../../../ml-service/output/geo_knowledge.db')
 
 let _db: Database.Database | null = null
 
 function getDb(): Database.Database {
   if (!_db) {
+    mkdirSync(path.dirname(DB_PATH), { recursive: true })
     _db = new Database(DB_PATH)
     _db.pragma('journal_mode = WAL')
     initQaLogs(_db)
@@ -164,6 +169,7 @@ export interface DocRow {
 }
 
 export function getDocs(): DocRow[] {
+  if (syntheticDemoEnabled()) return getSyntheticDemoRepository().listDocuments()
   try {
     const db = getDb()
     if (!tableExists(db, 'documents')) return []
@@ -181,6 +187,7 @@ export function getDocs(): DocRow[] {
 }
 
 export function deleteDoc(id: number): boolean {
+  if (syntheticDemoEnabled()) return false
   try {
     const db = getDb()
     if (!tableExists(db, 'documents')) return false
@@ -203,6 +210,7 @@ export function deleteDoc(id: number): boolean {
 }
 
 export function getDocById(id: number): DocRow | undefined {
+  if (syntheticDemoEnabled()) return getSyntheticDemoRepository().getDocument(id)
   try {
     const db = getDb()
     if (!tableExists(db, 'documents')) return undefined
@@ -220,6 +228,7 @@ export function getDocById(id: number): DocRow | undefined {
 }
 
 export function getChunksByDocId(docId: number) {
+  if (syntheticDemoEnabled()) return getSyntheticDemoRepository().getDocumentChunks(docId)
   try {
     const db = getDb()
     if (!tableExists(db, 'chunks')) return []
@@ -292,6 +301,14 @@ export function getQaLogs(): QaLogRow[] {
 // ── 统计 ──
 
 export function getStats() {
+  if (syntheticDemoEnabled()) {
+    const snapshot = getSyntheticDemoRepository().snapshot()
+    const db = getDb()
+    const logCount = tableExists(db, 'qa_logs')
+      ? (db.prepare('SELECT COUNT(*) AS n FROM qa_logs').get() as { n: number }).n
+      : 0
+    return { docCount: snapshot.documentCount, chunkCount: snapshot.chunkCount, logCount }
+  }
   const db = getDb()
   const docCount = tableExists(db, 'documents')
     ? (db.prepare('SELECT COUNT(*) AS n FROM documents').get() as any).n : 0

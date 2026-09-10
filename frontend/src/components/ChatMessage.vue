@@ -7,6 +7,7 @@ import { renderMarkdown } from '@/utils/markdown'
 import { formatEvidenceEntities, owlTypeMeta, summarizeOwlEvidence } from '@/utils/owl'
 import { summarizeKgProvenance } from '@/utils/kg-evidence'
 import { mapPlanLabels } from '@/utils/map-plan'
+import { formatClaimCitations } from '@/utils/citations'
 
 const props = defineProps<{ message: Message; question?: string; isLast?: boolean }>()
 
@@ -51,6 +52,23 @@ const spatialConditions = computed(() => {
   ].filter(Boolean)
 })
 const planLabels = computed(() => props.message.mapPlan ? mapPlanLabels(props.message.mapPlan) : [])
+const agentTrace = computed(() => props.message.toolTrace || [])
+const completedToolCount = computed(() => agentTrace.value.filter((item) => item.status === 'completed').length)
+const claimCitations = computed(() => formatClaimCitations(props.message.citations))
+
+const TOOL_LABELS = {
+  search_documents: '文档检索',
+  query_knowledge_graph: '图谱查询',
+  spatial_query: '空间分析',
+  get_entity_detail: '实体详情',
+} as const
+
+const STATUS_LABELS = {
+  running: '执行中',
+  completed: '已完成',
+  failed: '已降级',
+  timeout: '已超时',
+} as const
 
 function handleOpenMap() {
   if (hasMapResult.value) emit('open-map', props.message)
@@ -69,6 +87,25 @@ function handleOpenMap() {
     </div>
     <div class="content">
       <div class="bubble" :class="message.role" v-html="renderMarkdown(message.content)" />
+      <div v-if="claimCitations.length" class="claim-citations" aria-label="断言级引用">
+        <span v-for="citation in claimCitations" :key="citation.id">
+          <em>{{ citation.label }}</em>{{ citation.detail }}
+        </span>
+      </div>
+      <section v-if="agentTrace.length" class="agent-timeline" aria-label="Agent 执行时间线">
+        <header>
+          <span>Agent 执行</span>
+          <small>{{ completedToolCount }}/{{ agentTrace.length }}</small>
+        </header>
+        <div v-for="tool in agentTrace" :key="tool.id" class="agent-timeline-row">
+          <i class="agent-status" :class="tool.status" aria-hidden="true" />
+          <strong>{{ TOOL_LABELS[tool.toolName] }}</strong>
+          <span>{{ STATUS_LABELS[tool.status] }}</span>
+          <small>
+            {{ tool.latencyMs ?? 0 }} ms · {{ tool.evidenceCount ?? 0 }} 条证据
+          </small>
+        </div>
+      </section>
       <details v-if="message.sources?.length" class="evidence-details">
         <summary><span>参考来源</span><small>{{ message.sources.length }} 条</small></summary>
         <div class="evidence-details-body">
@@ -219,6 +256,27 @@ function handleOpenMap() {
   text-wrap: pretty;
 }
 
+.claim-citations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin-top: 7px;
+  color: var(--color-ink-500);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.claim-citations span {
+  white-space: nowrap;
+}
+
+.claim-citations em {
+  margin-right: 3px;
+  color: var(--color-primary);
+  font-family: var(--font-display);
+  font-style: italic;
+}
+
 .msg.user .bubble {
   background: var(--color-bg-subtle);
   padding: 14px 18px;
@@ -233,7 +291,7 @@ function handleOpenMap() {
   font-weight: 600;
   color: var(--color-ink-900);
   margin-bottom: 12px;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 .bubble :deep(p) {
@@ -243,6 +301,67 @@ function handleOpenMap() {
 .bubble :deep(strong) {
   color: var(--color-ink-900);
   font-weight: 600;
+}
+
+.agent-timeline {
+  margin-top: 12px;
+  border-top: 1px solid var(--color-ink-100);
+  color: var(--color-ink-500);
+}
+
+.agent-timeline header,
+.agent-timeline-row {
+  display: grid;
+  grid-template-columns: 12px minmax(108px, 1fr) minmax(52px, auto) minmax(112px, auto);
+  gap: 8px;
+  align-items: center;
+  min-height: 32px;
+}
+
+.agent-timeline header {
+  grid-template-columns: 1fr auto;
+  min-height: 36px;
+  color: var(--color-ink-700);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.agent-timeline header small,
+.agent-timeline-row small {
+  color: var(--color-ink-300);
+  font-size: 10px;
+  font-weight: 400;
+  text-align: right;
+}
+
+.agent-timeline-row {
+  border-top: 1px solid var(--color-ink-50);
+  font-size: 11px;
+}
+
+.agent-timeline-row strong {
+  min-width: 0;
+  color: var(--color-ink-700);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.agent-status {
+  width: 7px;
+  height: 7px;
+  border: 1px solid var(--color-ink-300);
+  border-radius: 50%;
+}
+
+.agent-status.completed {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+}
+
+.agent-status.failed,
+.agent-status.timeout {
+  border-color: #8A5A12;
+  background: #8A5A12;
 }
 
 .evidence-details {
@@ -442,5 +561,15 @@ function handleOpenMap() {
   }
 
   .spatial-regions em { text-align: left; }
+
+  .agent-timeline-row {
+    grid-template-columns: 12px minmax(0, 1fr) auto;
+  }
+
+  .agent-timeline-row small {
+    grid-column: 2 / -1;
+    text-align: left;
+    padding-bottom: 7px;
+  }
 }
 </style>

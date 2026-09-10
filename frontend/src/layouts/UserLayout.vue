@@ -42,6 +42,7 @@ function handleLogout() {
           :key="item.path"
           class="nav-tab"
           :class="{ active: activePath === item.path }"
+          :aria-label="item.label"
           @click="navigate(item.path)"
         >
           <svg v-if="item.icon === 'chat'" class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -236,6 +237,39 @@ function handleLogout() {
 /* ---- Content ---- */
 .content {
   flex: 1;
+  min-width: 0;
   overflow: hidden;
+}
+
+@media (max-width: 760px) {
+  .topbar {
+    height: 52px;
+    gap: 6px;
+    padding: 0 8px;
+  }
+
+  .brand { gap: 0; }
+  .brand-text { display: none; }
+  .brand-mark { width: 32px; height: 32px; }
+
+  .topnav {
+    min-width: 0;
+    justify-content: center;
+    gap: 2px;
+  }
+
+  .nav-tab {
+    width: 36px;
+    padding: 0;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .nav-tab span { display: none; }
+
+  .user-box { gap: 0; }
+  .role-badge,
+  .username { display: none; }
+  .logout-btn { width: 32px; height: 32px; }
 }
 </style>

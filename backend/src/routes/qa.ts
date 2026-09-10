@@ -6,6 +6,8 @@ import { getRuntimeSettings } from '../services/runtime-settings.js'
 import { insertQaLog } from '../db/sqlite.js'
 import { resolveSpatialForQuestion } from '../services/spatial.js'
 import { buildMapPlan } from '../services/map-plan.js'
+import { handleAgentQa } from './qa-agent.js'
+import type { JwtPayload } from '../middleware/auth.js'
 import {
   buildPathUsed,
   hasAvailableRetrievalPath,
@@ -15,6 +17,8 @@ import {
   finalizeRetrievalResults,
   ragCandidateTopK,
 } from '../services/retrieval-fusion.js'
+import { rerankDocuments } from '../services/reranker-client.js'
+import { groundAnswer } from '../services/grounding.js'
 import type { QaAskRequest, QaAskResponse, RetrievalMode } from '../types/index.js'
 
 const router = Router()
@@ -36,7 +40,8 @@ router.post('/qa/ask', async (req: Request, res: Response) => {
       question,
       stream: useStream,
       retrievalMode = 'hybrid',
-    } = req.body as QaAskRequest & { stream?: boolean }
+      agentMode = 'direct',
+    } = req.body as QaAskRequest
 
     if (!question || typeof question !== 'string' || question.trim().length === 0) {
       res.status(400).json({ error: '问题不能为空' })
@@ -44,6 +49,18 @@ router.post('/qa/ask', async (req: Request, res: Response) => {
     }
     if (!['rag', 'kg', 'hybrid'].includes(retrievalMode)) {
       res.status(400).json({ error: '检索模式只能是 rag、kg 或 hybrid' })
+      return
+    }
+    if (!['direct', 'agent'].includes(agentMode)) {
+      res.status(400).json({ error: 'agentMode must be direct or agent' })
+      return
+    }
+
+    if (agentMode === 'agent') {
+      await handleAgentQa({
+        user: (req as Request & { user?: JwtPayload }).user,
+        body: { ...req.body, question: question.trim(), retrievalMode, agentMode },
+      }, res)
       return
     }
 
@@ -86,9 +103,13 @@ router.post('/qa/ask', async (req: Request, res: Response) => {
 
     const kgContext = kgSearch.results
     const rawRagResults = ragSearch.results
+    const externalRerank = await rerankDocuments(trimmedQuestion, rawRagResults.slice(0, 20), 20)
+    const rerankInput = externalRerank.status.mode === 'bge-reranker'
+      ? externalRerank.results
+      : rawRagResults
     const ragResults = finalizeRetrievalResults(
       trimmedQuestion,
-      rawRagResults,
+      rerankInput,
       kgContext,
       policy,
     )
@@ -117,6 +138,7 @@ router.post('/qa/ask', async (req: Request, res: Response) => {
       const greeting = {
         answer: '您好！我是地质找矿知识问答助手。您可以向我提问关于矿产分布、断裂带控矿、成矿年代、岩石类型、构造特征等专业问题。',
         sources: [],
+        citations: [],
         kgContext: [],
         spatialData: emptySpatial,
       }
@@ -128,7 +150,7 @@ router.post('/qa/ask', async (req: Request, res: Response) => {
           'X-Accel-Buffering': 'no',
         })
         res.write(`data: ${JSON.stringify({ type: 'chunk', content: greeting.answer })}\n\n`)
-        res.write(`data: ${JSON.stringify({ type: 'done', sources: [], kgContext: [], spatialData: emptySpatial })}\n\n`)
+        res.write(`data: ${JSON.stringify({ type: 'done', sources: [], citations: [], kgContext: [], spatialData: emptySpatial })}\n\n`)
         res.end()
       } else {
         res.json(greeting)
@@ -160,6 +182,9 @@ router.post('/qa/ask', async (req: Request, res: Response) => {
       }
       res.write(`data: ${JSON.stringify(meta)}\n\n`)
 
+      const bufferedChunks: string[] = []
+      let bufferedSources: QaAskResponse['sources'] = []
+      let streamError: Error | undefined
       await generateAnswerStream(
         trimmedQuestion,
         ragResults,
@@ -168,41 +193,48 @@ router.post('/qa/ask', async (req: Request, res: Response) => {
         spatialAnalysis ? { data: spatialData, analysis: spatialAnalysis } : undefined,
         {
         onChunk(text) {
-          res.write(`data: ${JSON.stringify({ type: 'chunk', content: text })}\n\n`)
+          bufferedChunks.push(text)
         },
         onDone(sources) {
-          const finalSources = sources.length > 0 ? sources : toSources(ragResults)
-          // 写入问答日志
-          const pathUsed = buildPathUsed({
-            policy,
-            ragSucceeded: ragSearch.succeeded,
-            ragCount: ragResults.length,
-            kgCount: kgContext.length,
-            spatialCount,
-          })
-          insertQaLog({
-            id: `qa-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-            question: trimmedQuestion,
-            pathUsed,
-            hitDocs: ragResults.length,
-            kgCount: kgContext.length,
-            spatialCount,
-            latency: Date.now() - t0,
-            ragMode: policy.ragMode,
-            ragWeight: policy.ragWeight,
-            kgWeight: policy.kgWeight,
-            spatialWeight: policy.spatialWeight,
-          })
-          res.write(`data: ${JSON.stringify({ type: 'done', sources: finalSources, kgContext, spatialData, spatialAnalysis, mapPlan })}\n\n`)
-          res.end()
+          bufferedSources = sources
         },
         onError(err) {
-          console.error('[qa] SSE 流式错误:', err.message)
-          res.write(`data: ${JSON.stringify({ type: 'error', message: err.message })}\n\n`)
-          res.end()
+          streamError = err
         },
         },
       )
+      if (streamError) {
+        res.write(`data: ${JSON.stringify({ type: 'error', message: streamError.message })}\n\n`)
+        res.end()
+        return
+      }
+      const grounded = groundAnswer(bufferedChunks.join(''), ragResults, kgContext)
+      for (const content of grounded.answer.match(/.{1,160}/gu) ?? [grounded.answer]) {
+        res.write(`data: ${JSON.stringify({ type: 'chunk', content })}\n\n`)
+      }
+      const finalSources = bufferedSources.length > 0 ? bufferedSources : toSources(ragResults)
+      const pathUsed = buildPathUsed({
+        policy,
+        ragSucceeded: ragSearch.succeeded,
+        ragCount: ragResults.length,
+        kgCount: kgContext.length,
+        spatialCount,
+      })
+      insertQaLog({
+        id: `qa-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+        question: trimmedQuestion,
+        pathUsed,
+        hitDocs: ragResults.length,
+        kgCount: kgContext.length,
+        spatialCount,
+        latency: Date.now() - t0,
+        ragMode: policy.ragMode,
+        ragWeight: policy.ragWeight,
+        kgWeight: policy.kgWeight,
+        spatialWeight: policy.spatialWeight,
+      })
+      res.write(`data: ${JSON.stringify({ type: 'done', sources: finalSources, citations: grounded.citations, kgContext, spatialData, spatialAnalysis, mapPlan })}\n\n`)
+      res.end()
       return
     }
 
@@ -214,6 +246,7 @@ router.post('/qa/ask', async (req: Request, res: Response) => {
       retrievalMode,
       spatialAnalysis ? { data: spatialData, analysis: spatialAnalysis } : undefined,
     )
+    const grounded = groundAnswer(answer, ragResults, kgContext)
     const latency = Date.now() - t0
 
     // 写入问答日志
@@ -239,8 +272,9 @@ router.post('/qa/ask', async (req: Request, res: Response) => {
     })
 
     const response: QaAskResponse = {
-      answer,
+      answer: grounded.answer,
       sources: sources.length > 0 ? sources : toSources(ragResults),
+      citations: grounded.citations,
       kgContext,
       spatialData,
       spatialAnalysis,

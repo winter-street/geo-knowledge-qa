@@ -160,6 +160,7 @@ async function openMessageMap(message: Message, question: string) {
       <ChatInput
         :loading="store.loading"
         v-model:retrieval-mode="store.retrievalMode"
+        v-model:agent-mode="store.agentMode"
         @send="store.sendMessageStream"
       />
     </div>
@@ -324,4 +325,69 @@ async function openMessageMap(message: Message, question: string) {
 .rename-btn.cancel:hover { background: var(--color-ink-100); }
 .rename-btn.confirm { background: var(--color-ink-900); color: #fff; }
 .rename-btn.confirm:hover { background: var(--color-ink-700); }
+
+@media (max-width: 760px) {
+  .qa-layout {
+    flex-direction: column;
+  }
+
+  .qa-sidebar {
+    width: 100%;
+    height: 64px;
+    min-width: 0;
+    flex-direction: row;
+    border-right: none;
+    border-bottom: 1px solid var(--color-ink-100);
+  }
+
+  .sidebar-head,
+  .search { display: none; }
+
+  .conv-list {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 4px;
+  }
+
+  .conv-item {
+    flex: 0 0 156px;
+    padding: 8px 10px;
+    border-left: none;
+    border-bottom: 2px solid transparent;
+  }
+
+  .conv-item.active {
+    border-left-color: transparent;
+    border-bottom-color: var(--color-primary);
+  }
+
+  .new-btn {
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    margin: 10px;
+    padding: 0;
+    gap: 0;
+    font-size: 0;
+  }
+
+  .new-btn svg { width: 16px; height: 16px; }
+
+  .qa-main {
+    width: 100%;
+    min-height: 0;
+  }
+
+  .messages {
+    padding: 16px 12px;
+    gap: 16px;
+  }
+
+  .empty-state { padding: 48px 16px; }
+  .empty-title { font-size: 18px; }
+  .rename-dialog { width: calc(100vw - 32px); }
+}
 </style>

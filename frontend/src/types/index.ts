@@ -3,6 +3,8 @@ export interface Source {
   docTitle: string
   page: number
   snippet: string
+  synthetic?: boolean
+  isMock?: boolean
 }
 
 export interface KGPathScoreReason {
@@ -19,6 +21,7 @@ export interface KGPath {
   score?: number
   scoreReasons?: KGPathScoreReason[]
   isMock?: boolean
+  synthetic?: boolean
   source?: string
   regionContext?: string
   candidateKind?: 'direct' | 'region' | 'owl'
@@ -46,6 +49,7 @@ export interface GeoPoint {
   owlTypes?: string[]
   isAnchor?: boolean
   isMock?: boolean
+  synthetic?: boolean
   evidence?: string
   distanceKm?: number
   nearestStructureKm?: number
@@ -79,6 +83,7 @@ export interface GeoPolyline {
   label?: string
   region?: string
   isMock?: boolean
+  synthetic?: boolean
   evidence?: string
   distanceKm?: number
 }
@@ -288,6 +293,10 @@ export interface Message {
   spatialData?: SpatialData
   spatialAnalysis?: SpatialAnalysis
   mapPlan?: MapPlan
+  agentPlan?: AgentPlan
+  toolTrace?: AgentToolTrace[]
+  linkedEntities?: LinkedEntity[]
+  citations?: AgentCitation[]
   timestamp: number
 }
 
@@ -309,11 +318,66 @@ export interface Document {
 }
 
 export type RetrievalMode = 'rag' | 'kg' | 'hybrid'
+export type AgentMode = 'direct' | 'agent'
+
+export type AgentIntent = 'geology_qa' | 'entity_lookup' | 'spatial_analysis' | 'region_comparison' | 'chitchat' | 'clarification'
+export type AgentToolName = 'search_documents' | 'query_knowledge_graph' | 'spatial_query' | 'get_entity_detail'
+export type AgentToolStatus = 'running' | 'completed' | 'failed' | 'timeout'
+
+export interface LinkedEntity {
+  id: string
+  name: string
+  type: GeoEntityType
+  confidence: number
+  matchedBy: 'name' | 'alias' | 'context'
+  disambiguation: string
+}
+
+export interface AgentPlanStep {
+  id: string
+  label: string
+  tool: AgentToolName
+  args?: Record<string, unknown>
+}
+
+export interface AgentPlan {
+  steps: AgentPlanStep[]
+}
+
+export interface AgentToolTrace {
+  id: string
+  toolName: AgentToolName
+  argumentSummary?: Record<string, unknown>
+  status: AgentToolStatus
+  latencyMs?: number
+  evidenceCount?: number
+  error?: string
+}
+
+export interface AgentCitation {
+  id: string
+  label: string
+  kind: 'document' | 'kg'
+  docId?: number
+  page?: number
+  kgPathIndex?: number
+}
+
+export interface AgentResponseMetadata {
+  conversationId?: string
+  intent?: AgentIntent
+  linkedEntities?: LinkedEntity[]
+  citations?: AgentCitation[]
+  toolTrace?: AgentToolTrace[]
+  plan?: AgentPlan
+}
 
 export interface QaAskRequest {
   question: string
   conversationId?: string
   retrievalMode?: RetrievalMode
+  agentMode?: AgentMode
+  stream?: boolean
 }
 
 export interface QaAskResponse {
@@ -323,6 +387,12 @@ export interface QaAskResponse {
   spatialData?: SpatialData
   spatialAnalysis?: SpatialAnalysis
   mapPlan?: MapPlan
+  conversationId?: string
+  intent?: AgentIntent
+  linkedEntities?: LinkedEntity[]
+  citations?: AgentCitation[]
+  toolTrace?: AgentToolTrace[]
+  plan?: AgentPlan
 }
 
 export interface RuntimeRetrievalSettings {

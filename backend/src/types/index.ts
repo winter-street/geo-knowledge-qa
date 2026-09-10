@@ -5,6 +5,8 @@ export interface Chunk {
   docTitle: string
   page: number
   docType: string
+  synthetic?: boolean
+  isMock?: boolean
 }
 
 /** 检索来源（对齐前端 Source 类型） */
@@ -13,6 +15,8 @@ export interface Source {
   docTitle: string
   page: number
   snippet: string
+  synthetic?: boolean
+  isMock?: boolean
 }
 
 /** 知识图谱关系路径 */
@@ -30,6 +34,7 @@ export interface KGPath {
   score?: number
   scoreReasons?: KGPathScoreReason[]
   isMock?: boolean
+  synthetic?: boolean
   source?: string
   regionContext?: string
   candidateKind?: 'direct' | 'region' | 'owl'
@@ -54,6 +59,8 @@ export interface GraphNode {
   type: string
   /** 由 OWL 定义类推理得到的类别 */
   owlTypes?: string[]
+  isMock?: boolean
+  synthetic?: boolean
 }
 
 /** 知识图谱边 */
@@ -63,6 +70,8 @@ export interface GraphEdge {
   label: string
   /** OWL 推理得出的关系 */
   inferred?: boolean
+  isMock?: boolean
+  synthetic?: boolean
 }
 
 /** 图谱子图 */
@@ -140,6 +149,7 @@ export interface GeoPoint {
   owlTypes?: string[]
   isAnchor?: boolean
   isMock?: boolean
+  synthetic?: boolean
   evidence?: string
   distanceKm?: number
   nearestStructureKm?: number
@@ -171,6 +181,7 @@ export interface GeoPolyline {
   label?: string
   region?: string
   isMock?: boolean
+  synthetic?: boolean
   evidence?: string
   distanceKm?: number
 }
@@ -380,10 +391,15 @@ export interface SpatialQueryResponse {
 /** 检索模式 */
 export type RetrievalMode = 'rag' | 'kg' | 'hybrid'
 
+export type AgentMode = 'direct' | 'agent'
+
 /** POST /api/qa/ask 请求 */
 export interface QaAskRequest {
   question: string
+  conversationId?: string
   retrievalMode?: RetrievalMode
+  agentMode?: AgentMode
+  stream?: boolean
 }
 
 /** POST /api/qa/ask 响应 */
@@ -395,6 +411,12 @@ export interface QaAskResponse {
   spatialData: SpatialData
   spatialAnalysis?: SpatialAnalysis
   mapPlan?: MapPlan
+  conversationId?: string
+  intent?: AgentIntent
+  linkedEntities?: LinkedEntity[]
+  citations?: AgentCitation[]
+  toolTrace?: AgentToolTrace[]
+  plan?: AgentPlan
 }
 
 // ============================================================
@@ -434,4 +456,122 @@ export interface AppConfig {
     topK: number
   }
   jwtSecret: string
+}
+
+// ============================================================
+// Agent orchestration
+// ============================================================
+
+export type AgentIntent =
+  | 'geology_qa'
+  | 'entity_lookup'
+  | 'spatial_analysis'
+  | 'region_comparison'
+  | 'chitchat'
+  | 'clarification'
+
+export type EntityMatchMethod = 'name' | 'alias' | 'context'
+
+export interface EntityLinkCandidate {
+  id: string
+  name: string
+  type: GeoEntityType
+  aliases?: string[]
+}
+
+export interface LinkedEntity {
+  id: string
+  name: string
+  type: GeoEntityType
+  confidence: number
+  matchedBy: EntityMatchMethod
+  disambiguation: string
+}
+
+export interface EntityLinkResult {
+  entities: LinkedEntity[]
+  requiresClarification: boolean
+}
+
+export interface AgentMessage {
+  id: string
+  role: 'user' | 'assistant' | 'tool'
+  content: string
+  createdAt: string
+}
+
+export interface AgentMemory {
+  recentMessages: AgentMessage[]
+  summary: string
+  activeEntities: LinkedEntity[]
+}
+
+export interface AgentConversation {
+  id: string
+  userId: string
+  title: string
+  createdAt: string
+}
+
+export type AgentRunStatus = 'pending' | 'running' | 'completed' | 'failed'
+
+export interface AgentRun {
+  id: string
+  userId: string
+  conversationId: string
+  intent: AgentIntent
+  status: AgentRunStatus
+  createdAt: string
+  finishedAt?: string
+  latencyMs?: number
+}
+
+export interface AgentToolCall {
+  id: string
+  runId: string
+  userId: string
+  toolName: string
+  argumentSummary: Record<string, unknown>
+  status: AgentToolStatus
+  latencyMs?: number
+  evidenceCount?: number
+  createdAt: string
+}
+
+export type AgentToolName =
+  | 'search_documents'
+  | 'query_knowledge_graph'
+  | 'spatial_query'
+  | 'get_entity_detail'
+
+export type AgentToolStatus = 'running' | 'completed' | 'failed' | 'timeout'
+
+export interface AgentPlanStep {
+  id: string
+  label: string
+  tool: AgentToolName
+  args: Record<string, unknown>
+}
+
+export interface AgentPlan {
+  steps: AgentPlanStep[]
+}
+
+export interface AgentToolTrace {
+  id: string
+  toolName: AgentToolName
+  argumentSummary: Record<string, unknown>
+  status: AgentToolStatus
+  latencyMs: number
+  evidenceCount: number
+  error?: string
+}
+
+export interface AgentCitation {
+  id: string
+  label: string
+  kind: 'document' | 'kg'
+  docId?: number
+  page?: number
+  kgPathIndex?: number
 }
